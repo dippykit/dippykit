@@ -1,0 +1,362 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>dippykit.sampling module &mdash; dippykit  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="dippykit  documentation" href="index.html"/>
+        <link rel="up" title="dippykit package" href="dippykit.html"/>
+        <link rel="next" title="dippykit.transforms module" href="dippykit.transforms.html"/>
+        <link rel="prev" title="dippykit.metrics module" href="dippykit.metrics.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> dippykit
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="dippykit.html">dippykit package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="dippykit.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="dippykit.adjustments.html">dippykit.adjustments module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dippykit.coding.html">dippykit.coding module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dippykit.image_io.html">dippykit.image_io module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dippykit.metrics.html">dippykit.metrics module</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">dippykit.sampling module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dippykit.transforms.html">dippykit.transforms module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dippykit.utilities.html">dippykit.utilities module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dippykit.visualization.html">dippykit.visualization module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dippykit.windows.html">dippykit.windows module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dippykit.html#module-dippykit">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dippykit.adjustments.html">dippykit.adjustments module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dippykit.coding.html">dippykit.coding module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dippykit.image_io.html">dippykit.image_io module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dippykit.metrics.html">dippykit.metrics module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">dippykit.sampling module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dippykit.transforms.html">dippykit.transforms module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dippykit.utilities.html">dippykit.utilities module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dippykit.visualization.html">dippykit.visualization module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dippykit.windows.html">dippykit.windows module</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">dippykit</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="dippykit.html">dippykit package</a> &raquo;</li>
+        
+      <li>dippykit.sampling module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/dippykit.sampling.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-dippykit.sampling">
+<span id="dippykit-sampling-module"></span><h1>dippykit.sampling module<a class="headerlink" href="#module-dippykit.sampling" title="Permalink to this headline">¶</a></h1>
+<p>Module of various image sampling functions</p>
+<p>This module contains an assortment of functions that sample images in various
+useful manners.</p>
+<dl class="function">
+<dt id="dippykit.sampling.resample">
+<code class="descclassname">dippykit.sampling.</code><code class="descname">resample</code><span class="sig-paren">(</span><em>image: numpy.ndarray</em>, <em>rs_matrix: numpy.ndarray</em>, <em>**kwargs</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="reference internal" href="_modules/dippykit/sampling.html#resample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.sampling.resample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resamples an image based on a given resampling matrix.</p>
+<p>Resamples an image by the given resampling matrix argument, rs_matrix.
+For an input domain vector <strong>mn</strong> = [<strong>m</strong>, <strong>n</strong>] and an input
+image <strong>f</strong> (<strong>mn</strong>), the output image <strong>g</strong> (<strong>.</strong>) is defined by <strong>g</strong>
+(<strong>mn</strong>) = <strong>f</strong> (<strong>M</strong> &#64; <strong>mn</strong>) where <strong>M</strong> is the resampling matrix
+(rs_matrix) and the &#64; symbol denotes matrix multiplication.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>image</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – An image to be resampled.</li>
+<li><strong>rs_matrix</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – The resampling matrix <strong>M</strong> to be used.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The resampled image.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Keyword Arguments:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body"><ul class="first last">
+<li><p class="first"><strong>interpolation</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) –
+(default=None) The interpolation method used during the
+resampling. The lack of an interpolation method will lead to a
+resampling where only pixels that perfectly map across the input
+and output domains are included. This typically only works well
+for resampling matrices that contain only integer entries (which
+will downsample), or the inverses of such matrices (which will
+upsample).</p>
+<p>The interpolation keyword argument can take on any of the
+following values (For more information, see <a class="reference external" href="https://docs.opencv.org/2.4/modules/imgproc/doc/geometric_transformations.html?#void%20warpAffine(InputArray%20src,%20OutputArray%20dst,%20InputArray%20M,%20Size%20dsize,%20int%20flags,%20int%20borderMode,%20const%20Scalar&amp;%20borderValue)">cv2.warpAffine</a>):</p>
+<blockquote>
+<div><ul class="simple">
+<li>‘<strong>nearest</strong>’ (See cv2.INTER_NEAREST)</li>
+<li>‘<strong>linear</strong>’ or ‘<strong>bilinear</strong>’ (See cv2.INTER_LINEAR)</li>
+<li>‘<strong>area</strong>’ (See cv2.INTER_AREA)</li>
+<li>‘<strong>cubic</strong>’ or ‘<strong>bicubic</strong>’ (See cv2.INTER_CUBIC)</li>
+<li>‘<strong>lanczos4</strong>’ (See cv2.INTER_LANCZOS4)</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><strong>crop</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>) –
+(default=False) Whether or not to crop the output image. If this
+keyword argument is specified to be <code class="docutils literal notranslate"><span class="pre">True</span></code> without specifying a
+crop_size keyword argument, then the crop_size will be set to the
+original size of the input image by default.</p>
+</li>
+<li><p class="first"><strong>crop_size</strong> (<code class="docutils literal notranslate"><span class="pre">ShapeType</span></code>) –
+(default=image.shape) The dimensions of the output image after
+cropping. An integer argument signifies dimension in pixels,
+a floating point argument signifies dimension in proportion to the
+output image size (before cropping). A single value will yield a
+square output image.</p>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Examples:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span>  <span class="mi">3</span><span class="p">],</span>
+<span class="gp">... </span>                  <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mf">12.</span><span class="p">,</span> <span class="mi">13</span><span class="p">],</span>
+<span class="gp">... </span>                  <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mf">22.</span><span class="p">,</span> <span class="mi">23</span><span class="p">],</span>
+<span class="gp">... </span>                  <span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mf">32.</span><span class="p">,</span> <span class="mi">33</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resample</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span>
+<span class="go">array([[ 0.,  0.,  1.,  0.,  2.,  0.,  3.],</span>
+<span class="go">       [ 0.,  0.,  0.,  0.,  0.,  0.,  0.],</span>
+<span class="go">       [10.,  0., 11.,  0., 12.,  0., 13.],</span>
+<span class="go">       [ 0.,  0.,  0.,  0.,  0.,  0.,  0.],</span>
+<span class="go">       [20.,  0., 21.,  0., 22.,  0., 23.],</span>
+<span class="go">       [ 0.,  0.,  0.,  0.,  0.,  0.,  0.],</span>
+<span class="go">       [30.,  0., 31.,  0., 32.,  0., 33.]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resample</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">interp</span><span class="o">=</span><span class="s1">&#39;lin&#39;</span><span class="p">)</span>
+<span class="go">array([[ 0. ,  0.5,  1. ,  1.5,  2. ,  2.5,  3. ],</span>
+<span class="go">       [ 5. ,  5.5,  6. ,  6.5,  7. ,  7.5,  8. ],</span>
+<span class="go">       [10. , 10.5, 11. , 11.5, 12. , 12.5, 13. ],</span>
+<span class="go">       [15. , 15.5, 16. , 16.5, 17. , 17.5, 18. ],</span>
+<span class="go">       [20. , 20.5, 21. , 21.5, 22. , 22.5, 23. ],</span>
+<span class="go">       [25. , 25.5, 26. , 26.5, 27. , 27.5, 28. ],</span>
+<span class="go">       [30. , 30.5, 31. , 31.5, 32. , 32.5, 33. ]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resample</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">interp</span><span class="o">=</span><span class="s1">&#39;lin&#39;</span><span class="p">,</span> <span class="n">crop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">crop_size</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="go">array([[ 6. ,  6.5,  7. ],</span>
+<span class="go">       [11. , 11.5, 12. ],</span>
+<span class="go">       [16. , 16.5, 17. ],</span>
+<span class="go">       [21. , 21.5, 22. ]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">M2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resample</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">M2</span><span class="p">)</span>
+<span class="go">array([[ 0.,  2.],</span>
+<span class="go">       [20., 22.]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="dippykit.transforms.html" class="btn btn-neutral float-right" title="dippykit.transforms module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="dippykit.metrics.html" class="btn btn-neutral" title="dippykit.metrics module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Brighton Ancelin.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

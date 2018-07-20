@@ -1,0 +1,396 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>dippykit.windows &mdash; dippykit  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="dippykit  documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> dippykit
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.html">dippykit package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.adjustments.html">dippykit.adjustments module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.coding.html">dippykit.coding module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.image_io.html">dippykit.image_io module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.metrics.html">dippykit.metrics module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.sampling.html">dippykit.sampling module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.transforms.html">dippykit.transforms module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.utilities.html">dippykit.utilities module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.visualization.html">dippykit.visualization module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.windows.html">dippykit.windows module</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">dippykit</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>dippykit.windows</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for dippykit.windows</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Module of window-generating functions</span>
+
+<span class="sd">This module contains an assortment of functions that generate various windows.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># Internal imports</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">_utils</span>
+
+<span class="c1"># Functional imports</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># General imports</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Brighton Ancelin&#39;</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;window_2d&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="window_2d"><a class="viewcode-back" href="../../dippykit.windows.html#dippykit.windows.window_2d">[docs]</a><span class="k">def</span> <span class="nf">window_2d</span><span class="p">(</span>
+        <span class="n">support_size</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]],</span>
+        <span class="n">window_type</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;gaussian&#39;</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Generates a specified 2-dimensional window array.</span>
+
+<span class="sd">    Returns a window with the specified parameters. The returned window</span>
+<span class="sd">    is normalized such that the sum of all its elements is 1. When the window</span>
+<span class="sd">    cannot be centered, the window will prefer top-left placement of pixels.</span>
+
+<span class="sd">    :type support_size: ``int`` or ``Tuple[int, int]``</span>
+<span class="sd">    :param support_size: Height and width of the window array in pixels.</span>
+<span class="sd">    :type window_type: ``str``</span>
+<span class="sd">    :param window_type: (default=&#39;gaussian&#39;) Type of window desired. Must be</span>
+<span class="sd">        one of the following: *gaussian, rectangle, ellipse, circle*.</span>
+<span class="sd">    :param kwargs: See below.</span>
+<span class="sd">    :rtype: ``numpy.ndarray``</span>
+<span class="sd">    :return: The desired, normalized 2-dimensional window.</span>
+
+<span class="sd">    :Keyword Arguments:</span>
+<span class="sd">        * *Gaussian windows*</span>
+<span class="sd">            * **variance** (``float``) --</span>
+<span class="sd">              (default=1.0) The sigma squared variance of the gaussian window.</span>
+<span class="sd">        * *Rectangle windows*</span>
+<span class="sd">            * **dimensions** (``int`` or ``Tuple[int, int]``) --</span>
+<span class="sd">              (default= **support_size** ) The dimensions of the rectangle</span>
+<span class="sd">              window. If a list of two integers is provided, the first</span>
+<span class="sd">              element is the window height and the second element is the window</span>
+<span class="sd">              width. If a single integer is provided, a square is generated.</span>
+<span class="sd">        * *Ellipse windows*</span>
+<span class="sd">            * **radii** (``int`` or ``Tuple[int, int]``) --</span>
+<span class="sd">              (default= **support_size** /2) The radii of the ellipse window.</span>
+<span class="sd">              If a list of two integers is provided, the first element is</span>
+<span class="sd">              the window height-radius and the second element is the window</span>
+<span class="sd">              width-radius. If a single integer is provided, a circle is</span>
+<span class="sd">              generated.</span>
+<span class="sd">        * *Circle windows*</span>
+<span class="sd">            * **radius** (``int`` or ``Tuple[int, int]``) --</span>
+<span class="sd">              (default= **support_size** /2) The radius of the circle window.</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">    &gt;&gt;&gt; window_2d(5, &#39;rect&#39;, dim=(2,3))</span>
+<span class="sd">    array([[0.        , 0.        , 0.        , 0.        , 0.        ],</span>
+<span class="sd">           [0.        , 0.16666667, 0.16666667, 0.16666667, 0.        ],</span>
+<span class="sd">           [0.        , 0.16666667, 0.16666667, 0.16666667, 0.        ],</span>
+<span class="sd">           [0.        , 0.        , 0.        , 0.        , 0.        ],</span>
+<span class="sd">           [0.        , 0.        , 0.        , 0.        , 0.        ]])</span>
+<span class="sd">    &gt;&gt;&gt; window_2d(5)</span>
+<span class="sd">    array([[0.00296902, 0.01330621, 0.02193823, 0.01330621, 0.00296902],</span>
+<span class="sd">           [0.01330621, 0.0596343 , 0.09832033, 0.0596343 , 0.01330621],</span>
+<span class="sd">           [0.02193823, 0.09832033, 0.16210282, 0.09832033, 0.02193823],</span>
+<span class="sd">           [0.01330621, 0.0596343 , 0.09832033, 0.0596343 , 0.01330621],</span>
+<span class="sd">           [0.00296902, 0.01330621, 0.02193823, 0.01330621, 0.00296902]])</span>
+<span class="sd">    &gt;&gt;&gt; window_2d(8, &#39;e&#39;, radii=(3,2))</span>
+<span class="sd">    array([[0.  , 0.  , 0.  , 0.  , 0.  , 0.  , 0.  , 0.  ],</span>
+<span class="sd">           [0.  , 0.  , 0.  , 0.05, 0.05, 0.  , 0.  , 0.  ],</span>
+<span class="sd">           [0.  , 0.  , 0.05, 0.05, 0.05, 0.05, 0.  , 0.  ],</span>
+<span class="sd">           [0.  , 0.  , 0.05, 0.05, 0.05, 0.05, 0.  , 0.  ],</span>
+<span class="sd">           [0.  , 0.  , 0.05, 0.05, 0.05, 0.05, 0.  , 0.  ],</span>
+<span class="sd">           [0.  , 0.  , 0.05, 0.05, 0.05, 0.05, 0.  , 0.  ],</span>
+<span class="sd">           [0.  , 0.  , 0.  , 0.05, 0.05, 0.  , 0.  , 0.  ],</span>
+<span class="sd">           [0.  , 0.  , 0.  , 0.  , 0.  , 0.  , 0.  , 0.  ]])</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">gaussian</span><span class="p">():</span>
+        <span class="n">variance</span> <span class="o">=</span> <span class="n">_utils</span><span class="o">.</span><span class="n">get_arg_with_default</span><span class="p">(</span><span class="n">arg_dict</span><span class="p">,</span> <span class="s1">&#39;variance&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># Shift centers by -0.5 to accommodate the grid</span>
+        <span class="n">h_center</span> <span class="o">=</span> <span class="p">(</span><span class="n">support_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span>
+        <span class="n">w_center</span> <span class="o">=</span> <span class="p">(</span><span class="n">support_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ogrid</span><span class="p">[(</span><span class="o">-</span><span class="n">h_center</span><span class="p">):(</span><span class="n">support_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">h_center</span><span class="p">),</span>
+                <span class="p">(</span><span class="o">-</span><span class="n">w_center</span><span class="p">):(</span><span class="n">support_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">w_center</span><span class="p">)]</span>
+        <span class="n">window_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">variance</span><span class="p">)</span>
+        <span class="c1"># Normalize the window</span>
+        <span class="n">window_array</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">window_array</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">window_array</span>
+
+    <span class="k">def</span> <span class="nf">rectangle</span><span class="p">():</span>
+        <span class="n">dimensions</span> <span class="o">=</span> <span class="n">_utils</span><span class="o">.</span><span class="n">get_arg_with_default</span><span class="p">(</span><span class="n">arg_dict</span><span class="p">,</span> <span class="s1">&#39;dimensions&#39;</span><span class="p">,</span>
+                                                 <span class="n">support_size</span><span class="p">)</span>
+        <span class="n">dimensions</span> <span class="o">=</span> <span class="n">_utils</span><span class="o">.</span><span class="n">resolve_shape_arg</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="n">support_size</span><span class="p">,</span>
+                                                   <span class="s1">&#39;dimensions&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span> <span class="o">=</span> <span class="n">dimensions</span>
+        <span class="c1"># Should never happen thanks to resolve_shape_arg, but added as a</span>
+        <span class="c1"># final precaution</span>
+        <span class="k">assert</span> <span class="n">height</span> <span class="o">&lt;=</span> <span class="n">support_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="n">width</span> <span class="o">&lt;=</span> <span class="n">support_size</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> \
+            <span class="s2">&quot;Rectangle dimensions must be less than support_size&quot;</span>
+        <span class="n">window_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">support_size</span><span class="p">)</span>
+        <span class="n">h_begin</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">support_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">height</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">h_end</span> <span class="o">=</span> <span class="n">h_begin</span> <span class="o">+</span> <span class="n">height</span>
+        <span class="n">w_begin</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">support_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">width</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">w_end</span> <span class="o">=</span> <span class="n">w_begin</span> <span class="o">+</span> <span class="n">width</span>
+        <span class="n">weight</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">height</span> <span class="o">*</span> <span class="n">width</span><span class="p">)</span>
+        <span class="n">window_array</span><span class="p">[</span><span class="n">h_begin</span><span class="p">:</span><span class="n">h_end</span><span class="p">,</span> <span class="n">w_begin</span><span class="p">:</span><span class="n">w_end</span><span class="p">]</span> <span class="o">=</span> <span class="n">weight</span>
+        <span class="k">return</span> <span class="n">window_array</span>
+
+    <span class="k">def</span> <span class="nf">ellipse</span><span class="p">():</span>
+        <span class="n">radii</span> <span class="o">=</span> <span class="n">_utils</span><span class="o">.</span><span class="n">get_arg_with_default</span><span class="p">(</span><span class="n">arg_dict</span><span class="p">,</span> <span class="s1">&#39;radii&#39;</span><span class="p">,</span>
+                                            <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">support_size</span><span class="p">])</span>
+        <span class="n">radii</span> <span class="o">=</span> <span class="n">_utils</span><span class="o">.</span><span class="n">resolve_shape_arg</span><span class="p">(</span><span class="n">radii</span><span class="p">,</span>
+                                         <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">support_size</span><span class="p">],</span> <span class="s1">&#39;radii&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="p">(</span><span class="n">h_radius</span><span class="p">,</span> <span class="n">w_radius</span><span class="p">)</span> <span class="o">=</span> <span class="n">radii</span>
+        <span class="n">window_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">support_size</span><span class="p">)</span>
+        <span class="n">h_center</span> <span class="o">=</span> <span class="p">(</span><span class="n">support_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span>
+        <span class="n">w_center</span> <span class="o">=</span> <span class="p">(</span><span class="n">support_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span>
+        <span class="k">if</span> <span class="p">((</span><span class="n">h_center</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">-</span> <span class="n">h_radius</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> \
+                <span class="p">((</span><span class="n">w_center</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">-</span> <span class="n">w_radius</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Figure extends beyond the support size and will &quot;</span>
+                          <span class="s2">&quot;be clipped.&quot;</span><span class="p">)</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ogrid</span><span class="p">[(</span><span class="o">-</span><span class="n">h_center</span><span class="p">):(</span><span class="n">support_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">h_center</span><span class="p">),</span>
+                <span class="p">(</span><span class="o">-</span><span class="n">w_center</span><span class="p">):(</span><span class="n">support_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">w_center</span><span class="p">)]</span>
+        <span class="c1"># Create a mask in the shape of the ellipse</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="n">h_radius</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">w_radius</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">&lt;</span> <span class="mi">1</span>
+        <span class="n">weight</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+        <span class="n">window_array</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">weight</span>
+        <span class="k">return</span> <span class="n">window_array</span>
+
+    <span class="k">def</span> <span class="nf">circle</span><span class="p">():</span>
+        <span class="n">radius</span> <span class="o">=</span> <span class="n">_utils</span><span class="o">.</span><span class="n">get_arg_with_default</span><span class="p">(</span><span class="n">arg_dict</span><span class="p">,</span> <span class="s1">&#39;radius&#39;</span><span class="p">,</span>
+                                             <span class="nb">int</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">support_size</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
+        <span class="c1"># Assert that the kwargs are valid</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">radius</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">radius</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span> <span class="ow">or</span> \
+               <span class="mi">1</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">radius</span><span class="p">),</span> <span class="s2">&quot;Keyword argument &#39;</span><span class="si">{}</span><span class="s2">&#39; has a max size of &quot;</span> \
+               <span class="s2">&quot;1&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;radius&#39;</span><span class="p">)</span>
+        <span class="c1"># Add an appropriately-named entry in the arg_dict and let ellipse()</span>
+        <span class="c1"># handle the rest</span>
+        <span class="n">arg_dict</span><span class="p">[</span><span class="s1">&#39;radii&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">radius</span>
+        <span class="k">return</span> <span class="n">ellipse</span><span class="p">()</span>
+
+    <span class="c1"># Dictionary of window_type names and their associated functions and</span>
+    <span class="c1"># function parameter names</span>
+    <span class="n">func_dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;gaussian&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">gaussian</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;variance&#39;</span><span class="p">]),</span>
+        <span class="s1">&#39;rectangle&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">rectangle</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;dimensions&#39;</span><span class="p">]),</span>
+        <span class="s1">&#39;ellipse&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">ellipse</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;radii&#39;</span><span class="p">]),</span>
+        <span class="s1">&#39;circle&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">circle</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;radius&#39;</span><span class="p">]),</span>
+    <span class="p">}</span>
+    <span class="c1"># Ensure that the support_size is valid</span>
+    <span class="n">support_size</span> <span class="o">=</span> <span class="n">_utils</span><span class="o">.</span><span class="n">resolve_shape_arg_no_max</span><span class="p">(</span><span class="n">support_size</span><span class="p">,</span>
+                                                        <span class="s1">&#39;support_size&#39;</span><span class="p">)</span>
+    <span class="n">window_type</span> <span class="o">=</span> <span class="n">_utils</span><span class="o">.</span><span class="n">resolve_arg_from_list</span><span class="p">(</span><span class="n">window_type</span><span class="p">,</span>
+                                               <span class="nb">list</span><span class="p">(</span><span class="n">func_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+    <span class="n">arg_dict</span> <span class="o">=</span> <span class="n">_utils</span><span class="o">.</span><span class="n">resolve_arg_dict_from_list</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">func_dict</span><span class="p">[</span>
+                                                      <span class="n">window_type</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">func_dict</span><span class="p">[</span><span class="n">window_type</span><span class="p">][</span><span class="mi">0</span><span class="p">]()</span></div>
+
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Brighton Ancelin.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

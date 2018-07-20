@@ -2,3 +2,4 @@
 *.py[ocd]
 dist
 *.egg-info
+_build

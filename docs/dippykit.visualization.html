@@ -1,0 +1,530 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>dippykit.visualization module &mdash; dippykit  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="dippykit  documentation" href="index.html"/>
+        <link rel="up" title="dippykit package" href="dippykit.html"/>
+        <link rel="next" title="dippykit.windows module" href="dippykit.windows.html"/>
+        <link rel="prev" title="dippykit.utilities module" href="dippykit.utilities.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> dippykit
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="dippykit.html">dippykit package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="dippykit.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="dippykit.adjustments.html">dippykit.adjustments module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dippykit.coding.html">dippykit.coding module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dippykit.image_io.html">dippykit.image_io module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dippykit.metrics.html">dippykit.metrics module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dippykit.sampling.html">dippykit.sampling module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dippykit.transforms.html">dippykit.transforms module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dippykit.utilities.html">dippykit.utilities module</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">dippykit.visualization module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dippykit.windows.html">dippykit.windows module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dippykit.html#module-dippykit">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dippykit.adjustments.html">dippykit.adjustments module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dippykit.coding.html">dippykit.coding module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dippykit.image_io.html">dippykit.image_io module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dippykit.metrics.html">dippykit.metrics module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dippykit.sampling.html">dippykit.sampling module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dippykit.transforms.html">dippykit.transforms module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dippykit.utilities.html">dippykit.utilities module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">dippykit.visualization module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dippykit.windows.html">dippykit.windows module</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">dippykit</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="dippykit.html">dippykit package</a> &raquo;</li>
+        
+      <li>dippykit.visualization module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/dippykit.visualization.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-dippykit.visualization">
+<span id="dippykit-visualization-module"></span><h1>dippykit.visualization module<a class="headerlink" href="#module-dippykit.visualization" title="Permalink to this headline">¶</a></h1>
+<p>Module of image visualization functions</p>
+<p>This module contains an assortment of functions relevant to the plotting and
+visualization of various image-relevant data</p>
+<dl class="function">
+<dt id="dippykit.visualization.imshow">
+<code class="descclassname">dippykit.visualization.</code><code class="descname">imshow</code><span class="sig-paren">(</span><em>im: numpy.ndarray</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/dippykit/visualization.html#imshow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.visualization.imshow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Displays an image</p>
+<p>Displays the argument image with optional parameters. If the image has a
+dtype of uint8, then by default the vmin and vmax parameters will be set
+to 0 and 255 respectively. This is to provided accurate depictions of
+otherwise dark images.</p>
+<p>This function is essentially a wrapper for <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.imshow.html">matplotlib.pyplot.imshow</a>,
+so more detailed documentation may be found there.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>im</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – The image to be displayed.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This function wraps around functions from other packages. Reading
+these functions’ documentations may be useful. See the <strong>See also</strong>
+section for more information.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.imshow.html">matplotlib.pyplot.imshow</a></dt>
+<dd>Documentation of the random_noise function from Scikit Image</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="dippykit.visualization.quiver">
+<code class="descclassname">dippykit.visualization.</code><code class="descname">quiver</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/dippykit/visualization.html#quiver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.visualization.quiver" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots a field of arrows</p>
+<p>Plots a field of arrow on the current axes. If the following keyword
+arguments are not set, then they will take on the following default values:</p>
+<blockquote>
+<div><ul class="simple">
+<li>‘units’: ‘xy’</li>
+<li>‘angles’: ‘xy’</li>
+<li>‘scale_units’: ‘xy’</li>
+<li>‘scale’: The mean of the magnitudes of the U and V vectors.</li>
+</ul>
+</div></blockquote>
+<p>This function is essentially a wrapper for
+<a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.quiver.html">matplotlib.axes.Axes.quiver</a>, so more detailed documentation may be
+found there.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This function wraps around functions from other packages. Reading
+these functions’ documentations may be useful. See the <strong>See also</strong>
+section for more information.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.quiver.html">matplotlib.axes.Axes.quiver</a></dt>
+<dd>Documentation of the quiver function from Matplotlib</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="dippykit.visualization.surf">
+<code class="descclassname">dippykit.visualization.</code><code class="descname">surf</code><span class="sig-paren">(</span><em>x: numpy.ndarray</em>, <em>y: numpy.ndarray</em>, <em>z: numpy.ndarray</em>, <em>**kwargs</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/dippykit/visualization.html#surf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.visualization.surf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots a surface</p>
+<p>Plots the x, y, and z values as a surface in 3D.</p>
+<p>This function is essentially a wrapper for
+<a class="reference external" href="https://matplotlib.org/mpl_toolkits/mplot3d/tutorial.html#surface-plots">mpl_toolkits.mplot3d.axes3d.Axes3D.plot_surface</a>, so more detailed
+documentation may be found there.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – The array of x coordinates for the surface plot.</li>
+<li><strong>y</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – The array of y coordinates for the surface plot.</li>
+<li><strong>z</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – The array of z coordinates for the surface plot.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This function wraps around functions from other packages. Reading
+these functions’ documentations may be useful. See the <strong>See also</strong>
+section for more information.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference external" href="https://matplotlib.org/mpl_toolkits/mplot3d/tutorial.html#surface-plots">mpl_toolkits.mplot3d.axes3d.Axes3D.plot_surface</a></dt>
+<dd>Documentation of the plot_surface function from Matplotlib</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="dippykit.visualization.setup_continuous_rendering">
+<code class="descclassname">dippykit.visualization.</code><code class="descname">setup_continuous_rendering</code><span class="sig-paren">(</span><em>render: Callable[[matplotlib.axes._axes.Axes, Any], NoneType], update: Callable[&lt;bound method BaseContext.Queue of &lt;multiprocessing.context.DefaultContext object at 0x0000017C1E63D080&gt;&gt;, NoneType], delay: int = 100, auto_play: bool = True</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/dippykit/visualization.html#setup_continuous_rendering"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.visualization.setup_continuous_rendering" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets up a continuous renderer</p>
+<p>This function sets up a window to display data that can continuously
+change. To best understand this function, try copying the example code
+below into a python file, running it, and then observing the results.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>render</strong> (<code class="docutils literal notranslate"><span class="pre">Callable[[Axes,</span> <span class="pre">Any],</span> <span class="pre">None]</span></code>) – A function that takes a matplotlib Axes object and any
+data as arguments. This function returns nothing. This function should
+use the Axes object to update the rendering each time a new datum is
+received. These data are supplied through the <em>update</em> function.</li>
+<li><strong>update</strong> (<code class="docutils literal notranslate"><span class="pre">Callable[[Queue],</span> <span class="pre">None]</span></code>) – A function that takes a Queue as an argument and returns
+nothing. This function should update the rendering by putting each new
+datum into its queue via the <code class="docutils literal notranslate"><span class="pre">Queue.put()</span></code> function. These data are
+then subsequently rendered by the <em>render</em> function. Once this
+function places <code class="docutils literal notranslate"><span class="pre">None</span></code> into the queue, the rendering will cease to
+update.</li>
+<li><strong>delay</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – (default=100) The time (in milliseconds) between calling
+the <em>render</em> function to update the rendering. Also known as the
+refresh rate.</li>
+<li><strong>auto_play</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>) – (default=True) If set to false, the rendering will
+prompt the user before each update.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Examples:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># This file will generate a rendering of a square moving in an image</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">dippykit</span> <span class="kn">as</span> <span class="nn">dip</span>
+
+<span class="k">def</span> <span class="nf">render_square</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="c1"># Show the image without any axis</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">update_square</span><span class="p">(</span><span class="n">queue</span><span class="p">):</span>
+    <span class="c1"># Create an arbitrary animation of a square progressively moving</span>
+    <span class="c1"># through the image</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+        <span class="n">square</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+        <span class="n">square</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">square</span> <span class="o">=</span> <span class="n">square</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="n">queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">square</span><span class="p">)</span>
+    <span class="c1"># Putting None into the queue tells the renderer to cease updating</span>
+    <span class="n">queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="c1"># Sets up a continuous rendering using the functions above.</span>
+    <span class="c1"># The rendering will update every 1000 milliseconds (1 second).</span>
+    <span class="n">dip</span><span class="o">.</span><span class="n">setup_continuous_rendering</span><span class="p">(</span><span class="n">render_square</span><span class="p">,</span> <span class="n">update_square</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># This file will generate renderings of happy and sad faces</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">dippykit</span> <span class="kn">as</span> <span class="nn">dip</span>
+
+<span class="k">def</span> <span class="nf">render_face</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="c1"># Break the data into more manageable variable names</span>
+    <span class="n">mouth</span><span class="p">,</span> <span class="n">left_eye</span><span class="p">,</span> <span class="n">right_eye</span><span class="p">,</span> <span class="n">is_happy</span> <span class="o">=</span> <span class="n">data</span>
+    <span class="n">mouth_x</span><span class="p">,</span> <span class="n">mouth_y</span> <span class="o">=</span> <span class="n">mouth</span>
+    <span class="n">left_eye_x</span><span class="p">,</span> <span class="n">left_eye_y</span> <span class="o">=</span> <span class="n">left_eye</span>
+    <span class="n">right_eye_x</span><span class="p">,</span> <span class="n">right_eye_y</span> <span class="o">=</span> <span class="n">right_eye</span>
+    <span class="c1"># First, clear the axes</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+    <span class="c1"># Draw the face</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mouth_x</span><span class="p">,</span> <span class="n">mouth_y</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">left_eye_x</span><span class="p">,</span> <span class="n">left_eye_y</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">right_eye_x</span><span class="p">,</span> <span class="n">right_eye_y</span><span class="p">)</span>
+    <span class="c1"># Set the appropriate title to the axes</span>
+    <span class="k">if</span> <span class="n">is_happy</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Happy Face - Press ENTER to toggle&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Sad Face - Press ENTER to toggle&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">update_face</span><span class="p">(</span><span class="n">queue</span><span class="p">):</span>
+    <span class="c1"># Defining all the arrays</span>
+    <span class="n">mouth_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">31</span><span class="p">))</span> <span class="o">-</span> <span class="mi">15</span>
+    <span class="n">happy_mouth_y</span> <span class="o">=</span> <span class="mi">20</span> <span class="o">*</span> <span class="p">(</span><span class="n">mouth_x</span><span class="o">/</span><span class="mi">15</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="n">sad_mouth_y</span> <span class="o">=</span> <span class="mi">20</span> <span class="o">-</span> <span class="n">happy_mouth_y</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">21</span><span class="p">)</span>
+    <span class="n">left_eye_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">u</span><span class="p">)</span> <span class="o">-</span> <span class="mi">9</span>
+    <span class="n">right_eye_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">u</span><span class="p">)</span> <span class="o">+</span> <span class="mi">9</span>
+    <span class="n">eye_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">u</span><span class="p">)</span> <span class="o">+</span> <span class="mi">29</span>
+    <span class="c1"># Aggregating the data into single tuples</span>
+    <span class="n">happy_mouth</span> <span class="o">=</span> <span class="p">(</span><span class="n">mouth_x</span><span class="p">,</span> <span class="n">happy_mouth_y</span><span class="p">)</span>
+    <span class="n">sad_mouth</span> <span class="o">=</span> <span class="p">(</span><span class="n">mouth_x</span><span class="p">,</span> <span class="n">sad_mouth_y</span><span class="p">)</span>
+    <span class="n">left_eye</span> <span class="o">=</span> <span class="p">(</span><span class="n">left_eye_x</span><span class="p">,</span> <span class="n">eye_y</span><span class="p">)</span>
+    <span class="n">right_eye</span> <span class="o">=</span> <span class="p">(</span><span class="n">right_eye_x</span><span class="p">,</span> <span class="n">eye_y</span><span class="p">)</span>
+    <span class="n">happy_face</span> <span class="o">=</span> <span class="p">(</span><span class="n">happy_mouth</span><span class="p">,</span> <span class="n">left_eye</span><span class="p">,</span> <span class="n">right_eye</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+    <span class="n">sad_face</span> <span class="o">=</span> <span class="p">(</span><span class="n">sad_mouth</span><span class="p">,</span> <span class="n">left_eye</span><span class="p">,</span> <span class="n">right_eye</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+    <span class="n">is_happy</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="c1"># If there are less than 10 items in the queue</span>
+        <span class="k">if</span> <span class="n">queue</span><span class="o">.</span><span class="n">qsize</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+            <span class="c1"># Alternate with happy and sad faces</span>
+            <span class="k">if</span> <span class="n">is_happy</span><span class="p">:</span>
+                <span class="n">queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">happy_face</span><span class="p">)</span>
+                <span class="n">is_happy</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">sad_face</span><span class="p">)</span>
+                <span class="n">is_happy</span> <span class="o">=</span> <span class="bp">True</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="c1"># Sets up a continuous rendering using the functions above.</span>
+    <span class="c1"># This rendering will await user input before updating the display.</span>
+    <span class="n">dip</span><span class="o">.</span><span class="n">setup_continuous_rendering</span><span class="p">(</span><span class="n">render_face</span><span class="p">,</span> <span class="n">update_face</span><span class="p">,</span>
+                                   <span class="n">auto_play</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="dippykit.visualization.zlabel">
+<code class="descclassname">dippykit.visualization.</code><code class="descname">zlabel</code><span class="sig-paren">(</span><em>s: str</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/dippykit/visualization.html#zlabel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.visualization.zlabel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes a string to the z axis label</p>
+<p>Provided that the current axes has a z axis, this function will write
+the given string to the axis label.</p>
+<p>This function is essentially a wrapper for
+<a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.set_ylabel.html">mpl_toolkits.mplot3d.axes3d.Axes3D.set_zlabel</a>, so more detailed
+documentation may be found there.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>s</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – The string to write to the z axis label.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This function wraps around functions from other packages. Reading
+these functions’ documentations may be useful. See the <strong>See also</strong>
+section for more information.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.set_ylabel.html">mpl_toolkits.mplot3d.axes3d.Axes3D.set_zlabel</a></dt>
+<dd>Documentation of the set_ylabel function (set_zlabel has no
+formal documentation) from Matplotlib</dd>
+</dl>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="dippykit.windows.html" class="btn btn-neutral float-right" title="dippykit.windows module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="dippykit.utilities.html" class="btn btn-neutral" title="dippykit.utilities module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Brighton Ancelin.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,505 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>dippykit.transforms module &mdash; dippykit  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="dippykit  documentation" href="index.html"/>
+        <link rel="up" title="dippykit package" href="dippykit.html"/>
+        <link rel="next" title="dippykit.utilities module" href="dippykit.utilities.html"/>
+        <link rel="prev" title="dippykit.sampling module" href="dippykit.sampling.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> dippykit
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="dippykit.html">dippykit package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="dippykit.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="dippykit.adjustments.html">dippykit.adjustments module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dippykit.coding.html">dippykit.coding module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dippykit.image_io.html">dippykit.image_io module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dippykit.metrics.html">dippykit.metrics module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dippykit.sampling.html">dippykit.sampling module</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">dippykit.transforms module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dippykit.utilities.html">dippykit.utilities module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dippykit.visualization.html">dippykit.visualization module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dippykit.windows.html">dippykit.windows module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dippykit.html#module-dippykit">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dippykit.adjustments.html">dippykit.adjustments module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dippykit.coding.html">dippykit.coding module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dippykit.image_io.html">dippykit.image_io module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dippykit.metrics.html">dippykit.metrics module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dippykit.sampling.html">dippykit.sampling module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">dippykit.transforms module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dippykit.utilities.html">dippykit.utilities module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dippykit.visualization.html">dippykit.visualization module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dippykit.windows.html">dippykit.windows module</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">dippykit</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="dippykit.html">dippykit package</a> &raquo;</li>
+        
+      <li>dippykit.transforms module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/dippykit.transforms.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-dippykit.transforms">
+<span id="dippykit-transforms-module"></span><h1>dippykit.transforms module<a class="headerlink" href="#module-dippykit.transforms" title="Permalink to this headline">¶</a></h1>
+<p>Module of various image transform functions</p>
+<p>This module contains an assortment of functions that perform transform
+operations on images in various useful manners.</p>
+<dl class="function">
+<dt id="dippykit.transforms.dct_2d">
+<code class="descclassname">dippykit.transforms.</code><code class="descname">dct_2d</code><span class="sig-paren">(</span><em>im: numpy.ndarray</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="reference internal" href="_modules/dippykit/transforms.html#dct_2d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.transforms.dct_2d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the Discrete Cosine Transform of an image</p>
+<p>Given an input image, this function computes its discrete cosine
+transform. This result is identical to the result of the dct2() Matlab
+function. Internally, this function is computed using
+<code class="docutils literal notranslate"><span class="pre">scipy.fftpack.dctn(im,</span> <span class="pre">norm='ortho')</span></code>.</p>
+<p>This function is essentially a wrapper for <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.fftpack.dctn.html">scipy.fftpack.dctn</a>,
+so more detailed documentation may be found there.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>im</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – An image to be processed.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The discrete cosine transform of the input image.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This function wraps around functions from other packages. Reading
+these functions’ documentations may be useful. See the <strong>See also</strong>
+section for more information.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.fftpack.dctn.html">scipy.fftpack.dctn</a></dt>
+<dd>Documentation of the dctn function from Scipy</dd>
+</dl>
+</div>
+<p>Examples:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">freq_1</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">freq_2</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">8</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">domain_1</span><span class="p">,</span> <span class="n">domain_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">domain_1</span>
+<span class="go">array([[0, 1, 2, 3, 4, 5, 6, 7],</span>
+<span class="go">       [0, 1, 2, 3, 4, 5, 6, 7],</span>
+<span class="go">       [0, 1, 2, 3, 4, 5, 6, 7],</span>
+<span class="go">       [0, 1, 2, 3, 4, 5, 6, 7],</span>
+<span class="go">       [0, 1, 2, 3, 4, 5, 6, 7],</span>
+<span class="go">       [0, 1, 2, 3, 4, 5, 6, 7],</span>
+<span class="go">       [0, 1, 2, 3, 4, 5, 6, 7],</span>
+<span class="go">       [0, 1, 2, 3, 4, 5, 6, 7]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">domain_2</span>
+<span class="go">array([[0, 0, 0, 0, 0, 0, 0, 0],</span>
+<span class="go">       [1, 1, 1, 1, 1, 1, 1, 1],</span>
+<span class="go">       [2, 2, 2, 2, 2, 2, 2, 2],</span>
+<span class="go">       [3, 3, 3, 3, 3, 3, 3, 3],</span>
+<span class="go">       [4, 4, 4, 4, 4, 4, 4, 4],</span>
+<span class="go">       [5, 5, 5, 5, 5, 5, 5, 5],</span>
+<span class="go">       [6, 6, 6, 6, 6, 6, 6, 6],</span>
+<span class="go">       [7, 7, 7, 7, 7, 7, 7, 7]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im_1</span> <span class="o">=</span> <span class="mi">10</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">freq_1</span> <span class="o">*</span> <span class="p">(</span><span class="n">domain_1</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im_2</span> <span class="o">=</span> <span class="mi">10</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">freq_2</span> <span class="o">*</span> <span class="p">(</span><span class="n">domain_2</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im</span> <span class="o">=</span> <span class="n">im_1</span> <span class="o">+</span> <span class="n">im_2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im</span>
+<span class="go">array([[ 16.31,   2.17,   2.17,  16.31,  16.31,   2.17,   2.17,  16.31],</span>
+<span class="go">       [ 10.9 ,  -3.24,  -3.24,  10.9 ,  10.9 ,  -3.24,  -3.24,  10.9 ],</span>
+<span class="go">       [  3.24, -10.9 , -10.9 ,   3.24,   3.24, -10.9 , -10.9 ,   3.24],</span>
+<span class="go">       [ -2.17, -16.31, -16.31,  -2.17,  -2.17, -16.31, -16.31,  -2.17],</span>
+<span class="go">       [ -2.17, -16.31, -16.31,  -2.17,  -2.17, -16.31, -16.31,  -2.17],</span>
+<span class="go">       [  3.24, -10.9 , -10.9 ,   3.24,   3.24, -10.9 , -10.9 ,   3.24],</span>
+<span class="go">       [ 10.9 ,  -3.24,  -3.24,  10.9 ,  10.9 ,  -3.24,  -3.24,  10.9 ],</span>
+<span class="go">       [ 16.31,   2.17,   2.17,  16.31,  16.31,   2.17,   2.17,  16.31]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dct_2d</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+<span class="go">array([[-0.  ,  0.  , -0.  ,  0.  , 56.57,  0.  , -0.  ,  0.  ],</span>
+<span class="go">       [ 0.  ,  0.  ,  0.  , -0.  , -0.  ,  0.  , -0.  , -0.  ],</span>
+<span class="go">       [56.57,  0.  ,  0.  ,  0.  ,  0.  ,  0.  ,  0.  ,  0.  ],</span>
+<span class="go">       [-0.  ,  0.  , -0.  , -0.  ,  0.  ,  0.  ,  0.  , -0.  ],</span>
+<span class="go">       [-0.  ,  0.  , -0.  ,  0.  , -0.  ,  0.  , -0.  ,  0.  ],</span>
+<span class="go">       [ 0.  ,  0.  ,  0.  , -0.  ,  0.  ,  0.  , -0.  , -0.  ],</span>
+<span class="go">       [-0.  ,  0.  , -0.  ,  0.  ,  0.  ,  0.  , -0.  , -0.  ],</span>
+<span class="go">       [ 0.  ,  0.  ,  0.  , -0.  , -0.  ,  0.  , -0.  , -0.  ]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="dippykit.transforms.idct_2d">
+<code class="descclassname">dippykit.transforms.</code><code class="descname">idct_2d</code><span class="sig-paren">(</span><em>im: numpy.ndarray</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="reference internal" href="_modules/dippykit/transforms.html#idct_2d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.transforms.idct_2d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the Inverse Discrete Cosine Transform of an image</p>
+<p>Given an input image, this function computes its inverse discrete cosine
+transform. This result is identical to the result of the idct2() Matlab
+function. Internally, this function is computed using
+<code class="docutils literal notranslate"><span class="pre">scipy.fftpack.idctn(im,</span> <span class="pre">norm='ortho')</span></code>.</p>
+<p>This function is essentially a wrapper for <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.fftpack.idctn.html">scipy.fftpack.idctn</a>,
+so more detailed documentation may be found there.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>im</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – An image to be processed.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The inverse discrete cosine transform of the input image.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This function wraps around functions from other packages. Reading
+these functions’ documentations may be useful. See the <strong>See also</strong>
+section for more information.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.fftpack.idctn.html">scipy.fftpack.idctn</a></dt>
+<dd>Documentation of the dctn function from Scipy</dd>
+</dl>
+</div>
+<p>Examples:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im_DCT</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im_DCT</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">idct_2d</span><span class="p">(</span><span class="n">im_DCT</span><span class="p">)</span>
+<span class="go">array([[ 0.16,  0.07, -0.07, -0.16, -0.16, -0.07,  0.07,  0.16],</span>
+<span class="go">       [ 0.16,  0.07, -0.07, -0.16, -0.16, -0.07,  0.07,  0.16],</span>
+<span class="go">       [ 0.16,  0.07, -0.07, -0.16, -0.16, -0.07,  0.07,  0.16],</span>
+<span class="go">       [ 0.16,  0.07, -0.07, -0.16, -0.16, -0.07,  0.07,  0.16],</span>
+<span class="go">       [ 0.16,  0.07, -0.07, -0.16, -0.16, -0.07,  0.07,  0.16],</span>
+<span class="go">       [ 0.16,  0.07, -0.07, -0.16, -0.16, -0.07,  0.07,  0.16],</span>
+<span class="go">       [ 0.16,  0.07, -0.07, -0.16, -0.16, -0.07,  0.07,  0.16],</span>
+<span class="go">       [ 0.16,  0.07, -0.07, -0.16, -0.16, -0.07,  0.07,  0.16]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="dippykit.transforms.edge_detect">
+<code class="descclassname">dippykit.transforms.</code><code class="descname">edge_detect</code><span class="sig-paren">(</span><em>im: numpy.ndarray</em>, <em>mode: str = 'sobel'</em>, <em>as_bool: bool = False</em>, <em>**kwargs</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="reference internal" href="_modules/dippykit/transforms.html#edge_detect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.transforms.edge_detect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs an edge detection operation on an image</p>
+<p>Given an input image and an edge detection mode, this function applies
+an edge detection operation to the image and returns the result.
+Optionally, this result can be returned as a binary/boolean image.</p>
+<p>This function is essentially a wrapper for several external functions,
+so more detailed documentation may be found there.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>im</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – The input image.</li>
+<li><strong>mode</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – The edge detection mode/algorithm to be used. Acceptable
+values are: ‘sobel’, ‘sobel_h’, ‘sobel_v’, ‘canny’, ‘scharr’,
+‘prewitt’, ‘roberts’, and ‘laplace’.</li>
+<li><strong>as_bool</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>) – (default=False) If set to True, this function will
+return the result as a binary/boolean image. This binary image is
+built by taking the original edge image and substituting any
+values below <em>threshold</em> as False, and all other values as True. The
+value of <em>threshold</em> is defined as the 95th percentile of values in
+the original edge image.</li>
+<li><strong>kwargs</strong> – The keyword arguments to be passed to the edge detecting
+functions. If mode=’canny’, and there is no keyword argument
+‘sigma’, then this function will set the ‘sigma’ keyword argument to
+the square root of 2 by default.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The edge image.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This function wraps around functions from other packages. Reading
+these functions’ documentations may be useful. See the <strong>See also</strong>
+section for more information.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference external" href="http://scikit-image.org/docs/dev/api/skimage.feature.html#skimage.feature.canny">skimage.feature.canny</a></dt>
+<dd>Documentation of the canny function from Scikit Image</dd>
+<dt><a class="reference external" href="http://scikit-image.org/docs/dev/api/skimage.filters.html#skimage.filters.sobel">skimage.filters.sobel</a></dt>
+<dd>Documentation of the sobel function from Scikit Image</dd>
+<dt><a class="reference external" href="http://scikit-image.org/docs/dev/api/skimage.filters.html#skimage.filters.sobel_h">skimage.filters.sobel_h</a></dt>
+<dd>Documentation of the sobel_h function from Scikit Image</dd>
+<dt><a class="reference external" href="http://scikit-image.org/docs/dev/api/skimage.filters.html#skimage.filters.sobel_v">skimage.filters.sobel_v</a></dt>
+<dd>Documentation of the sobel_v function from Scikit Image</dd>
+<dt><a class="reference external" href="http://scikit-image.org/docs/dev/api/skimage.filters.html#skimage.filters.scharr">skimage.filters.scharr</a></dt>
+<dd>Documentation of the scharr function from Scikit Image</dd>
+<dt><a class="reference external" href="http://scikit-image.org/docs/dev/api/skimage.filters.html#skimage.filters.prewitt">skimage.filters.prewitt</a></dt>
+<dd>Documentation of the prewitt function from Scikit Image</dd>
+<dt><a class="reference external" href="http://scikit-image.org/docs/dev/api/skimage.filters.html#skimage.filters.roberts">skimage.filters.roberts</a></dt>
+<dd>Documentation of the roberts function from Scikit Image</dd>
+<dt><a class="reference external" href="http://scikit-image.org/docs/dev/api/skimage.filters.html#skimage.filters.laplace">skimage.filters.laplace</a></dt>
+<dd>Documentation of the laplace function from Scikit Image</dd>
+</dl>
+</div>
+<p>Examples:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">],</span>
+<span class="gp">... </span>                     <span class="p">[</span><span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">],</span>
+<span class="gp">... </span>                     <span class="p">[</span><span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">1.</span> <span class="p">,</span> <span class="mf">1.</span> <span class="p">,</span> <span class="mf">1.</span> <span class="p">,</span> <span class="mf">1.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">],</span>
+<span class="gp">... </span>                     <span class="p">[</span><span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.</span> <span class="p">,</span> <span class="mf">1.</span> <span class="p">,</span> <span class="mf">1.</span> <span class="p">,</span> <span class="mf">1.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">],</span>
+<span class="gp">... </span>                     <span class="p">[</span><span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.</span> <span class="p">,</span> <span class="mf">1.</span> <span class="p">,</span> <span class="mf">1.</span> <span class="p">,</span> <span class="mf">1.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">],</span>
+<span class="gp">... </span>                     <span class="p">[</span><span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">1.</span> <span class="p">,</span> <span class="mf">1.</span> <span class="p">,</span> <span class="mf">1.</span> <span class="p">,</span> <span class="mf">1.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">],</span>
+<span class="gp">... </span>                     <span class="p">[</span><span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">],</span>
+<span class="gp">... </span>                     <span class="p">[</span><span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">edge_detect</span><span class="p">(</span><span class="n">im</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">array([[0.  , 0.  , 0.  , 0.  , 0.  , 0.  , 0.  , 0.  ],</span>
+<span class="go">       [0.  , 0.25, 0.64, 0.73, 0.73, 0.64, 0.25, 0.  ],</span>
+<span class="go">       [0.  , 0.64, 0.75, 0.45, 0.45, 0.76, 0.56, 0.  ],</span>
+<span class="go">       [0.  , 0.73, 0.45, 0.  , 0.  , 0.71, 0.71, 0.  ],</span>
+<span class="go">       [0.  , 0.73, 0.45, 0.  , 0.  , 0.71, 0.71, 0.  ],</span>
+<span class="go">       [0.  , 0.64, 0.76, 0.71, 0.71, 0.75, 0.56, 0.  ],</span>
+<span class="go">       [0.  , 0.25, 0.56, 0.71, 0.71, 0.56, 0.25, 0.  ],</span>
+<span class="go">       [0.  , 0.  , 0.  , 0.  , 0.  , 0.  , 0.  , 0.  ]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">edge_detect</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">as_bool</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">array([[False, False, False, False, False, False, False, False],</span>
+<span class="go">       [False, False, False, False, False, False, False, False],</span>
+<span class="go">       [False, False,  True, False, False,  True, False, False],</span>
+<span class="go">       [False, False, False, False, False, False, False, False],</span>
+<span class="go">       [False, False, False, False, False, False, False, False],</span>
+<span class="go">       [False, False,  True, False, False,  True, False, False],</span>
+<span class="go">       [False, False, False, False, False, False, False, False],</span>
+<span class="go">       [False, False, False, False, False, False, False, False]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">dip</span><span class="o">.</span><span class="n">edge_detect</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="s1">&#39;sobel_h&#39;</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">array([[ 0.  ,  0.  ,  0.  ,  0.  ,  0.  ,  0.  ,  0.  ,  0.  ],</span>
+<span class="go">       [ 0.  ,  0.25,  0.75,  1.  ,  1.  ,  0.75,  0.25,  0.  ],</span>
+<span class="go">       [ 0.  ,  0.5 ,  0.75,  0.62,  0.62,  0.62,  0.25,  0.  ],</span>
+<span class="go">       [ 0.  ,  0.25,  0.12,  0.  ,  0.  ,  0.  ,  0.  ,  0.  ],</span>
+<span class="go">       [ 0.  , -0.25, -0.12,  0.  ,  0.  ,  0.  ,  0.  ,  0.  ],</span>
+<span class="go">       [ 0.  , -0.5 , -0.88, -1.  , -1.  , -0.75, -0.25,  0.  ],</span>
+<span class="go">       [ 0.  , -0.25, -0.75, -1.  , -1.  , -0.75, -0.25,  0.  ],</span>
+<span class="go">       [ 0.  ,  0.  ,  0.  ,  0.  ,  0.  ,  0.  ,  0.  ,  0.  ]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="dippykit.utilities.html" class="btn btn-neutral float-right" title="dippykit.utilities module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="dippykit.sampling.html" class="btn btn-neutral" title="dippykit.sampling module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Brighton Ancelin.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

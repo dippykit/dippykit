@@ -1,0 +1,792 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>dippykit.utilities &mdash; dippykit  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="dippykit  documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> dippykit
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.html">dippykit package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.adjustments.html">dippykit.adjustments module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.coding.html">dippykit.coding module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.image_io.html">dippykit.image_io module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.metrics.html">dippykit.metrics module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.sampling.html">dippykit.sampling module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.transforms.html">dippykit.transforms module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.utilities.html">dippykit.utilities module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.visualization.html">dippykit.visualization module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.windows.html">dippykit.windows module</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">dippykit</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>dippykit.utilities</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for dippykit.utilities</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Module of image processing utility functions</span>
+
+<span class="sd">This module contains an assortment of general purpose or otherwise</span>
+<span class="sd">ill-categorized functions that are useful in image processing.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># Internal imports</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">_utils</span>
+
+<span class="c1"># Functional imports</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="k">import</span> <span class="n">signal</span>
+
+<span class="c1"># General imports</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Any</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Brighton Ancelin&#39;</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;block_process&#39;</span><span class="p">,</span> <span class="s1">&#39;zigzag_indices&#39;</span><span class="p">,</span> <span class="s1">&#39;conv2d_grid&#39;</span><span class="p">,</span> <span class="s1">&#39;rgb2ycbcr&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;rgb2gray&#39;</span><span class="p">,</span> <span class="s1">&#39;convolve2d&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="block_process"><a class="viewcode-back" href="../../dippykit.utilities.html#dippykit.utilities.block_process">[docs]</a><span class="k">def</span> <span class="nf">block_process</span><span class="p">(</span>
+        <span class="n">im</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">Any</span><span class="p">],</span>
+        <span class="n">block_size</span><span class="p">:</span> <span class="n">_utils</span><span class="o">.</span><span class="n">ShapeType</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+        <span class="n">stride</span><span class="p">:</span> <span class="n">_utils</span><span class="o">.</span><span class="n">ShapeType</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Performs an operation on an array/image in smaller blocks and</span>
+<span class="sd">    concatenates the results</span>
+
+<span class="sd">    Given an array/image, a function, and a block size, this function will</span>
+<span class="sd">    iterate through all non-overlapping blocks of size block_size and</span>
+<span class="sd">    perform the specified function on each block. The return values of the</span>
+<span class="sd">    specified function for each block are then concatenated together and</span>
+<span class="sd">    returned as a new array.</span>
+
+<span class="sd">    Blocks begin with array index [0, 0] and continue until all values in</span>
+<span class="sd">    the input array have been used. If a full block can&#39;t be created from</span>
+<span class="sd">    the area a block would occupy, a partial block will be evaluated (e.g.</span>
+<span class="sd">    using a block size of (8, 8) on an image that is of size (9, 9) will</span>
+<span class="sd">    result in a block of size (8, 8), a block of size (8,1), a block of size</span>
+<span class="sd">    (1, 8), and a block of size (1, 1)).</span>
+
+<span class="sd">    The function argument, func, can return anything that numpy is able to</span>
+<span class="sd">    convert to an ``ndarray``. This value may be a scalar, vector, matrix,</span>
+<span class="sd">    or anything that will consistently concatenate as blocks progress along</span>
+<span class="sd">    each axis.</span>
+
+<span class="sd">    If a stride is specified, then blocks edges will be separated by the</span>
+<span class="sd">    stride argument instead of by the block size itself. This can be used to</span>
+<span class="sd">    process overlapping blocks or to skip over regions of an array/image.</span>
+
+<span class="sd">    :type im: ``numpy.ndarray``</span>
+<span class="sd">    :param im: The array or image to be processed.</span>
+<span class="sd">    :type func: ``Callable[[np.ndarray], Any]``</span>
+<span class="sd">    :param func: The function to apply to each block. The return value must</span>
+<span class="sd">        be something that numpy can convert to an ndarray.</span>
+<span class="sd">    :type block_size: ``ShapeType``</span>
+<span class="sd">    :param block_size: (default=(8, 8)) The size of each block.</span>
+<span class="sd">    :type stride: ``ShapeType``</span>
+<span class="sd">    :param stride: (default=block_size) The stride to take when moving to</span>
+<span class="sd">        the next block.</span>
+<span class="sd">    :rtype: ``numpy.ndarray``</span>
+<span class="sd">    :return: The concatenated output of the function func for each block.</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; im = np.array([[ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9],</span>
+<span class="sd">    ...                [10, 11, 12, 13, 14, 15, 16, 17, 18, 19],</span>
+<span class="sd">    ...                [20, 21, 22, 23, 24, 25, 26, 27, 28, 29],</span>
+<span class="sd">    ...                [30, 31, 32, 33, 34, 35, 36, 37, 38, 39],</span>
+<span class="sd">    ...                [40, 41, 42, 43, 44, 45, 46, 47, 48, 49],</span>
+<span class="sd">    ...                [50, 51, 52, 53, 54, 55, 56, 57, 58, 59],</span>
+<span class="sd">    ...                [60, 61, 62, 63, 64, 65, 66, 67, 68, 69],</span>
+<span class="sd">    ...                [70, 71, 72, 73, 74, 75, 76, 77, 78, 79],</span>
+<span class="sd">    ...                [80, 81, 82, 83, 84, 85, 86, 87, 88, 89],</span>
+<span class="sd">    ...                [90, 91, 92, 93, 94, 95, 96, 97, 98, 99]])</span>
+<span class="sd">    &gt;&gt;&gt; block_process(im, np.transpose, (2, 2))</span>
+<span class="sd">    array([[ 0, 10,  2, 12,  4, 14,  6, 16,  8, 18],</span>
+<span class="sd">           [ 1, 11,  3, 13,  5, 15,  7, 17,  9, 19],</span>
+<span class="sd">           [20, 30, 22, 32, 24, 34, 26, 36, 28, 38],</span>
+<span class="sd">           [21, 31, 23, 33, 25, 35, 27, 37, 29, 39],</span>
+<span class="sd">           [40, 50, 42, 52, 44, 54, 46, 56, 48, 58],</span>
+<span class="sd">           [41, 51, 43, 53, 45, 55, 47, 57, 49, 59],</span>
+<span class="sd">           [60, 70, 62, 72, 64, 74, 66, 76, 68, 78],</span>
+<span class="sd">           [61, 71, 63, 73, 65, 75, 67, 77, 69, 79],</span>
+<span class="sd">           [80, 90, 82, 92, 84, 94, 86, 96, 88, 98],</span>
+<span class="sd">           [81, 91, 83, 93, 85, 95, 87, 97, 89, 99]])</span>
+<span class="sd">    &gt;&gt;&gt; block_process(im, np.flipud, (3, 5))</span>
+<span class="sd">    array([[20, 21, 22, 23, 24, 25, 26, 27, 28, 29],</span>
+<span class="sd">           [10, 11, 12, 13, 14, 15, 16, 17, 18, 19],</span>
+<span class="sd">           [ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9],</span>
+<span class="sd">           [50, 51, 52, 53, 54, 55, 56, 57, 58, 59],</span>
+<span class="sd">           [40, 41, 42, 43, 44, 45, 46, 47, 48, 49],</span>
+<span class="sd">           [30, 31, 32, 33, 34, 35, 36, 37, 38, 39],</span>
+<span class="sd">           [80, 81, 82, 83, 84, 85, 86, 87, 88, 89],</span>
+<span class="sd">           [70, 71, 72, 73, 74, 75, 76, 77, 78, 79],</span>
+<span class="sd">           [60, 61, 62, 63, 64, 65, 66, 67, 68, 69],</span>
+<span class="sd">           [90, 91, 92, 93, 94, 95, 96, 97, 98, 99]])</span>
+<span class="sd">    &gt;&gt;&gt; block_process(im, np.mean, (5, 5))</span>
+<span class="sd">    array([[22., 27.],</span>
+<span class="sd">           [72., 77.]])</span>
+<span class="sd">    &gt;&gt;&gt; block_process(im, np.mean, (2, 2), stride=(4, 4))</span>
+<span class="sd">    array([[16.5, 20.5, 23.5],</span>
+<span class="sd">           [56.5, 60.5, 63.5],</span>
+<span class="sd">           [86.5, 90.5, 93.5]])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">block_size</span> <span class="o">=</span> <span class="n">_utils</span><span class="o">.</span><span class="n">resolve_shape_arg</span><span class="p">(</span><span class="n">block_size</span><span class="p">,</span> <span class="n">im</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
+                                               <span class="s1">&#39;block_size&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">stride</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">row_stride</span> <span class="o">=</span> <span class="n">block_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">col_stride</span> <span class="o">=</span> <span class="n">block_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="p">(</span><span class="n">row_stride</span><span class="p">,</span> <span class="n">col_stride</span><span class="p">)</span> <span class="o">=</span> <span class="n">_utils</span><span class="o">.</span><span class="n">resolve_shape_arg</span><span class="p">(</span><span class="n">stride</span><span class="p">,</span>
+                                                            <span class="n">im</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="s1">&#39;stride&#39;</span><span class="p">,</span>
+                                                            <span class="kc">False</span><span class="p">)</span>
+    <span class="n">height</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">width</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">row_stride</span><span class="p">):</span>
+        <span class="n">row_result</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">col_stride</span><span class="p">):</span>
+            <span class="n">cur_result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">im</span><span class="p">[</span><span class="n">row</span><span class="p">:</span><span class="nb">min</span><span class="p">(</span><span class="n">row</span> <span class="o">+</span> <span class="n">row_stride</span><span class="p">,</span> <span class="n">height</span><span class="p">),</span>
+                                 <span class="n">col</span><span class="p">:</span><span class="nb">min</span><span class="p">(</span><span class="n">col</span> <span class="o">+</span> <span class="n">col_stride</span><span class="p">,</span> <span class="n">width</span><span class="p">)])</span>
+            <span class="n">cur_result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">cur_result</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">row_result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">row_result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">row_result</span><span class="p">,</span> <span class="n">cur_result</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">row_result</span> <span class="o">=</span> <span class="n">cur_result</span>
+        <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">result</span><span class="p">,</span> <span class="n">row_result</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">row_result</span>
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="zigzag_indices"><a class="viewcode-back" href="../../dippykit.utilities.html#dippykit.utilities.zigzag_indices">[docs]</a><span class="k">def</span> <span class="nf">zigzag_indices</span><span class="p">(</span>
+        <span class="n">shape</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">],</span>
+        <span class="n">length</span><span class="p">:</span> <span class="nb">int</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Generates indices for a zigzag pattern in a matrix</span>
+
+<span class="sd">    Given a matrix shape, this function will determine the indices in such a</span>
+<span class="sd">    matrix of consecutive elements in a zigzag pattern. If an integer *length*</span>
+<span class="sd">    is specified, the indices of only *length* elements will be returned.</span>
+<span class="sd">    *It is almost always preferable to specify a length if one does not need</span>
+<span class="sd">    every element&#39;s indices. This saves computation time.*</span>
+
+<span class="sd">    The zigzag pattern used here is akin to the one used in JPEG.</span>
+
+<span class="sd">    :type shape: ``Tuple[int, int]`` or ``int``</span>
+<span class="sd">    :param shape: The shape of the matrix for which the zigzag indices are</span>
+<span class="sd">        applicable.</span>
+<span class="sd">    :type length: ``int``</span>
+<span class="sd">    :param length: (default=shape[0]*shape[1]) The number of indices to be</span>
+<span class="sd">        returned; equivalently, the length of each ndarray returned.</span>
+<span class="sd">    :rtype: ``Tuple[numpy.ndarray, numpy.ndarray]``</span>
+<span class="sd">    :return: A length 2 tuple of indices of zigzag values.</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; im = np.array([[ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9],</span>
+<span class="sd">    ...                [10, 11, 12, 13, 14, 15, 16, 17, 18, 19],</span>
+<span class="sd">    ...                [20, 21, 22, 23, 24, 25, 26, 27, 28, 29],</span>
+<span class="sd">    ...                [30, 31, 32, 33, 34, 35, 36, 37, 38, 39],</span>
+<span class="sd">    ...                [40, 41, 42, 43, 44, 45, 46, 47, 48, 49],</span>
+<span class="sd">    ...                [50, 51, 52, 53, 54, 55, 56, 57, 58, 59],</span>
+<span class="sd">    ...                [60, 61, 62, 63, 64, 65, 66, 67, 68, 69],</span>
+<span class="sd">    ...                [70, 71, 72, 73, 74, 75, 76, 77, 78, 79],</span>
+<span class="sd">    ...                [80, 81, 82, 83, 84, 85, 86, 87, 88, 89],</span>
+<span class="sd">    ...                [90, 91, 92, 93, 94, 95, 96, 97, 98, 99]])</span>
+<span class="sd">    &gt;&gt;&gt; im[zigzag_indices(im.shape, 10)]</span>
+<span class="sd">    array([ 0,  1, 10, 20, 11,  2,  3, 12, 21, 30])</span>
+<span class="sd">    &gt;&gt;&gt; im_2 = np.array([[ 0,  1,  2],</span>
+<span class="sd">    ...                  [10, 11, 12],</span>
+<span class="sd">    ...                  [20, 21, 22]])</span>
+<span class="sd">    &gt;&gt;&gt; ind = zigzag_indices(im_2.shape)</span>
+<span class="sd">    &gt;&gt;&gt; ind</span>
+<span class="sd">    (array([0, 0, 1, 2, 1, 0, 1, 2, 2]), array([0, 1, 0, 0, 1, 2, 2, 1, 2]))</span>
+<span class="sd">    &gt;&gt;&gt; im_2[ind]</span>
+<span class="sd">    array([ 0,  1, 10, 20, 11,  2, 12, 21, 22])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">shape</span> <span class="o">=</span> <span class="n">_utils</span><span class="o">.</span><span class="n">resolve_shape_arg_no_max</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="s1">&#39;shape&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="o">-</span><span class="mi">1</span> <span class="o">==</span> <span class="n">length</span><span class="p">:</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="n">length</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">antidiag_sum</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">row_start</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">antidiag_sum</span> <span class="o">-</span> <span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">col_start</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">antidiag_sum</span> <span class="o">-</span> <span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">row_stop</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">antidiag_sum</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">col_stop</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">antidiag_sum</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">antidiag_length</span> <span class="o">=</span> <span class="n">row_stop</span> <span class="o">-</span> <span class="n">row_start</span>
+        <span class="n">step_overshoot</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">antidiag_length</span> <span class="o">-</span> <span class="n">length</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">&gt;=</span> <span class="n">step_overshoot</span><span class="p">:</span>
+            <span class="k">if</span> <span class="mi">0</span> <span class="o">==</span> <span class="n">antidiag_sum</span> <span class="o">%</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">indices</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">:(</span><span class="n">i</span> <span class="o">+</span> <span class="n">antidiag_length</span><span class="p">)]</span> <span class="o">=</span> \
+                        <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">row_stop</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">row_start</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">indices</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">:(</span><span class="n">i</span> <span class="o">+</span> <span class="n">antidiag_length</span><span class="p">)]</span> <span class="o">=</span> \
+                    <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">col_start</span><span class="p">,</span> <span class="n">col_stop</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">indices</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">:(</span><span class="n">i</span> <span class="o">+</span> <span class="n">antidiag_length</span><span class="p">)]</span> <span class="o">=</span> \
+                    <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">row_start</span><span class="p">,</span> <span class="n">row_stop</span><span class="p">)</span>
+                <span class="n">indices</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">:(</span><span class="n">i</span> <span class="o">+</span> <span class="n">antidiag_length</span><span class="p">)]</span> <span class="o">=</span> \
+                    <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">col_stop</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">col_start</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="mi">0</span> <span class="o">==</span> <span class="n">antidiag_sum</span> <span class="o">%</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">row_stop</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">antidiag_sum</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="n">col_start</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">antidiag_sum</span> <span class="o">-</span> <span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="n">row_start</span> <span class="o">=</span> <span class="n">row_stop</span> <span class="o">-</span> <span class="p">(</span><span class="n">antidiag_length</span> <span class="o">-</span> <span class="n">step_overshoot</span><span class="p">)</span>
+                <span class="n">col_stop</span> <span class="o">=</span> <span class="n">col_start</span> <span class="o">+</span> <span class="p">(</span><span class="n">antidiag_length</span> <span class="o">-</span> <span class="n">step_overshoot</span><span class="p">)</span>
+                <span class="n">indices</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">row_stop</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">row_start</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">indices</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">col_start</span><span class="p">,</span> <span class="n">col_stop</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">row_start</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">antidiag_sum</span> <span class="o">-</span> <span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="n">col_stop</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">antidiag_sum</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="n">row_stop</span> <span class="o">=</span> <span class="n">row_start</span> <span class="o">+</span> <span class="p">(</span><span class="n">antidiag_length</span> <span class="o">-</span> <span class="n">step_overshoot</span><span class="p">)</span>
+                <span class="n">col_start</span> <span class="o">=</span> <span class="n">col_stop</span> <span class="o">-</span> <span class="p">(</span><span class="n">antidiag_length</span> <span class="o">-</span> <span class="n">step_overshoot</span><span class="p">)</span>
+                <span class="n">indices</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">row_start</span><span class="p">,</span> <span class="n">row_stop</span><span class="p">)</span>
+                <span class="n">indices</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">col_stop</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">col_start</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="n">antidiag_length</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">step_overshoot</span><span class="p">:</span>
+            <span class="k">break</span>
+
+    <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="conv2d_grid"><a class="viewcode-back" href="../../dippykit.utilities.html#dippykit.utilities.conv2d_grid">[docs]</a><span class="k">def</span> <span class="nf">conv2d_grid</span><span class="p">(</span>
+        <span class="n">f_lower</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">_utils</span><span class="o">.</span><span class="n">NumericType</span><span class="p">,</span> <span class="n">_utils</span><span class="o">.</span><span class="n">NumericType</span><span class="p">],</span>
+        <span class="n">g_lower</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">_utils</span><span class="o">.</span><span class="n">NumericType</span><span class="p">,</span> <span class="n">_utils</span><span class="o">.</span><span class="n">NumericType</span><span class="p">],</span>
+        <span class="n">f</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">g</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Generates a meshgrid for the domain of a convolution result</span>
+
+<span class="sd">    Given the domain values of the [0, 0] index in the</span>
+<span class="sd">    two-dimensional signals f and g and the signals f and g themselves,</span>
+<span class="sd">    this function returns a meshgrid of the domain of f convolved with g.</span>
+
+<span class="sd">    A step size of 1 is assumed uniformly for both signal domains. For</span>
+<span class="sd">    example, if the domain value of the [0, 0] index in f is</span>
+<span class="sd">    [x=\ **3**\ , y=\ **1**\ ], then this function assumes the domain value</span>
+<span class="sd">    of the [1, 7] index in f is [x=(3+1)=\ **4**\ , y=(1+7)=\ **8**\ ].</span>
+
+<span class="sd">    A bit of background:</span>
+
+<span class="sd">    A common point of obscurity in image processing is the treatment of</span>
+<span class="sd">    arrays as actual arrays vs. two-dimensional signals. When dealing with</span>
+<span class="sd">    the latter, an underlying domain is implied. For convolution operations</span>
+<span class="sd">    on two-dimensional signals in particular, keeping track of the changes</span>
+<span class="sd">    in domain can be annoying and tricky. This function exists to be a</span>
+<span class="sd">    simple, reliable way to track the domains of your signals after</span>
+<span class="sd">    convolution operations.</span>
+
+<span class="sd">    :type f_lower: ``Tuple[int or float, int or float]``</span>
+<span class="sd">    :param f_lower: The domain value of the point f[0, 0].</span>
+<span class="sd">    :type g_lower: ``Tuple[int or float, int or float]``</span>
+<span class="sd">    :param g_lower: The domain value of the point g[0, 0].</span>
+<span class="sd">    :type f: ``numpy.ndarray``</span>
+<span class="sd">    :param f: An ndarray interpreted as a two-dimensional signal.</span>
+<span class="sd">    :type g: ``numpy.ndarray``</span>
+<span class="sd">    :param g: An ndarray interpreted as a two-dimensional signal.</span>
+<span class="sd">    :rtype: ``Tuple[numpy.ndarray, numpy.ndarray]``</span>
+<span class="sd">    :return: The domain of the convolution of f and g in meshgrid format.</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; import dippykit as dip</span>
+<span class="sd">    &gt;&gt;&gt; f_domain_x, f_domain_y = np.meshgrid(np.arange(-5, 5), np.arange(0, 7))</span>
+<span class="sd">    &gt;&gt;&gt; f = np.zeros(f_domain_x.shape)</span>
+<span class="sd">    &gt;&gt;&gt; f[(0 == f_domain_x) &amp; (0 == f_domain_y)] = 1</span>
+<span class="sd">    &gt;&gt;&gt; f</span>
+<span class="sd">    array([[0., 0., 0., 0., 0., 1., 0., 0., 0., 0.],</span>
+<span class="sd">           [0., 0., 0., 0., 0., 0., 0., 0., 0., 0.],</span>
+<span class="sd">           [0., 0., 0., 0., 0., 0., 0., 0., 0., 0.],</span>
+<span class="sd">           [0., 0., 0., 0., 0., 0., 0., 0., 0., 0.],</span>
+<span class="sd">           [0., 0., 0., 0., 0., 0., 0., 0., 0., 0.],</span>
+<span class="sd">           [0., 0., 0., 0., 0., 0., 0., 0., 0., 0.],</span>
+<span class="sd">           [0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]])</span>
+<span class="sd">    &gt;&gt;&gt; g_domain_x, g_domain_y = np.meshgrid(np.arange(0, 5), np.arange(-5, 2))</span>
+<span class="sd">    &gt;&gt;&gt; g = np.zeros(g_domain_x.shape)</span>
+<span class="sd">    &gt;&gt;&gt; g[(0 == g_domain_x) &amp; (0 == g_domain_y)] = 1</span>
+<span class="sd">    &gt;&gt;&gt; g</span>
+<span class="sd">    array([[0., 0., 0., 0., 0.],</span>
+<span class="sd">           [0., 0., 0., 0., 0.],</span>
+<span class="sd">           [0., 0., 0., 0., 0.],</span>
+<span class="sd">           [0., 0., 0., 0., 0.],</span>
+<span class="sd">           [0., 0., 0., 0., 0.],</span>
+<span class="sd">           [1., 0., 0., 0., 0.],</span>
+<span class="sd">           [0., 0., 0., 0., 0.]])</span>
+<span class="sd">    &gt;&gt;&gt; fg = dip.convolve2d(f, g)</span>
+<span class="sd">    &gt;&gt;&gt; fg</span>
+<span class="sd">    array([[0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.],</span>
+<span class="sd">           [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.],</span>
+<span class="sd">           [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.],</span>
+<span class="sd">           [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.],</span>
+<span class="sd">           [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.],</span>
+<span class="sd">           [0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0., 0., 0., 0.],</span>
+<span class="sd">           [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.],</span>
+<span class="sd">           [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.],</span>
+<span class="sd">           [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.],</span>
+<span class="sd">           [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.],</span>
+<span class="sd">           [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.],</span>
+<span class="sd">           [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.],</span>
+<span class="sd">           [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]])</span>
+<span class="sd">    &gt;&gt;&gt; f_lower = (f_domain_x[0, 0], f_domain_y[0, 0])</span>
+<span class="sd">    &gt;&gt;&gt; g_lower = (g_domain_x[0, 0], g_domain_y[0, 0])</span>
+<span class="sd">    &gt;&gt;&gt; fg_domain_x, fg_domain_y = conv2d_grid(f_lower, g_lower, f, g)</span>
+<span class="sd">    &gt;&gt;&gt; fg[(0 == fg_domain_x) &amp; (0 == fg_domain_y)]</span>
+<span class="sd">    array([1.])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">f_lower</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">f_lower</span><span class="p">)</span>
+    <span class="n">g_lower</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">g_lower</span><span class="p">)</span>
+    <span class="n">f_upper</span> <span class="o">=</span> <span class="n">f_lower</span> <span class="o">+</span> <span class="n">f</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">g_upper</span> <span class="o">=</span> <span class="n">g_lower</span> <span class="o">+</span> <span class="n">g</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">xy_start</span> <span class="o">=</span> <span class="n">f_lower</span> <span class="o">+</span> <span class="n">g_lower</span>
+    <span class="n">xy_end</span> <span class="o">=</span> <span class="n">f_upper</span> <span class="o">+</span> <span class="n">g_upper</span>
+    <span class="n">x_grid</span><span class="p">,</span> <span class="n">y_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">xy_start</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">xy_end</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span>
+                                 <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">xy_start</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xy_end</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">x_grid</span><span class="p">,</span> <span class="n">y_grid</span></div>
+
+
+<div class="viewcode-block" id="rgb2ycbcr"><a class="viewcode-back" href="../../dippykit.utilities.html#dippykit.utilities.rgb2ycbcr">[docs]</a><span class="k">def</span> <span class="nf">rgb2ycbcr</span><span class="p">(</span>
+        <span class="n">rgb_im</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Converts an RGB image to YCbCr, in exactly the same manner as Matlab</span>
+
+<span class="sd">    This function will return the same output as Matlab&#39;s rgb2ycbcr function</span>
+<span class="sd">    for images with a dtype of ``uint8``.</span>
+
+<span class="sd">    :type rgb_im: ``numpy.ndarray``</span>
+<span class="sd">    :param rgb_im: The RGB image to be converted.</span>
+<span class="sd">    :rtype: ``numpy.ndarray``</span>
+<span class="sd">    :return: A YCbCr image, matching the Matlab conversion metric for dtypes</span>
+<span class="sd">        of ``numpy.uint8``.</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; im = np.array([[[255, 255, 255], [128, 128, 128]],</span>
+<span class="sd">    ...                [[  0,   0,   0], [ 64,  32, 224]]], dtype=np.uint8)</span>
+<span class="sd">    &gt;&gt;&gt; rgb2ycbcr(im)</span>
+<span class="sd">    array([[[235, 128, 128],</span>
+<span class="sd">            [126, 128, 128]],</span>
+<span class="sd">           [[ 16, 128, 128],</span>
+<span class="sd">            [ 70, 208, 128]]], dtype=uint8)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="mi">3</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">rgb_im</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span> <span class="s2">&quot;rgb2ycbcr must have a 3-channel rgb &quot;</span> \
+            <span class="s2">&quot;image as input&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="s1">&#39;uint8&#39;</span> <span class="o">==</span> <span class="n">rgb_im</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">name</span><span class="p">):</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Function rgb2ycbcr may not work exactly as Matlab for &quot;</span>
+                      <span class="s2">&quot;input images with a dtype of </span><span class="si">{}</span><span class="s2">&quot;</span>
+                      <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rgb_im</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+    <span class="n">rgb_im_float</span> <span class="o">=</span> <span class="n">rgb_im</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
+    <span class="n">weight_tensor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mf">65.481</span><span class="p">,</span> <span class="mf">128.553</span><span class="p">,</span>  <span class="mf">24.966</span><span class="p">],</span>
+                              <span class="p">[</span><span class="o">-</span><span class="mf">37.797</span><span class="p">,</span> <span class="o">-</span><span class="mf">74.203</span><span class="p">,</span> <span class="mf">112.</span>   <span class="p">],</span>
+                              <span class="p">[</span><span class="mf">112.</span>   <span class="p">,</span> <span class="o">-</span><span class="mf">93.786</span><span class="p">,</span> <span class="o">-</span><span class="mf">18.214</span><span class="p">]])</span>
+    <span class="n">weight_tensor</span> <span class="o">/=</span> <span class="mi">255</span>
+    <span class="n">bias_tensor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">16</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">yuv_primitive</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tensordot</span><span class="p">(</span><span class="n">rgb_im_float</span><span class="p">,</span> <span class="n">weight_tensor</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">yuv_u</span> <span class="o">=</span> <span class="n">yuv_primitive</span> <span class="o">+</span> <span class="n">bias_tensor</span>
+    <span class="k">if</span> <span class="n">rgb_im</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">yuv_u</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">yuv_u</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="rgb2gray"><a class="viewcode-back" href="../../dippykit.utilities.html#dippykit.utilities.rgb2gray">[docs]</a><span class="k">def</span> <span class="nf">rgb2gray</span><span class="p">(</span>
+        <span class="n">rgb_im</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Converts a 3-channel RGB image to 1-channel gray image</span>
+
+<span class="sd">    Given a 3-channel RGB image, this function converts the image to a</span>
+<span class="sd">    1-channel gray image with particular weights for each channel. These</span>
+<span class="sd">    weights are the same as those used in the Matlab rgb2gray function.</span>
+
+<span class="sd">    :type rgb_im: ``numpy.ndarray``</span>
+<span class="sd">    :param rgb_im: The input 3-channel RGB image.</span>
+<span class="sd">    :rtype: ``numpy.ndarray``</span>
+<span class="sd">    :return: The output 1-channel gray image.</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; im = np.array([[[255, 255, 255], [128, 128, 128]],</span>
+<span class="sd">    ...                [[  0,   0,   0], [ 64,  32, 224]]], dtype=np.uint8)</span>
+<span class="sd">    &gt;&gt;&gt; rgb2gray(im)</span>
+<span class="sd">    array([[255, 128],</span>
+<span class="sd">           [  0,  63]], dtype=uint8)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="mi">3</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">rgb_im</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span> <span class="s2">&quot;rgb2ycbcr must have a 3-channel rgb &quot;</span> \
+                                   <span class="s2">&quot;image as input&quot;</span>
+    <span class="n">weight_tensor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.299</span><span class="p">,</span> <span class="mf">0.5870</span><span class="p">,</span> <span class="mf">0.1140</span><span class="p">])</span>
+    <span class="n">gray_im</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tensordot</span><span class="p">(</span><span class="n">rgb_im</span><span class="p">,</span> <span class="n">weight_tensor</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">rgb_im</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="s1">&#39;u&#39;</span> <span class="ow">or</span> <span class="n">rgb_im</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="s1">&#39;i&#39;</span><span class="p">:</span>
+        <span class="n">gray_im</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">gray_im</span><span class="p">)</span>
+    <span class="n">gray_im</span> <span class="o">=</span> <span class="n">gray_im</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">rgb_im</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">gray_im</span></div>
+
+
+<div class="viewcode-block" id="convolve2d"><a class="viewcode-back" href="../../dippykit.utilities.html#dippykit.utilities.convolve2d">[docs]</a><span class="k">def</span> <span class="nf">convolve2d</span><span class="p">(</span>
+        <span class="n">sig_1</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">sig_2</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;full&#39;</span><span class="p">,</span>
+        <span class="n">boundary</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;fill&#39;</span><span class="p">,</span>
+        <span class="n">fillvalue</span><span class="p">:</span> <span class="n">_utils</span><span class="o">.</span><span class="n">NumericType</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">like_matlab</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Convolves two arrays in two dimensions</span>
+
+<span class="sd">    Given two input arrays, this function computes their 2D convolution. The</span>
+<span class="sd">    input arrays must be either 2-dimensional or 3-dimensional, and the</span>
+<span class="sd">    second input array must have less than or equal dimensions to the first.</span>
+
+<span class="sd">    Convolution is always computed across the first and second dimensions of</span>
+<span class="sd">    the input arrays. In the case that both input arrays are 3-dimensional,</span>
+<span class="sd">    the result is the sum of 2D convolutions for each corresponding 2D</span>
+<span class="sd">    slice of the input arrays. This result is 2-dimensional. In the case that</span>
+<span class="sd">    only the first input array is 3-dimensional, the result is the stack of</span>
+<span class="sd">    2D convolutions for each 2D slice of the first input array with the</span>
+<span class="sd">    second input array. This result is 3-dimensional.</span>
+
+<span class="sd">    In cases where either the first or second dimension of the second input</span>
+<span class="sd">    array is an even integer, and where the mode is &#39;same&#39;, this function</span>
+<span class="sd">    will prefer lesser indices in centering by default. Setting the</span>
+<span class="sd">    &#39;like_matlab&#39; keyword argument to True will alter this behavior to</span>
+<span class="sd">    prefer greater indices in centering. This is better understood through</span>
+<span class="sd">    demonstration in the examples below.</span>
+
+<span class="sd">    This function is essentially a wrapper for `scipy.signal.convolve2d`_,</span>
+<span class="sd">    so more detailed documentation may be found there.</span>
+
+<span class="sd">    :type sig_1: ``numpy.ndarray``</span>
+<span class="sd">    :param sig_1: The first input array.</span>
+<span class="sd">    :type sig_2: ``numpy.ndarray``</span>
+<span class="sd">    :param sig_2: The second input array.</span>
+<span class="sd">    :type mode: ``str``</span>
+<span class="sd">    :param mode: (default=&#39;full&#39;) The mode to be used for the convolution.</span>
+<span class="sd">        If set to &#39;full&#39;, a full convolution will be performed. If set to</span>
+<span class="sd">        &#39;same&#39;, the output will be the same size (in the first two</span>
+<span class="sd">        dimensions) as the first input array. If set to valid, only values</span>
+<span class="sd">        generated without padding will be retained. For more information,</span>
+<span class="sd">        see `scipy.signal.convolve2d`_.</span>
+<span class="sd">    :type boundary: ``str``</span>
+<span class="sd">    :param boundary: (default=&#39;fill&#39;) A string representing how boundaries</span>
+<span class="sd">        will be handled. If set to &#39;fill&#39;, the first input array is padded</span>
+<span class="sd">        with fillvalue values. If set to &#39;wrap&#39;, the first input array is</span>
+<span class="sd">        padded with copies of itself in a tile configuration. If set to</span>
+<span class="sd">        &#39;symm&#39;, the first input array is padded with reflected copies of</span>
+<span class="sd">        itself. For more information, see `scipy.signal.convolve2d`_.</span>
+<span class="sd">    :type fillvalue: ``NumericType``</span>
+<span class="sd">    :param fillvalue: (default=0) The numeric value to pad the first input</span>
+<span class="sd">        array with (assuming boundary=&#39;fill&#39;).</span>
+<span class="sd">    :type like_matlab: ``bool``</span>
+<span class="sd">    :param like_matlab: (default=False) If set to True, this function will</span>
+<span class="sd">        return arrays in the same manner that Matlab would.</span>
+<span class="sd">    :rtype: ``numpy.ndarray``</span>
+<span class="sd">    :return: The convolution of the two arrays.</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        This function wraps around functions from other packages. Reading</span>
+<span class="sd">        these functions&#39; documentations may be useful. See the **See also**</span>
+<span class="sd">        section for more information.</span>
+
+<span class="sd">    .. seealso::</span>
+<span class="sd">        `scipy.signal.convolve2d`_</span>
+<span class="sd">            Documentation of the convolve2d function from Scipy</span>
+
+<span class="sd">    .. _scipy.signal.convolve2d: https://docs.scipy.org/doc/scipy/reference</span>
+<span class="sd">        /generated/scipy.signal.convolve2d.html</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">    &gt;&gt;&gt; a = np.array([[1, 0, 2],</span>
+<span class="sd">    ...               [0, 3, 0],</span>
+<span class="sd">    ...               [4, 0, 5]])</span>
+<span class="sd">    &gt;&gt;&gt; b = np.array([[ 1,  1],</span>
+<span class="sd">    ...               [-1, -1]])</span>
+<span class="sd">    &gt;&gt;&gt; convolve2d(a, b)</span>
+<span class="sd">    array([[ 1,  1,  2,  2],</span>
+<span class="sd">           [-1,  2,  1, -2],</span>
+<span class="sd">           [ 4,  1,  2,  5],</span>
+<span class="sd">           [-4, -4, -5, -5]])</span>
+<span class="sd">    &gt;&gt;&gt; convolve2d(a, b, mode=&#39;same&#39;)</span>
+<span class="sd">    array([[ 1,  1,  2],</span>
+<span class="sd">           [-1,  2,  1],</span>
+<span class="sd">           [ 4,  1,  2]])</span>
+<span class="sd">    &gt;&gt;&gt; convolve2d(a, b, mode=&#39;same&#39;, like_matlab=True)</span>
+<span class="sd">    array([[ 2,  1, -2],</span>
+<span class="sd">           [ 1,  2,  5],</span>
+<span class="sd">           [-4, -5, -5]])</span>
+<span class="sd">    &gt;&gt;&gt; c = np.stack(([[1, 1],</span>
+<span class="sd">    ...                [1, 1]],</span>
+<span class="sd">    ...               [[2, 2],</span>
+<span class="sd">    ...                [2, 2]],</span>
+<span class="sd">    ...               [[3, 3],</span>
+<span class="sd">    ...                [3, 3]]), axis=2)</span>
+<span class="sd">    &gt;&gt;&gt; d = convolve2d(c, b)</span>
+<span class="sd">    &gt;&gt;&gt; d[:, :, 0]</span>
+<span class="sd">    array([[ 1,  2,  1],</span>
+<span class="sd">           [ 0,  0,  0],</span>
+<span class="sd">           [-1, -2, -1]])</span>
+<span class="sd">    &gt;&gt;&gt; d[:, :, 1]</span>
+<span class="sd">    array([[ 2,  4,  2],</span>
+<span class="sd">           [ 0,  0,  0],</span>
+<span class="sd">           [-2, -4, -2]])</span>
+<span class="sd">    &gt;&gt;&gt; d[:, :, 2]</span>
+<span class="sd">    array([[ 3,  6,  3],</span>
+<span class="sd">           [ 0,  0,  0],</span>
+<span class="sd">           [-3, -6, -3]])</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">do_convolve2d</span><span class="p">():</span>
+        <span class="k">if</span> <span class="mi">3</span> <span class="o">==</span> <span class="n">sig_1</span><span class="o">.</span><span class="n">ndim</span><span class="p">:</span>
+            <span class="k">if</span> <span class="mi">2</span> <span class="o">==</span> <span class="n">sig_2</span><span class="o">.</span><span class="n">ndim</span><span class="p">:</span>
+                <span class="n">sig_out_0</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">convolve2d</span><span class="p">(</span><span class="n">sig_1</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">sig_2</span><span class="p">,</span>
+                        <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span> <span class="n">boundary</span><span class="o">=</span><span class="n">boundary</span><span class="p">,</span> <span class="n">fillvalue</span><span class="o">=</span><span class="n">fillvalue</span><span class="p">)</span>
+                <span class="n">sig_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="o">*</span><span class="n">sig_out_0</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">sig_1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span>
+                                   <span class="n">dtype</span><span class="o">=</span><span class="n">sig_out_0</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+                <span class="n">sig_out</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">sig_out_0</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">sig_1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]):</span>
+                    <span class="n">sig_out</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">convolve2d</span><span class="p">(</span><span class="n">sig_1</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">],</span>
+                            <span class="n">sig_2</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span> <span class="n">boundary</span><span class="o">=</span><span class="n">boundary</span><span class="p">,</span>
+                            <span class="n">fillvalue</span><span class="o">=</span><span class="n">fillvalue</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">assert</span> <span class="n">sig_1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">sig_2</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> \
+                        <span class="s2">&quot;3 dimensional signal inputs must have same 3rd &quot;</span> \
+                        <span class="s2">&quot;dimension shape&quot;</span>
+                <span class="n">sig_out</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">convolve2d</span><span class="p">(</span><span class="n">sig_1</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">sig_2</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span>
+                        <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span> <span class="n">boundary</span><span class="o">=</span><span class="n">boundary</span><span class="p">,</span> <span class="n">fillvalue</span><span class="o">=</span><span class="n">fillvalue</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">sig_1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]):</span>
+                    <span class="n">sig_out</span> <span class="o">+=</span> <span class="n">signal</span><span class="o">.</span><span class="n">convolve2d</span><span class="p">(</span><span class="n">sig_1</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">],</span>
+                            <span class="n">sig_2</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span> <span class="n">boundary</span><span class="o">=</span><span class="n">boundary</span><span class="p">,</span>
+                            <span class="n">fillvalue</span><span class="o">=</span><span class="n">fillvalue</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sig_out</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">convolve2d</span><span class="p">(</span><span class="n">sig_1</span><span class="p">,</span> <span class="n">sig_2</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span>
+                    <span class="n">boundary</span><span class="o">=</span><span class="n">boundary</span><span class="p">,</span> <span class="n">fillvalue</span><span class="o">=</span><span class="n">fillvalue</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">sig_out</span>
+    <span class="k">assert</span> <span class="p">(</span><span class="mi">2</span> <span class="o">==</span> <span class="n">sig_1</span><span class="o">.</span><span class="n">ndim</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="mi">3</span> <span class="o">==</span> <span class="n">sig_1</span><span class="o">.</span><span class="n">ndim</span><span class="p">),</span> \
+            <span class="s2">&quot;Signal 1 must be 2 or 3 dimensional&quot;</span>
+    <span class="k">assert</span> <span class="p">(</span><span class="mi">2</span> <span class="o">==</span> <span class="n">sig_2</span><span class="o">.</span><span class="n">ndim</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="mi">3</span> <span class="o">==</span> <span class="n">sig_2</span><span class="o">.</span><span class="n">ndim</span><span class="p">),</span> \
+            <span class="s2">&quot;Signal 2 must be 2 or 3 dimensional&quot;</span>
+    <span class="k">assert</span> <span class="p">(</span><span class="n">sig_1</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&gt;=</span> <span class="n">sig_2</span><span class="o">.</span><span class="n">ndim</span><span class="p">),</span> \
+            <span class="s2">&quot;Signal 1 must be equal or greater than signal 2 in terms of &quot;</span> \
+            <span class="s2">&quot;dimensions&quot;</span>
+    <span class="k">if</span> <span class="n">like_matlab</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s1">&#39;same&#39;</span> <span class="o">==</span> <span class="n">mode</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="mi">0</span> <span class="o">==</span> <span class="n">sig_2</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="mi">0</span> <span class="o">==</span> <span class="n">sig_2</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">%</span> <span class="mi">2</span><span class="p">):</span>
+                <span class="n">row_start</span> <span class="o">=</span> <span class="n">sig_2</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">//</span> <span class="mi">2</span>
+                <span class="n">col_start</span> <span class="o">=</span> <span class="n">sig_2</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">//</span> <span class="mi">2</span>
+                <span class="n">row_end</span> <span class="o">=</span> <span class="n">row_start</span> <span class="o">+</span> <span class="n">sig_1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">col_end</span> <span class="o">=</span> <span class="n">col_start</span> <span class="o">+</span> <span class="n">sig_1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;full&#39;</span>
+                <span class="n">sig_out</span> <span class="o">=</span> <span class="n">do_convolve2d</span><span class="p">()</span>
+                <span class="k">return</span> <span class="n">sig_out</span><span class="p">[</span><span class="n">row_start</span><span class="p">:</span><span class="n">row_end</span><span class="p">,</span> <span class="n">col_start</span><span class="p">:</span><span class="n">col_end</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">do_convolve2d</span><span class="p">()</span></div>
+
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Brighton Ancelin.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

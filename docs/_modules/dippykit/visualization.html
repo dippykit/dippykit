@@ -1,0 +1,605 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>dippykit.visualization &mdash; dippykit  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="dippykit  documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> dippykit
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.html">dippykit package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.adjustments.html">dippykit.adjustments module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.coding.html">dippykit.coding module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.image_io.html">dippykit.image_io module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.metrics.html">dippykit.metrics module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.sampling.html">dippykit.sampling module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.transforms.html">dippykit.transforms module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.utilities.html">dippykit.utilities module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.visualization.html">dippykit.visualization module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.windows.html">dippykit.windows module</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">dippykit</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>dippykit.visualization</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for dippykit.visualization</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Module of image visualization functions</span>
+
+<span class="sd">This module contains an assortment of functions relevant to the plotting and</span>
+<span class="sd">visualization of various image-relevant data</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># Functional imports</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;TkAgg&#39;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="k">import</span> <span class="n">Axes3D</span>
+<span class="kn">from</span> <span class="nn">matplotlib.axes</span> <span class="k">import</span> <span class="n">Axes</span>
+<span class="kn">from</span> <span class="nn">matplotlib.backends.backend_tkagg</span> <span class="k">import</span> <span class="n">FigureCanvasTkAgg</span>
+<span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="k">import</span> <span class="n">Queue</span><span class="p">,</span> <span class="n">Process</span>
+<span class="kn">from</span> <span class="nn">threading</span> <span class="k">import</span> <span class="n">Thread</span>
+<span class="kn">from</span> <span class="nn">tkinter</span> <span class="k">import</span> <span class="n">Tk</span><span class="p">,</span> <span class="n">TOP</span><span class="p">,</span> <span class="n">BOTH</span>
+
+<span class="c1"># General imports</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Brighton Ancelin&#39;</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;imshow&#39;</span><span class="p">,</span> <span class="s1">&#39;quiver&#39;</span><span class="p">,</span> <span class="s1">&#39;surf&#39;</span><span class="p">,</span> <span class="s1">&#39;setup_continuous_rendering&#39;</span><span class="p">,</span> <span class="s1">&#39;zlabel&#39;</span><span class="p">]</span>
+
+<div class="viewcode-block" id="imshow"><a class="viewcode-back" href="../../dippykit.visualization.html#dippykit.visualization.imshow">[docs]</a><span class="k">def</span> <span class="nf">imshow</span><span class="p">(</span>
+        <span class="n">im</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Displays an image</span>
+
+<span class="sd">    Displays the argument image with optional parameters. If the image has a</span>
+<span class="sd">    dtype of uint8, then by default the vmin and vmax parameters will be set</span>
+<span class="sd">    to 0 and 255 respectively. This is to provided accurate depictions of</span>
+<span class="sd">    otherwise dark images.</span>
+
+<span class="sd">    This function is essentially a wrapper for `matplotlib.pyplot.imshow`_,</span>
+<span class="sd">    so more detailed documentation may be found there.</span>
+
+<span class="sd">    :type im: ``numpy.ndarray``</span>
+<span class="sd">    :param im: The image to be displayed.</span>
+<span class="sd">    :return: None</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        This function wraps around functions from other packages. Reading</span>
+<span class="sd">        these functions&#39; documentations may be useful. See the **See also**</span>
+<span class="sd">        section for more information.</span>
+
+<span class="sd">    .. seealso::</span>
+<span class="sd">        `matplotlib.pyplot.imshow`_</span>
+<span class="sd">            Documentation of the random_noise function from Scikit Image</span>
+
+<span class="sd">    .. _matplotlib.pyplot.imshow: https://matplotlib.org/api/_as_gen</span>
+<span class="sd">        /matplotlib.pyplot.imshow.html</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">im</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">:</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">iinfo</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;vmin&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;vmin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">min</span>
+        <span class="k">if</span> <span class="s1">&#39;vmax&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;vmax&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">max</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="surf"><a class="viewcode-back" href="../../dippykit.visualization.html#dippykit.visualization.surf">[docs]</a><span class="k">def</span> <span class="nf">surf</span><span class="p">(</span>
+        <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">y</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">z</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Plots a surface</span>
+
+<span class="sd">    Plots the x, y, and z values as a surface in 3D.</span>
+
+<span class="sd">    This function is essentially a wrapper for</span>
+<span class="sd">    `mpl_toolkits.mplot3d.axes3d.Axes3D.plot_surface`_, so more detailed</span>
+<span class="sd">    documentation may be found there.</span>
+
+<span class="sd">    :type x: ``numpy.ndarray``</span>
+<span class="sd">    :param x: The array of x coordinates for the surface plot.</span>
+<span class="sd">    :type y: ``numpy.ndarray``</span>
+<span class="sd">    :param y: The array of y coordinates for the surface plot.</span>
+<span class="sd">    :type z: ``numpy.ndarray``</span>
+<span class="sd">    :param z: The array of z coordinates for the surface plot.</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        This function wraps around functions from other packages. Reading</span>
+<span class="sd">        these functions&#39; documentations may be useful. See the **See also**</span>
+<span class="sd">        section for more information.</span>
+
+<span class="sd">    .. seealso::</span>
+<span class="sd">        `mpl_toolkits.mplot3d.axes3d.Axes3D.plot_surface`_</span>
+<span class="sd">            Documentation of the plot_surface function from Matplotlib</span>
+
+<span class="sd">    .. _mpl_toolkits.mplot3d.axes3d.Axes3D.plot_surface: https://matplotlib</span>
+<span class="sd">        .org/mpl_toolkits/mplot3d/tutorial.html#surface-plots</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="mi">1</span> <span class="o">==</span> <span class="n">x</span><span class="o">.</span><span class="n">ndim</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="mi">1</span> <span class="o">==</span> <span class="n">y</span><span class="o">.</span><span class="n">ndim</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="zlabel"><a class="viewcode-back" href="../../dippykit.visualization.html#dippykit.visualization.zlabel">[docs]</a><span class="k">def</span> <span class="nf">zlabel</span><span class="p">(</span>
+        <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Writes a string to the z axis label</span>
+
+<span class="sd">    Provided that the current axes has a z axis, this function will write</span>
+<span class="sd">    the given string to the axis label.</span>
+
+<span class="sd">    This function is essentially a wrapper for</span>
+<span class="sd">    `mpl_toolkits.mplot3d.axes3d.Axes3D.set_zlabel`_, so more detailed</span>
+<span class="sd">    documentation may be found there.</span>
+
+<span class="sd">    :type s: ``str``</span>
+<span class="sd">    :param s: The string to write to the z axis label.</span>
+<span class="sd">    :return: None</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        This function wraps around functions from other packages. Reading</span>
+<span class="sd">        these functions&#39; documentations may be useful. See the **See also**</span>
+<span class="sd">        section for more information.</span>
+
+<span class="sd">    .. seealso::</span>
+<span class="sd">        `mpl_toolkits.mplot3d.axes3d.Axes3D.set_zlabel`_</span>
+<span class="sd">            Documentation of the set_ylabel function (set_zlabel has no</span>
+<span class="sd">            formal documentation) from Matplotlib</span>
+
+<span class="sd">    .. _mpl_toolkits.mplot3d.axes3d.Axes3D.set_zlabel: https://matplotlib.org</span>
+<span class="sd">        /api/_as_gen/matplotlib.axes.Axes.set_ylabel.html</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="s1">&#39;set_zlabel&#39;</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">ax</span><span class="p">),</span> \
+            <span class="s2">&quot;Can&#39;t set z label if the current axes don&#39;t have a z axis.&quot;</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="quiver"><a class="viewcode-back" href="../../dippykit.visualization.html#dippykit.visualization.quiver">[docs]</a><span class="k">def</span> <span class="nf">quiver</span><span class="p">(</span>
+        <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Plots a field of arrows</span>
+
+<span class="sd">    Plots a field of arrow on the current axes. If the following keyword</span>
+<span class="sd">    arguments are not set, then they will take on the following default values:</span>
+
+<span class="sd">        * &#39;units&#39;: &#39;xy&#39;</span>
+<span class="sd">        * &#39;angles&#39;: &#39;xy&#39;</span>
+<span class="sd">        * &#39;scale_units&#39;: &#39;xy&#39;</span>
+<span class="sd">        * &#39;scale&#39;: The mean of the magnitudes of the U and V vectors.</span>
+
+<span class="sd">    This function is essentially a wrapper for</span>
+<span class="sd">    `matplotlib.axes.Axes.quiver`_, so more detailed documentation may be</span>
+<span class="sd">    found there.</span>
+
+<span class="sd">    :return: None</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        This function wraps around functions from other packages. Reading</span>
+<span class="sd">        these functions&#39; documentations may be useful. See the **See also**</span>
+<span class="sd">        section for more information.</span>
+
+<span class="sd">    .. seealso::</span>
+<span class="sd">        `matplotlib.axes.Axes.quiver`_</span>
+<span class="sd">            Documentation of the quiver function from Matplotlib</span>
+
+<span class="sd">    .. _matplotlib.axes.Axes.quiver: https://matplotlib.org/api/_as_gen</span>
+<span class="sd">        /matplotlib.axes.Axes.quiver.html</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="s1">&#39;units&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;units&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;xy&#39;</span>
+    <span class="k">if</span> <span class="s1">&#39;angles&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;angles&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;xy&#39;</span>
+    <span class="k">if</span> <span class="s1">&#39;scale_units&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;scale_units&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;xy&#39;</span>
+    <span class="k">if</span> <span class="s1">&#39;scale&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="k">if</span> <span class="mi">2</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="ow">or</span> <span class="mi">3</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+            <span class="n">scale</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="mi">4</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="ow">or</span> <span class="mi">5</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+            <span class="n">scale</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">args</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">args</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">)</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;scale&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scale</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="setup_continuous_rendering"><a class="viewcode-back" href="../../dippykit.visualization.html#dippykit.visualization.setup_continuous_rendering">[docs]</a><span class="k">def</span> <span class="nf">setup_continuous_rendering</span><span class="p">(</span>
+        <span class="n">render</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Axes</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="kc">None</span><span class="p">],</span>
+        <span class="n">update</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Queue</span><span class="p">],</span> <span class="kc">None</span><span class="p">],</span>
+        <span class="n">delay</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+        <span class="n">auto_play</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Sets up a continuous renderer</span>
+
+<span class="sd">    This function sets up a window to display data that can continuously</span>
+<span class="sd">    change. To best understand this function, try copying the example code</span>
+<span class="sd">    below into a python file, running it, and then observing the results.</span>
+
+<span class="sd">    :type render: ``Callable[[Axes, Any], None]``</span>
+<span class="sd">    :param render: A function that takes a matplotlib Axes object and any</span>
+<span class="sd">        data as arguments. This function returns nothing. This function should</span>
+<span class="sd">        use the Axes object to update the rendering each time a new datum is</span>
+<span class="sd">        received. These data are supplied through the *update* function.</span>
+<span class="sd">    :type update: ``Callable[[Queue], None]``</span>
+<span class="sd">    :param update: A function that takes a Queue as an argument and returns</span>
+<span class="sd">        nothing. This function should update the rendering by putting each new</span>
+<span class="sd">        datum into its queue via the ``Queue.put()`` function. These data are</span>
+<span class="sd">        then subsequently rendered by the *render* function. Once this</span>
+<span class="sd">        function places ``None`` into the queue, the rendering will cease to</span>
+<span class="sd">        update.</span>
+<span class="sd">    :type delay: ``int``</span>
+<span class="sd">    :param delay: (default=100) The time (in milliseconds) between calling</span>
+<span class="sd">        the *render* function to update the rendering. Also known as the</span>
+<span class="sd">        refresh rate.</span>
+<span class="sd">    :type auto_play: ``bool``</span>
+<span class="sd">    :param auto_play: (default=True) If set to false, the rendering will</span>
+<span class="sd">        prompt the user before each update.</span>
+<span class="sd">    :return: None</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        # This file will generate a rendering of a square moving in an image</span>
+
+<span class="sd">        import numpy as np</span>
+<span class="sd">        import dippykit as dip</span>
+
+<span class="sd">        def render_square(ax, data):</span>
+<span class="sd">            # Show the image without any axis</span>
+<span class="sd">            ax.imshow(data, &#39;gray&#39;)</span>
+<span class="sd">            ax.axis(&#39;off&#39;)</span>
+
+<span class="sd">        def update_square(queue):</span>
+<span class="sd">            # Create an arbitrary animation of a square progressively moving</span>
+<span class="sd">            # through the image</span>
+<span class="sd">            for i in range(9):</span>
+<span class="sd">                square = np.zeros(9)</span>
+<span class="sd">                square[i] = 1</span>
+<span class="sd">                square = square.reshape((3, 3))</span>
+<span class="sd">                queue.put(square)</span>
+<span class="sd">            # Putting None into the queue tells the renderer to cease updating</span>
+<span class="sd">            queue.put(None)</span>
+
+<span class="sd">        if __name__ == &#39;__main__&#39;:</span>
+<span class="sd">            # Sets up a continuous rendering using the functions above.</span>
+<span class="sd">            # The rendering will update every 1000 milliseconds (1 second).</span>
+<span class="sd">            dip.setup_continuous_rendering(render_square, update_square, 1000)</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        # This file will generate renderings of happy and sad faces</span>
+
+<span class="sd">        import numpy as np</span>
+<span class="sd">        import dippykit as dip</span>
+
+<span class="sd">        def render_face(ax, data):</span>
+<span class="sd">            # Break the data into more manageable variable names</span>
+<span class="sd">            mouth, left_eye, right_eye, is_happy = data</span>
+<span class="sd">            mouth_x, mouth_y = mouth</span>
+<span class="sd">            left_eye_x, left_eye_y = left_eye</span>
+<span class="sd">            right_eye_x, right_eye_y = right_eye</span>
+<span class="sd">            # First, clear the axes</span>
+<span class="sd">            ax.clear()</span>
+<span class="sd">            # Draw the face</span>
+<span class="sd">            ax.plot(mouth_x, mouth_y)</span>
+<span class="sd">            ax.plot(left_eye_x, left_eye_y)</span>
+<span class="sd">            ax.plot(right_eye_x, right_eye_y)</span>
+<span class="sd">            # Set the appropriate title to the axes</span>
+<span class="sd">            if is_happy:</span>
+<span class="sd">                ax.set_title(&#39;Happy Face - Press ENTER to toggle&#39;)</span>
+<span class="sd">            else:</span>
+<span class="sd">                ax.set_title(&#39;Sad Face - Press ENTER to toggle&#39;)</span>
+
+<span class="sd">        def update_face(queue):</span>
+<span class="sd">            # Defining all the arrays</span>
+<span class="sd">            mouth_x = np.array(range(31)) - 15</span>
+<span class="sd">            happy_mouth_y = 20 * (mouth_x/15) ** 2</span>
+<span class="sd">            sad_mouth_y = 20 - happy_mouth_y</span>
+<span class="sd">            u = np.linspace(0, 1, 21)</span>
+<span class="sd">            left_eye_x = np.cos(2 * np.pi * u) - 9</span>
+<span class="sd">            right_eye_x = np.cos(2 * np.pi * u) + 9</span>
+<span class="sd">            eye_y = np.sin(2 * np.pi * u) + 29</span>
+<span class="sd">            # Aggregating the data into single tuples</span>
+<span class="sd">            happy_mouth = (mouth_x, happy_mouth_y)</span>
+<span class="sd">            sad_mouth = (mouth_x, sad_mouth_y)</span>
+<span class="sd">            left_eye = (left_eye_x, eye_y)</span>
+<span class="sd">            right_eye = (right_eye_x, eye_y)</span>
+<span class="sd">            happy_face = (happy_mouth, left_eye, right_eye, True)</span>
+<span class="sd">            sad_face = (sad_mouth, left_eye, right_eye, False)</span>
+<span class="sd">            is_happy = True</span>
+<span class="sd">            while True:</span>
+<span class="sd">                # If there are less than 10 items in the queue</span>
+<span class="sd">                if queue.qsize() &lt; 10:</span>
+<span class="sd">                    # Alternate with happy and sad faces</span>
+<span class="sd">                    if is_happy:</span>
+<span class="sd">                        queue.put(happy_face)</span>
+<span class="sd">                        is_happy = False</span>
+<span class="sd">                    else:</span>
+<span class="sd">                        queue.put(sad_face)</span>
+<span class="sd">                        is_happy = True</span>
+
+<span class="sd">        if __name__ == &#39;__main__&#39;:</span>
+<span class="sd">            # Sets up a continuous rendering using the functions above.</span>
+<span class="sd">            # This rendering will await user input before updating the display.</span>
+<span class="sd">            dip.setup_continuous_rendering(render_face, update_face,</span>
+<span class="sd">                                           auto_play=False)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">window</span> <span class="o">=</span> <span class="n">Tk</span><span class="p">()</span>
+    <span class="n">queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
+    <span class="n">update_process</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">update</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">queue</span><span class="p">,))</span>
+    <span class="n">update_process</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="n">ax</span><span class="p">,</span> <span class="n">canvas</span> <span class="o">=</span> <span class="n">_setup_window</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
+    <span class="n">_update_window</span><span class="p">(</span><span class="n">render</span><span class="p">,</span> <span class="n">queue</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">canvas</span><span class="p">,</span> <span class="n">delay</span><span class="p">,</span> <span class="n">auto_play</span><span class="p">)</span>
+    <span class="n">window</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span>
+    <span class="n">update_process</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span></div>
+
+
+<span class="k">def</span> <span class="nf">_setup_window</span><span class="p">(</span>
+        <span class="n">window</span><span class="p">:</span> <span class="n">Tk</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Axes</span><span class="p">,</span> <span class="n">FigureCanvasTkAgg</span><span class="p">]:</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">canvas</span> <span class="o">=</span> <span class="n">FigureCanvasTkAgg</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">master</span><span class="o">=</span><span class="n">window</span><span class="p">)</span>
+    <span class="n">canvas</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="n">canvas</span><span class="o">.</span><span class="n">get_tk_widget</span><span class="p">()</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">side</span><span class="o">=</span><span class="n">TOP</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="n">BOTH</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">canvas</span><span class="o">.</span><span class="n">_tkcanvas</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">side</span><span class="o">=</span><span class="n">TOP</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="n">BOTH</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ax</span><span class="p">,</span> <span class="n">canvas</span>
+
+
+<span class="k">def</span> <span class="nf">_update_window</span><span class="p">(</span>
+        <span class="n">render</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Axes</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="kc">None</span><span class="p">],</span>
+        <span class="n">queue</span><span class="p">:</span> <span class="n">Queue</span><span class="p">,</span>
+        <span class="n">window</span><span class="p">:</span> <span class="n">Tk</span><span class="p">,</span>
+        <span class="n">ax</span><span class="p">:</span> <span class="n">Axes</span><span class="p">,</span>
+        <span class="n">canvas</span><span class="p">:</span> <span class="n">FigureCanvasTkAgg</span><span class="p">,</span>
+        <span class="n">delay</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">auto_play</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="n">wait_thread</span><span class="p">:</span> <span class="n">Thread</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">do_update</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="n">wait_thread</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">do_update</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="n">wait_thread</span><span class="o">.</span><span class="n">is_alive</span><span class="p">():</span>
+        <span class="n">wait_thread</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">do_update</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="n">do_update</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">queue</span><span class="o">.</span><span class="n">empty</span><span class="p">()):</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">get_nowait</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">val</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">render</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+            <span class="n">canvas</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">auto_play</span><span class="p">:</span>
+                <span class="n">wait_thread</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span>
+                    <span class="n">target</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Press ENTER to continue...&#39;</span><span class="p">))</span>
+                <span class="n">wait_thread</span><span class="o">.</span><span class="n">setDaemon</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">wait_thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+            <span class="n">window</span><span class="o">.</span><span class="n">after</span><span class="p">(</span><span class="n">delay</span><span class="p">,</span> <span class="n">_update_window</span><span class="p">,</span> <span class="n">render</span><span class="p">,</span> <span class="n">queue</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span>
+                         <span class="n">canvas</span><span class="p">,</span> <span class="n">delay</span><span class="p">,</span> <span class="n">auto_play</span><span class="p">,</span> <span class="n">wait_thread</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">window</span><span class="o">.</span><span class="n">after</span><span class="p">(</span><span class="n">delay</span><span class="p">,</span> <span class="n">_update_window</span><span class="p">,</span> <span class="n">render</span><span class="p">,</span> <span class="n">queue</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span>
+                     <span class="n">canvas</span><span class="p">,</span> <span class="n">delay</span><span class="p">,</span> <span class="n">auto_play</span><span class="p">,</span> <span class="n">wait_thread</span><span class="p">)</span>
+
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Brighton Ancelin.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

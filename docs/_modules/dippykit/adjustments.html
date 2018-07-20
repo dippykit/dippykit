@@ -1,0 +1,630 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>dippykit.adjustments &mdash; dippykit  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="dippykit  documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> dippykit
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.html">dippykit package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.adjustments.html">dippykit.adjustments module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.coding.html">dippykit.coding module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.image_io.html">dippykit.image_io module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.metrics.html">dippykit.metrics module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.sampling.html">dippykit.sampling module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.transforms.html">dippykit.transforms module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.utilities.html">dippykit.utilities module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.visualization.html">dippykit.visualization module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.windows.html">dippykit.windows module</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">dippykit</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>dippykit.adjustments</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for dippykit.adjustments</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Module of image adjustment functions</span>
+
+<span class="sd">This module contains an assortment of functions for use in adjusting the</span>
+<span class="sd">specifics of images. This includes noise, domain expansion/contraction,</span>
+<span class="sd">shifts, etc.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># Internal imports</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">_utils</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">image_io</span>
+
+<span class="c1"># Functional imports</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">skimage.util</span> <span class="k">import</span> <span class="n">random_noise</span>
+
+<span class="c1"># General imports</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Brighton Ancelin&#39;</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;image_noise&#39;</span><span class="p">,</span> <span class="s1">&#39;image_adjust&#39;</span><span class="p">,</span> <span class="s1">&#39;image_translate&#39;</span><span class="p">,</span> <span class="s1">&#39;image_shift&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="image_noise"><a class="viewcode-back" href="../../dippykit.adjustments.html#dippykit.adjustments.image_noise">[docs]</a><span class="k">def</span> <span class="nf">image_noise</span><span class="p">(</span>
+        <span class="n">im</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;gaussian&#39;</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Adds random noise to an image</span>
+
+<span class="sd">    Adds random noise to an input image. For images with an integer dtype,</span>
+<span class="sd">    the returned image will retain the original image&#39;s dtype. In all other</span>
+<span class="sd">    cases, the returned image will have a float dtype and be within the</span>
+<span class="sd">    normalized range from 0 to 1.</span>
+
+<span class="sd">    This function is essentially a wrapper for `skimage.util.random_noise`_,</span>
+<span class="sd">    so more detailed documentation may be found there.</span>
+
+<span class="sd">    :type im: ``numpy.ndarray``</span>
+<span class="sd">    :param im: The original image.</span>
+<span class="sd">    :type mode: ``str``</span>
+<span class="sd">    :param mode: (default=&#39;gaussian&#39;) The type of noise to add to the image.</span>
+<span class="sd">        May be one of the following: *&#39;gaussian&#39;, &#39;localvar&#39;, &#39;poisson&#39;,</span>
+<span class="sd">        &#39;salt&#39;, &#39;pepper&#39;, &#39;s&amp;p&#39;, &#39;speckle&#39;*. Passed as the mode argument to</span>
+<span class="sd">        `skimage.util.random_noise`_.</span>
+<span class="sd">    :param kwargs: See below.</span>
+<span class="sd">    :rtype: ``numpy.ndarray``</span>
+<span class="sd">    :return: The noisy image.</span>
+
+<span class="sd">    :Keyword Arguments:</span>
+<span class="sd">        * **mean** (``int`` or ``float``) --</span>
+<span class="sd">          The mean of the randomly distributed noise. This value&#39;s meaning</span>
+<span class="sd">          is dependent on the dtype of the image (e.g. mean=127 for an image</span>
+<span class="sd">          with dtype=uint8 is analogous to mean=(127 / 255) for an image with</span>
+<span class="sd">          dtype=float).</span>
+<span class="sd">        * **var** (``int`` or ``float``) --</span>
+<span class="sd">          The variance of the randomly distributed noise. This value&#39;s</span>
+<span class="sd">          meaning is dependent on the dtype of the image (e.g. var=(0.01 * (</span>
+<span class="sd">          255 ** 2)) for an image with dtype=uint8 is analogous to var=0.01</span>
+<span class="sd">          for an image with dtype=float).</span>
+<span class="sd">        * **local_vars** (``numpy.ndarray``) --</span>
+<span class="sd">          The array of local variances for the randomly distributed noise.</span>
+<span class="sd">          This value&#39;s meaning is dependent on the dtype of the image. Each</span>
+<span class="sd">          element in the array is treated in the same way the var keyword</span>
+<span class="sd">          argument would be.</span>
+<span class="sd">        * A full list of keyword arguments along with descriptions can be</span>
+<span class="sd">          found at `skimage.util.random_noise`_.</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        This function wraps around functions from other packages. Reading</span>
+<span class="sd">        these functions&#39; documentations may be useful. See the **See also**</span>
+<span class="sd">        section for more information.</span>
+
+<span class="sd">    .. seealso::</span>
+<span class="sd">        `skimage.util.random_noise`_</span>
+<span class="sd">            Documentation of the random_noise function from Scikit Image</span>
+
+<span class="sd">    .. _skimage.util.random_noise: http://scikit-image.org/docs/dev/api/</span>
+<span class="sd">        skimage.util.html#skimage.util.random_noise</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; im = np.random.randint(0, 256, size=(8, 8), dtype=np.uint8)</span>
+<span class="sd">    &gt;&gt;&gt; im</span>
+<span class="sd">    array([[238, 208, 243, 228, 198, 186,  72, 181],</span>
+<span class="sd">           [ 92, 247,  98, 197, 203, 210, 219, 175],</span>
+<span class="sd">           [124,  66, 231, 193, 154, 153, 136,  59],</span>
+<span class="sd">           [218, 162,  65, 196, 181, 160,  13, 148],</span>
+<span class="sd">           [164,  26, 150, 202,  55, 138,  40, 116],</span>
+<span class="sd">           [ 46, 151,  97,  78, 169, 249, 181, 167],</span>
+<span class="sd">           [ 79,  72,  31,  98, 152,  80, 220, 152],</span>
+<span class="sd">           [ 19, 233, 111, 126, 176,  68,  40,  49]], dtype=uint8)</span>
+<span class="sd">    &gt;&gt;&gt; image_noise(im)</span>
+<span class="sd">    array([[246, 220, 211, 216, 216, 157,  51, 176],</span>
+<span class="sd">           [ 79, 230,  68, 217, 211, 175, 244, 180],</span>
+<span class="sd">           [ 86,  75, 184, 178, 123, 183, 106,  61],</span>
+<span class="sd">           [201, 154,  73, 193, 163, 180,  33, 180],</span>
+<span class="sd">           [192,  19, 144, 197,  64,  89,  36,  99],</span>
+<span class="sd">           [ 58, 182,  81,  53, 154, 255, 193, 145],</span>
+<span class="sd">           [ 60,  62,  55, 122, 132,  97, 244, 167],</span>
+<span class="sd">           [ 33, 181, 132, 163, 190,   9,  41,  45]], dtype=uint8)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">im_float</span> <span class="o">=</span> <span class="n">image_io</span><span class="o">.</span><span class="n">im_to_float</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+        <span class="n">success</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">dtype_max_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">iinfo</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span><span class="o">.</span><span class="n">max</span>
+        <span class="k">if</span> <span class="s1">&#39;mean&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;mean&#39;</span><span class="p">]</span> <span class="o">/=</span> <span class="n">dtype_max_val</span>
+        <span class="k">if</span> <span class="s1">&#39;var&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;var&#39;</span><span class="p">]</span> <span class="o">/=</span> <span class="p">(</span><span class="n">dtype_max_val</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;local_vars&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;local_vars&#39;</span><span class="p">]</span> <span class="o">/=</span> <span class="p">(</span><span class="n">dtype_max_val</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="n">im_float</span> <span class="o">=</span> <span class="n">im</span>
+        <span class="n">success</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="mi">0</span> <span class="o">&gt;</span> <span class="n">im</span><span class="p">)</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;</span> <span class="n">im</span><span class="p">):</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Image passed to image_noise() was not able to be &#39;</span>
+                      <span class="s1">&#39;converted to a normalized floating point range. This &#39;</span>
+                      <span class="s1">&#39;is most likely due to having the image in a &#39;</span>
+                      <span class="s1">&#39;non-integer dtype. Returned noisy image will have a &#39;</span>
+                      <span class="s1">&#39;normalized floating point range.&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">success</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">image_io</span><span class="o">.</span><span class="n">float_to_im</span><span class="p">(</span><span class="n">random_noise</span><span class="p">(</span><span class="n">im_float</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span>
+                <span class="o">**</span><span class="n">kwargs</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">iinfo</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span><span class="o">.</span><span class="n">bits</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">random_noise</span><span class="p">(</span><span class="n">im_float</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="image_adjust"><a class="viewcode-back" href="../../dippykit.adjustments.html#dippykit.adjustments.image_adjust">[docs]</a><span class="k">def</span> <span class="nf">image_adjust</span><span class="p">(</span>
+        <span class="n">im</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">lower_in</span><span class="p">:</span> <span class="n">_utils</span><span class="o">.</span><span class="n">NumericType</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">upper_in</span><span class="p">:</span> <span class="n">_utils</span><span class="o">.</span><span class="n">NumericType</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">lower_out</span><span class="p">:</span> <span class="n">_utils</span><span class="o">.</span><span class="n">NumericType</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">upper_out</span><span class="p">:</span> <span class="n">_utils</span><span class="o">.</span><span class="n">NumericType</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">keep_dtype</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Adjusts a given image by clipping and scaling its range</span>
+
+<span class="sd">    Given an image and parameters, this function clips the values in the</span>
+<span class="sd">    image to within a specific range and subsequently scales the image to a</span>
+<span class="sd">    new range.</span>
+
+<span class="sd">    :type im: ``numpy.ndarray``</span>
+<span class="sd">    :param im: The original image.</span>
+<span class="sd">    :type lower_in: ``NumericType``</span>
+<span class="sd">    :param lower_in: The lower clipping bound for the input image. All</span>
+<span class="sd">        values less than this will be set to this in the image before</span>
+<span class="sd">        scaling. By default, this value will be set to 1st percentile of the</span>
+<span class="sd">        image.</span>
+<span class="sd">    :type upper_in: ``NumericType``</span>
+<span class="sd">    :param upper_in: The upper clipping bound for the input image. All</span>
+<span class="sd">        values greater than this will be set to this in the image before</span>
+<span class="sd">        scaling. By default, this value will be set to 99th percentile of the</span>
+<span class="sd">        image.</span>
+<span class="sd">    :type lower_out: ``NumericType``</span>
+<span class="sd">    :param lower_out: The lower bound for the range of the scaled output</span>
+<span class="sd">        image. By default, this value is the minimum value of the dtype for</span>
+<span class="sd">        integer dtypes or 0.0 for float dtypes.</span>
+<span class="sd">    :type upper_out: ``NumericType``</span>
+<span class="sd">    :param upper_out: The upper bound for the range of the scaled output</span>
+<span class="sd">        image. By default, this value is the maximum value of the dtype for</span>
+<span class="sd">        integer dtypes or 1.0 for float dtypes.</span>
+<span class="sd">    :type keep_dtype: ``bool``</span>
+<span class="sd">    :param keep_dtype: (default=True) Whether or not to cast the output</span>
+<span class="sd">        image back to the dtype of the input image</span>
+<span class="sd">    :rtype: ``numpy.ndarray``</span>
+<span class="sd">    :return: The adjusted image.</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; im = np.array([[  0,  32,  64],</span>
+<span class="sd">    ...                [ 96, 128, 160],</span>
+<span class="sd">    ...                [192, 224, 255]], dtype=np.uint8)</span>
+<span class="sd">    &gt;&gt;&gt; image_adjust(im, 64, 192)</span>
+<span class="sd">    array([[  0,   0,   0],</span>
+<span class="sd">           [ 63, 127, 191],</span>
+<span class="sd">           [255, 255, 255]], dtype=uint8)</span>
+<span class="sd">    &gt;&gt;&gt; image_adjust(im, 64, 192, 64, 192)</span>
+<span class="sd">    array([[ 64,  64,  64],</span>
+<span class="sd">           [ 96, 128, 160],</span>
+<span class="sd">           [192, 192, 192]], dtype=uint8)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">sorted_im_ravel</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">keep_dtype</span><span class="p">:</span>
+        <span class="n">orig_dtype</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">dtype</span>
+    <span class="k">if</span> <span class="n">lower_in</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># Set to the 1st percentile</span>
+        <span class="n">sorted_im_ravel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
+        <span class="n">lower_in</span> <span class="o">=</span> <span class="n">sorted_im_ravel</span><span class="p">[</span><span class="n">im</span><span class="o">.</span><span class="n">size</span> <span class="o">//</span> <span class="mi">100</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">upper_in</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># Set to the 99th percentile</span>
+        <span class="k">if</span> <span class="n">sorted_im_ravel</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">upper_in</span> <span class="o">=</span> <span class="n">sorted_im_ravel</span><span class="p">[</span><span class="n">im</span><span class="o">.</span><span class="n">size</span> <span class="o">-</span> <span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">size</span> <span class="o">//</span> <span class="mi">100</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">upper_in</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">ravel</span><span class="p">())[</span><span class="n">im</span><span class="o">.</span><span class="n">size</span> <span class="o">-</span> <span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">size</span> <span class="o">//</span> <span class="mi">100</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">lower_out</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">im</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">kind</span> <span class="ow">in</span> <span class="s1">&#39;iu&#39;</span><span class="p">:</span>
+            <span class="n">lower_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">iinfo</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span><span class="o">.</span><span class="n">min</span>
+        <span class="k">elif</span> <span class="n">im</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="s1">&#39;f&#39;</span><span class="p">:</span>
+            <span class="n">lower_out</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Should never occur</span>
+            <span class="n">lower_out</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">if</span> <span class="n">upper_out</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">im</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">kind</span> <span class="ow">in</span> <span class="s1">&#39;iu&#39;</span><span class="p">:</span>
+            <span class="n">upper_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">iinfo</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span><span class="o">.</span><span class="n">max</span>
+        <span class="k">elif</span> <span class="n">im</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="s1">&#39;f&#39;</span><span class="p">:</span>
+            <span class="n">upper_out</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Should never occur</span>
+            <span class="n">upper_out</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">im</span><span class="p">[</span><span class="n">im</span> <span class="o">&lt;</span> <span class="n">lower_in</span><span class="p">]</span> <span class="o">=</span> <span class="n">lower_in</span>
+    <span class="n">im</span><span class="p">[</span><span class="n">im</span> <span class="o">&gt;</span> <span class="n">upper_in</span><span class="p">]</span> <span class="o">=</span> <span class="n">upper_in</span>
+    <span class="n">im</span> <span class="o">=</span> <span class="p">((</span><span class="n">im</span> <span class="o">-</span> <span class="n">lower_in</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">upper_out</span> <span class="o">-</span> <span class="n">lower_out</span><span class="p">)</span> <span class="o">/</span>
+          <span class="p">(</span><span class="n">upper_in</span> <span class="o">-</span> <span class="n">lower_in</span><span class="p">))</span> <span class="o">+</span> <span class="n">lower_out</span>
+    <span class="k">if</span> <span class="n">keep_dtype</span><span class="p">:</span>
+        <span class="n">im</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">orig_dtype</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">im</span></div>
+
+
+<div class="viewcode-block" id="image_translate"><a class="viewcode-back" href="../../dippykit.adjustments.html#dippykit.adjustments.image_translate">[docs]</a><span class="k">def</span> <span class="nf">image_translate</span><span class="p">(</span>
+        <span class="n">im</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">dist_vec</span><span class="p">:</span> <span class="n">_utils</span><span class="o">.</span><span class="n">ShapeType</span><span class="p">,</span>
+        <span class="n">pad_value</span><span class="p">:</span> <span class="n">_utils</span><span class="o">.</span><span class="n">NumericType</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Translates an image</span>
+
+<span class="sd">    Given an image and a two-dimensional vector of distances to translate,</span>
+<span class="sd">    this function translates the original image. Values left in the wake of</span>
+<span class="sd">    the translation are padded with pad_value, which is by default set to 0.</span>
+
+<span class="sd">    :type im: ``numpy.ndarray``</span>
+<span class="sd">    :param im: The original image.</span>
+<span class="sd">    :type dist_vec: ``ShapeType``</span>
+<span class="sd">    :param dist_vec: A vector of distances to translate.</span>
+<span class="sd">    :type pad_value: ``NumericType``</span>
+<span class="sd">    :param pad_value: The value to pad for elements left in the wake of the</span>
+<span class="sd">        translation.</span>
+<span class="sd">    :rtype: ``numpy.ndarray``</span>
+<span class="sd">    :return: The translated image.</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; im = np.array(array([[ 1,  2,  3,  4,  5],</span>
+<span class="sd">    ...                      [ 6,  7,  8,  9, 10],</span>
+<span class="sd">    ...                      [11, 12, 13, 14, 15],</span>
+<span class="sd">    ...                      [16, 17, 18, 19, 20],</span>
+<span class="sd">    ...                      [21, 22, 23, 24, 25]])</span>
+<span class="sd">    &gt;&gt;&gt; image_translate(im, (0, 2))</span>
+<span class="sd">    array([[ 0,  0,  1,  2,  3],</span>
+<span class="sd">           [ 0,  0,  6,  7,  8],</span>
+<span class="sd">           [ 0,  0, 11, 12, 13],</span>
+<span class="sd">           [ 0,  0, 16, 17, 18],</span>
+<span class="sd">           [ 0,  0, 21, 22, 23]])</span>
+<span class="sd">    &gt;&gt;&gt; image_translate(im, (-3, 2), pad_value=-1)</span>
+<span class="sd">    array([[-1, -1, 16, 17, 18],</span>
+<span class="sd">           [-1, -1, 21, 22, 23],</span>
+<span class="sd">           [-1, -1, -1, -1, -1],</span>
+<span class="sd">           [-1, -1, -1, -1, -1],</span>
+<span class="sd">           [-1, -1, -1, -1, -1]])</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">dist_vec_abs</span> <span class="o">=</span> <span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span> <span class="k">for</span> <span class="n">dist</span> <span class="ow">in</span> <span class="n">dist_vec</span><span class="p">]</span>
+    <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+        <span class="n">dist_vec</span> <span class="o">=</span> <span class="p">(</span><span class="n">dist_vec</span><span class="p">,</span> <span class="n">dist_vec</span><span class="p">)</span>
+        <span class="n">dist_vec_abs</span> <span class="o">=</span> <span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span> <span class="k">for</span> <span class="n">dist</span> <span class="ow">in</span> <span class="n">dist_vec</span><span class="p">]</span>
+    <span class="n">dist_vec_abs_px</span> <span class="o">=</span> <span class="n">_utils</span><span class="o">.</span><span class="n">resolve_shape_arg</span><span class="p">(</span><span class="n">dist_vec_abs</span><span class="p">,</span> <span class="n">im</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
+                                               <span class="n">arg_name</span><span class="o">=</span><span class="s1">&#39;dist_vec&#39;</span><span class="p">,</span>
+                                               <span class="n">allow_larger_than_max</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">im_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">im</span><span class="p">)</span> <span class="o">*</span> <span class="n">pad_value</span>
+    <span class="k">if</span> <span class="mi">0</span> <span class="o">==</span> <span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">==</span> <span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">im_out</span><span class="p">[:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">im</span><span class="p">[:,</span> <span class="p">:]</span>
+        <span class="k">elif</span> <span class="n">dist_vec</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">im_out</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">im</span><span class="p">[:,</span> <span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">1</span><span class="p">]:]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">im_out</span><span class="p">[:,</span> <span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">1</span><span class="p">]:]</span> <span class="o">=</span> <span class="n">im</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+    <span class="k">elif</span> <span class="n">dist_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">==</span> <span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">im_out</span><span class="p">[:</span><span class="o">-</span><span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">im</span><span class="p">[</span><span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">0</span><span class="p">]:,</span> <span class="p">:]</span>
+        <span class="k">elif</span> <span class="n">dist_vec</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">im_out</span><span class="p">[:</span><span class="o">-</span><span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">:</span><span class="o">-</span><span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> \
+                    <span class="n">im</span><span class="p">[</span><span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">0</span><span class="p">]:,</span> <span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">1</span><span class="p">]:]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">im_out</span><span class="p">[:</span><span class="o">-</span><span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">1</span><span class="p">]:]</span> <span class="o">=</span> \
+                    <span class="n">im</span><span class="p">[</span><span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">0</span><span class="p">]:,</span> <span class="p">:</span><span class="o">-</span><span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">==</span> <span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">im_out</span><span class="p">[</span><span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">0</span><span class="p">]:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">im</span><span class="p">[:</span><span class="o">-</span><span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">:]</span>
+        <span class="k">elif</span> <span class="n">dist_vec</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">im_out</span><span class="p">[</span><span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">0</span><span class="p">]:,</span> <span class="p">:</span><span class="o">-</span><span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> \
+                    <span class="n">im</span><span class="p">[:</span><span class="o">-</span><span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">1</span><span class="p">]:]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">im_out</span><span class="p">[</span><span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">0</span><span class="p">]:,</span> <span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">1</span><span class="p">]:]</span> <span class="o">=</span> \
+                    <span class="n">im</span><span class="p">[:</span><span class="o">-</span><span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">:</span><span class="o">-</span><span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+    <span class="k">return</span> <span class="n">im_out</span></div>
+
+
+<div class="viewcode-block" id="image_shift"><a class="viewcode-back" href="../../dippykit.adjustments.html#dippykit.adjustments.image_shift">[docs]</a><span class="k">def</span> <span class="nf">image_shift</span><span class="p">(</span>
+        <span class="n">im</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">dist_vec</span><span class="p">:</span> <span class="n">_utils</span><span class="o">.</span><span class="n">ShapeType</span><span class="p">,</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Shifts an image by consecutively applying and summing translations</span>
+
+<span class="sd">    Given an image and a two-dimensional vector of distances to shift,</span>
+<span class="sd">    this function shifts the image by weighting and summing many</span>
+<span class="sd">    intermediate translations. This simulates an image taken with a shaky</span>
+<span class="sd">    camera.</span>
+
+<span class="sd">    :type im: ``numpy.ndarray``</span>
+<span class="sd">    :param im: The original image.</span>
+<span class="sd">    :type dist_vec: ``ShapeType``</span>
+<span class="sd">    :param dist_vec: A vector of distances to shift.</span>
+<span class="sd">    :rtype: ``numpy.ndarray``</span>
+<span class="sd">    :return: The translated image.</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; im = np.array(array([[  1,   2,   4],</span>
+<span class="sd">    ...                      [  8,  16,  32],</span>
+<span class="sd">    ...                      [ 64, 128, 256]])</span>
+<span class="sd">    &gt;&gt;&gt; image_translate(im, (0, 1))</span>
+<span class="sd">    array([[  1,   1,   3],</span>
+<span class="sd">           [  8,  12,  24],</span>
+<span class="sd">           [ 64,  96, 192]])</span>
+<span class="sd">    &gt;&gt;&gt; image_translate(im, (-1, 1))</span>
+<span class="sd">    array([[  1,   5,  10],</span>
+<span class="sd">           [  8,  40,  80],</span>
+<span class="sd">           [ 64, 128, 256]])</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">dist_vec_abs</span> <span class="o">=</span> <span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span> <span class="k">for</span> <span class="n">dist</span> <span class="ow">in</span> <span class="n">dist_vec</span><span class="p">]</span>
+    <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+        <span class="n">dist_vec</span> <span class="o">=</span> <span class="p">(</span><span class="n">dist_vec</span><span class="p">,</span> <span class="n">dist_vec</span><span class="p">)</span>
+        <span class="n">dist_vec_abs</span> <span class="o">=</span> <span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span> <span class="k">for</span> <span class="n">dist</span> <span class="ow">in</span> <span class="n">dist_vec</span><span class="p">]</span>
+    <span class="n">dist_vec_abs_px</span> <span class="o">=</span> <span class="n">_utils</span><span class="o">.</span><span class="n">resolve_shape_arg</span><span class="p">(</span><span class="n">dist_vec_abs</span><span class="p">,</span> <span class="n">im</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
+                                               <span class="n">arg_name</span><span class="o">=</span><span class="s1">&#39;dist_vec&#39;</span><span class="p">,</span>
+                                               <span class="n">allow_larger_than_max</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">im_out</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">im_ones</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint16</span><span class="p">)</span>
+    <span class="n">weights</span> <span class="o">=</span> <span class="n">im_ones</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">if</span> <span class="mi">0</span> <span class="o">==</span> <span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">==</span> <span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="k">pass</span>
+        <span class="k">elif</span> <span class="n">dist_vec</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">weights</span> <span class="o">+=</span> <span class="n">image_translate</span><span class="p">(</span><span class="n">im_ones</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">j</span><span class="p">),</span> <span class="n">pad_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">im_out</span> <span class="o">+=</span> <span class="n">image_translate</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">j</span><span class="p">),</span> <span class="n">pad_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">weights</span> <span class="o">+=</span> <span class="n">image_translate</span><span class="p">(</span><span class="n">im_ones</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="n">pad_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">im_out</span> <span class="o">+=</span> <span class="n">image_translate</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="n">pad_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">dist_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">==</span> <span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">weights</span> <span class="o">+=</span> <span class="n">image_translate</span><span class="p">(</span><span class="n">im_ones</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">pad_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">im_out</span> <span class="o">+=</span> <span class="n">image_translate</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">pad_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">dist_vec</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">iterations</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">dist_vec_abs_px</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">iterations</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">//</span> <span class="n">iterations</span>
+                <span class="n">j</span> <span class="o">=</span> <span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">//</span> <span class="n">iterations</span>
+                <span class="n">weights</span> <span class="o">+=</span> <span class="n">image_translate</span><span class="p">(</span><span class="n">im_ones</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="n">i</span><span class="p">,</span> <span class="o">-</span><span class="n">j</span><span class="p">),</span> <span class="n">pad_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">im_out</span> <span class="o">+=</span> <span class="n">image_translate</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="n">i</span><span class="p">,</span> <span class="o">-</span><span class="n">j</span><span class="p">),</span> <span class="n">pad_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">iterations</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">dist_vec_abs_px</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">iterations</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">//</span> <span class="n">iterations</span>
+                <span class="n">j</span> <span class="o">=</span> <span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">//</span> <span class="n">iterations</span>
+                <span class="n">weights</span> <span class="o">+=</span> <span class="n">image_translate</span><span class="p">(</span><span class="n">im_ones</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="n">pad_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">im_out</span> <span class="o">+=</span> <span class="n">image_translate</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="n">pad_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">==</span> <span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">weights</span> <span class="o">+=</span> <span class="n">image_translate</span><span class="p">(</span><span class="n">im_ones</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">pad_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">im_out</span> <span class="o">+=</span> <span class="n">image_translate</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">pad_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">dist_vec</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">iterations</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">dist_vec_abs_px</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">iterations</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">//</span> <span class="n">iterations</span>
+                <span class="n">j</span> <span class="o">=</span> <span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">//</span> <span class="n">iterations</span>
+                <span class="n">weights</span> <span class="o">+=</span> <span class="n">image_translate</span><span class="p">(</span><span class="n">im_ones</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="o">-</span><span class="n">j</span><span class="p">),</span> <span class="n">pad_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">im_out</span> <span class="o">+=</span> <span class="n">image_translate</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="o">-</span><span class="n">j</span><span class="p">),</span> <span class="n">pad_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">iterations</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">dist_vec_abs_px</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">iterations</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">//</span> <span class="n">iterations</span>
+                <span class="n">j</span> <span class="o">=</span> <span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">dist_vec_abs_px</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">//</span> <span class="n">iterations</span>
+                <span class="n">weights</span> <span class="o">+=</span> <span class="n">image_translate</span><span class="p">(</span><span class="n">im_ones</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="n">pad_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">im_out</span> <span class="o">+=</span> <span class="n">image_translate</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="n">pad_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">im_out</span> <span class="o">/=</span> <span class="n">weights</span>
+    <span class="k">return</span> <span class="n">im_out</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Brighton Ancelin.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

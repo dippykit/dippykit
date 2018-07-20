@@ -1,0 +1,523 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>dippykit.transforms &mdash; dippykit  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="dippykit  documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> dippykit
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.html">dippykit package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.adjustments.html">dippykit.adjustments module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.coding.html">dippykit.coding module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.image_io.html">dippykit.image_io module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.metrics.html">dippykit.metrics module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.sampling.html">dippykit.sampling module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.transforms.html">dippykit.transforms module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.utilities.html">dippykit.utilities module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.visualization.html">dippykit.visualization module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dippykit.windows.html">dippykit.windows module</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">dippykit</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>dippykit.transforms</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for dippykit.transforms</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Module of various image transform functions</span>
+
+<span class="sd">This module contains an assortment of functions that perform transform</span>
+<span class="sd">operations on images in various useful manners.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># Functional imports</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="k">import</span> <span class="n">fftpack</span>
+<span class="kn">from</span> <span class="nn">skimage.feature</span> <span class="k">import</span> <span class="n">canny</span>
+<span class="kn">from</span> <span class="nn">skimage.filters</span> <span class="k">import</span> <span class="n">sobel</span><span class="p">,</span> <span class="n">sobel_h</span><span class="p">,</span> <span class="n">sobel_v</span><span class="p">,</span> <span class="n">scharr</span><span class="p">,</span> <span class="n">prewitt</span><span class="p">,</span> \
+    <span class="n">roberts</span><span class="p">,</span> <span class="n">laplace</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Brighton Ancelin&#39;</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;dct_2d&#39;</span><span class="p">,</span> <span class="s1">&#39;idct_2d&#39;</span><span class="p">,</span> <span class="s1">&#39;edge_detect&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="dct_2d"><a class="viewcode-back" href="../../dippykit.transforms.html#dippykit.transforms.dct_2d">[docs]</a><span class="k">def</span> <span class="nf">dct_2d</span><span class="p">(</span>
+        <span class="n">im</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Computes the Discrete Cosine Transform of an image</span>
+
+<span class="sd">    Given an input image, this function computes its discrete cosine</span>
+<span class="sd">    transform. This result is identical to the result of the dct2() Matlab</span>
+<span class="sd">    function. Internally, this function is computed using</span>
+<span class="sd">    ``scipy.fftpack.dctn(im, norm=&#39;ortho&#39;)``.</span>
+
+<span class="sd">    This function is essentially a wrapper for `scipy.fftpack.dctn`_,</span>
+<span class="sd">    so more detailed documentation may be found there.</span>
+
+<span class="sd">    :type im: ``numpy.ndarray``</span>
+<span class="sd">    :param im: An image to be processed.</span>
+<span class="sd">    :rtype: ``numpy.ndarray``</span>
+<span class="sd">    :return: The discrete cosine transform of the input image.</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        This function wraps around functions from other packages. Reading</span>
+<span class="sd">        these functions&#39; documentations may be useful. See the **See also**</span>
+<span class="sd">        section for more information.</span>
+
+<span class="sd">    .. seealso::</span>
+<span class="sd">        `scipy.fftpack.dctn`_</span>
+<span class="sd">            Documentation of the dctn function from Scipy</span>
+
+<span class="sd">    .. _scipy.fftpack.dctn: https://docs.scipy.org/doc/scipy/reference</span>
+<span class="sd">        /generated/scipy.fftpack.dctn.html</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; freq_1 = 1/4</span>
+<span class="sd">    &gt;&gt;&gt; freq_2 = 1/8</span>
+<span class="sd">    &gt;&gt;&gt; domain_1, domain_2 = np.meshgrid(np.arange(8), np.arange(8))</span>
+<span class="sd">    &gt;&gt;&gt; domain_1</span>
+<span class="sd">    array([[0, 1, 2, 3, 4, 5, 6, 7],</span>
+<span class="sd">           [0, 1, 2, 3, 4, 5, 6, 7],</span>
+<span class="sd">           [0, 1, 2, 3, 4, 5, 6, 7],</span>
+<span class="sd">           [0, 1, 2, 3, 4, 5, 6, 7],</span>
+<span class="sd">           [0, 1, 2, 3, 4, 5, 6, 7],</span>
+<span class="sd">           [0, 1, 2, 3, 4, 5, 6, 7],</span>
+<span class="sd">           [0, 1, 2, 3, 4, 5, 6, 7],</span>
+<span class="sd">           [0, 1, 2, 3, 4, 5, 6, 7]])</span>
+<span class="sd">    &gt;&gt;&gt; domain_2</span>
+<span class="sd">    array([[0, 0, 0, 0, 0, 0, 0, 0],</span>
+<span class="sd">           [1, 1, 1, 1, 1, 1, 1, 1],</span>
+<span class="sd">           [2, 2, 2, 2, 2, 2, 2, 2],</span>
+<span class="sd">           [3, 3, 3, 3, 3, 3, 3, 3],</span>
+<span class="sd">           [4, 4, 4, 4, 4, 4, 4, 4],</span>
+<span class="sd">           [5, 5, 5, 5, 5, 5, 5, 5],</span>
+<span class="sd">           [6, 6, 6, 6, 6, 6, 6, 6],</span>
+<span class="sd">           [7, 7, 7, 7, 7, 7, 7, 7]])</span>
+<span class="sd">    &gt;&gt;&gt; im_1 = 10*np.cos(2 * np.pi * freq_1 * (domain_1 + 0.5))</span>
+<span class="sd">    &gt;&gt;&gt; im_2 = 10*np.cos(2 * np.pi * freq_2 * (domain_2 + 0.5))</span>
+<span class="sd">    &gt;&gt;&gt; im = im_1 + im_2</span>
+<span class="sd">    &gt;&gt;&gt; np.set_printoptions(precision=2, suppress=True)</span>
+<span class="sd">    &gt;&gt;&gt; im</span>
+<span class="sd">    array([[ 16.31,   2.17,   2.17,  16.31,  16.31,   2.17,   2.17,  16.31],</span>
+<span class="sd">           [ 10.9 ,  -3.24,  -3.24,  10.9 ,  10.9 ,  -3.24,  -3.24,  10.9 ],</span>
+<span class="sd">           [  3.24, -10.9 , -10.9 ,   3.24,   3.24, -10.9 , -10.9 ,   3.24],</span>
+<span class="sd">           [ -2.17, -16.31, -16.31,  -2.17,  -2.17, -16.31, -16.31,  -2.17],</span>
+<span class="sd">           [ -2.17, -16.31, -16.31,  -2.17,  -2.17, -16.31, -16.31,  -2.17],</span>
+<span class="sd">           [  3.24, -10.9 , -10.9 ,   3.24,   3.24, -10.9 , -10.9 ,   3.24],</span>
+<span class="sd">           [ 10.9 ,  -3.24,  -3.24,  10.9 ,  10.9 ,  -3.24,  -3.24,  10.9 ],</span>
+<span class="sd">           [ 16.31,   2.17,   2.17,  16.31,  16.31,   2.17,   2.17,  16.31]])</span>
+<span class="sd">    &gt;&gt;&gt; dct_2d(im)</span>
+<span class="sd">    array([[-0.  ,  0.  , -0.  ,  0.  , 56.57,  0.  , -0.  ,  0.  ],</span>
+<span class="sd">           [ 0.  ,  0.  ,  0.  , -0.  , -0.  ,  0.  , -0.  , -0.  ],</span>
+<span class="sd">           [56.57,  0.  ,  0.  ,  0.  ,  0.  ,  0.  ,  0.  ,  0.  ],</span>
+<span class="sd">           [-0.  ,  0.  , -0.  , -0.  ,  0.  ,  0.  ,  0.  , -0.  ],</span>
+<span class="sd">           [-0.  ,  0.  , -0.  ,  0.  , -0.  ,  0.  , -0.  ,  0.  ],</span>
+<span class="sd">           [ 0.  ,  0.  ,  0.  , -0.  ,  0.  ,  0.  , -0.  , -0.  ],</span>
+<span class="sd">           [-0.  ,  0.  , -0.  ,  0.  ,  0.  ,  0.  , -0.  , -0.  ],</span>
+<span class="sd">           [ 0.  ,  0.  ,  0.  , -0.  , -0.  ,  0.  , -0.  , -0.  ]])</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">fftpack</span><span class="o">.</span><span class="n">dctn</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s1">&#39;ortho&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="idct_2d"><a class="viewcode-back" href="../../dippykit.transforms.html#dippykit.transforms.idct_2d">[docs]</a><span class="k">def</span> <span class="nf">idct_2d</span><span class="p">(</span>
+        <span class="n">im</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Computes the Inverse Discrete Cosine Transform of an image</span>
+
+<span class="sd">    Given an input image, this function computes its inverse discrete cosine</span>
+<span class="sd">    transform. This result is identical to the result of the idct2() Matlab</span>
+<span class="sd">    function. Internally, this function is computed using</span>
+<span class="sd">    ``scipy.fftpack.idctn(im, norm=&#39;ortho&#39;)``.</span>
+
+<span class="sd">    This function is essentially a wrapper for `scipy.fftpack.idctn`_,</span>
+<span class="sd">    so more detailed documentation may be found there.</span>
+
+<span class="sd">    :type im: ``numpy.ndarray``</span>
+<span class="sd">    :param im: An image to be processed.</span>
+<span class="sd">    :rtype: ``numpy.ndarray``</span>
+<span class="sd">    :return: The inverse discrete cosine transform of the input image.</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        This function wraps around functions from other packages. Reading</span>
+<span class="sd">        these functions&#39; documentations may be useful. See the **See also**</span>
+<span class="sd">        section for more information.</span>
+
+<span class="sd">    .. seealso::</span>
+<span class="sd">        `scipy.fftpack.idctn`_</span>
+<span class="sd">            Documentation of the dctn function from Scipy</span>
+
+<span class="sd">    .. _scipy.fftpack.idctn: https://docs.scipy.org/doc/scipy/reference</span>
+<span class="sd">        /generated/scipy.fftpack.idctn.html</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; im_DCT = np.zeros((8, 8))</span>
+<span class="sd">    &gt;&gt;&gt; im_DCT[0, 2] = 1</span>
+<span class="sd">    &gt;&gt;&gt; np.set_printoptions(precision=2, suppress=True)</span>
+<span class="sd">    &gt;&gt;&gt; idct_2d(im_DCT)</span>
+<span class="sd">    array([[ 0.16,  0.07, -0.07, -0.16, -0.16, -0.07,  0.07,  0.16],</span>
+<span class="sd">           [ 0.16,  0.07, -0.07, -0.16, -0.16, -0.07,  0.07,  0.16],</span>
+<span class="sd">           [ 0.16,  0.07, -0.07, -0.16, -0.16, -0.07,  0.07,  0.16],</span>
+<span class="sd">           [ 0.16,  0.07, -0.07, -0.16, -0.16, -0.07,  0.07,  0.16],</span>
+<span class="sd">           [ 0.16,  0.07, -0.07, -0.16, -0.16, -0.07,  0.07,  0.16],</span>
+<span class="sd">           [ 0.16,  0.07, -0.07, -0.16, -0.16, -0.07,  0.07,  0.16],</span>
+<span class="sd">           [ 0.16,  0.07, -0.07, -0.16, -0.16, -0.07,  0.07,  0.16],</span>
+<span class="sd">           [ 0.16,  0.07, -0.07, -0.16, -0.16, -0.07,  0.07,  0.16]])</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">fftpack</span><span class="o">.</span><span class="n">idctn</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s1">&#39;ortho&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="edge_detect"><a class="viewcode-back" href="../../dippykit.transforms.html#dippykit.transforms.edge_detect">[docs]</a><span class="k">def</span> <span class="nf">edge_detect</span><span class="p">(</span>
+        <span class="n">im</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;sobel&#39;</span><span class="p">,</span>
+        <span class="n">as_bool</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Performs an edge detection operation on an image</span>
+
+<span class="sd">    Given an input image and an edge detection mode, this function applies</span>
+<span class="sd">    an edge detection operation to the image and returns the result.</span>
+<span class="sd">    Optionally, this result can be returned as a binary/boolean image.</span>
+
+<span class="sd">    This function is essentially a wrapper for several external functions,</span>
+<span class="sd">    so more detailed documentation may be found there.</span>
+
+<span class="sd">    :type im: ``numpy.ndarray``</span>
+<span class="sd">    :param im: The input image.</span>
+<span class="sd">    :type mode: ``str``</span>
+<span class="sd">    :param mode: The edge detection mode/algorithm to be used. Acceptable</span>
+<span class="sd">        values are: &#39;sobel&#39;, &#39;sobel_h&#39;, &#39;sobel_v&#39;, &#39;canny&#39;, &#39;scharr&#39;,</span>
+<span class="sd">        &#39;prewitt&#39;, &#39;roberts&#39;, and &#39;laplace&#39;.</span>
+<span class="sd">    :type as_bool: ``bool``</span>
+<span class="sd">    :param as_bool: (default=False) If set to True, this function will</span>
+<span class="sd">        return the result as a binary/boolean image. This binary image is</span>
+<span class="sd">        built by taking the original edge image and substituting any</span>
+<span class="sd">        values below *threshold* as False, and all other values as True. The</span>
+<span class="sd">        value of *threshold* is defined as the 95th percentile of values in</span>
+<span class="sd">        the original edge image.</span>
+<span class="sd">    :param kwargs: The keyword arguments to be passed to the edge detecting</span>
+<span class="sd">        functions. If mode=&#39;canny&#39;, and there is no keyword argument</span>
+<span class="sd">        &#39;sigma&#39;, then this function will set the &#39;sigma&#39; keyword argument to</span>
+<span class="sd">        the square root of 2 by default.</span>
+<span class="sd">    :rtype: ``numpy.ndarray``</span>
+<span class="sd">    :return: The edge image.</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        This function wraps around functions from other packages. Reading</span>
+<span class="sd">        these functions&#39; documentations may be useful. See the **See also**</span>
+<span class="sd">        section for more information.</span>
+
+<span class="sd">    .. seealso::</span>
+<span class="sd">        `skimage.feature.canny`_</span>
+<span class="sd">            Documentation of the canny function from Scikit Image</span>
+<span class="sd">        `skimage.filters.sobel`_</span>
+<span class="sd">            Documentation of the sobel function from Scikit Image</span>
+<span class="sd">        `skimage.filters.sobel_h`_</span>
+<span class="sd">            Documentation of the sobel_h function from Scikit Image</span>
+<span class="sd">        `skimage.filters.sobel_v`_</span>
+<span class="sd">            Documentation of the sobel_v function from Scikit Image</span>
+<span class="sd">        `skimage.filters.scharr`_</span>
+<span class="sd">            Documentation of the scharr function from Scikit Image</span>
+<span class="sd">        `skimage.filters.prewitt`_</span>
+<span class="sd">            Documentation of the prewitt function from Scikit Image</span>
+<span class="sd">        `skimage.filters.roberts`_</span>
+<span class="sd">            Documentation of the roberts function from Scikit Image</span>
+<span class="sd">        `skimage.filters.laplace`_</span>
+<span class="sd">            Documentation of the laplace function from Scikit Image</span>
+
+<span class="sd">    .. _skimage.feature.canny: http://scikit-image.org/docs/dev/api</span>
+<span class="sd">        /skimage.feature.html#skimage.feature.canny</span>
+<span class="sd">    .. _skimage.filters.sobel: http://scikit-image.org/docs/dev/api</span>
+<span class="sd">        /skimage.filters.html#skimage.filters.sobel</span>
+<span class="sd">    .. _skimage.filters.sobel_h: http://scikit-image.org/docs/dev/api</span>
+<span class="sd">        /skimage.filters.html#skimage.filters.sobel_h</span>
+<span class="sd">    .. _skimage.filters.sobel_v: http://scikit-image.org/docs/dev/api</span>
+<span class="sd">        /skimage.filters.html#skimage.filters.sobel_v</span>
+<span class="sd">    .. _skimage.filters.scharr: http://scikit-image.org/docs/dev/api</span>
+<span class="sd">        /skimage.filters.html#skimage.filters.scharr</span>
+<span class="sd">    .. _skimage.filters.prewitt: http://scikit-image.org/docs/dev/api</span>
+<span class="sd">        /skimage.filters.html#skimage.filters.prewitt</span>
+<span class="sd">    .. _skimage.filters.roberts: http://scikit-image.org/docs/dev/api</span>
+<span class="sd">        /skimage.filters.html#skimage.filters.roberts</span>
+<span class="sd">    .. _skimage.filters.laplace: http://scikit-image.org/docs/dev/api</span>
+<span class="sd">        /skimage.filters.html#skimage.filters.laplace</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; im = np.array(array([[0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. ],</span>
+<span class="sd">    ...                      [0. , 0. , 0. , 0.5, 0.5, 0. , 0. , 0. ],</span>
+<span class="sd">    ...                      [0. , 0. , 1. , 1. , 1. , 1. , 0. , 0. ],</span>
+<span class="sd">    ...                      [0. , 0.5, 1. , 1. , 1. , 1. , 0. , 0. ],</span>
+<span class="sd">    ...                      [0. , 0.5, 1. , 1. , 1. , 1. , 0. , 0. ],</span>
+<span class="sd">    ...                      [0. , 0. , 1. , 1. , 1. , 1. , 0. , 0. ],</span>
+<span class="sd">    ...                      [0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. ],</span>
+<span class="sd">    ...                      [0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. ]])</span>
+<span class="sd">    &gt;&gt;&gt; np.round(edge_detect(im), 2)</span>
+<span class="sd">    array([[0.  , 0.  , 0.  , 0.  , 0.  , 0.  , 0.  , 0.  ],</span>
+<span class="sd">           [0.  , 0.25, 0.64, 0.73, 0.73, 0.64, 0.25, 0.  ],</span>
+<span class="sd">           [0.  , 0.64, 0.75, 0.45, 0.45, 0.76, 0.56, 0.  ],</span>
+<span class="sd">           [0.  , 0.73, 0.45, 0.  , 0.  , 0.71, 0.71, 0.  ],</span>
+<span class="sd">           [0.  , 0.73, 0.45, 0.  , 0.  , 0.71, 0.71, 0.  ],</span>
+<span class="sd">           [0.  , 0.64, 0.76, 0.71, 0.71, 0.75, 0.56, 0.  ],</span>
+<span class="sd">           [0.  , 0.25, 0.56, 0.71, 0.71, 0.56, 0.25, 0.  ],</span>
+<span class="sd">           [0.  , 0.  , 0.  , 0.  , 0.  , 0.  , 0.  , 0.  ]])</span>
+<span class="sd">    &gt;&gt;&gt; edge_detect(im, as_bool=True)</span>
+<span class="sd">    array([[False, False, False, False, False, False, False, False],</span>
+<span class="sd">           [False, False, False, False, False, False, False, False],</span>
+<span class="sd">           [False, False,  True, False, False,  True, False, False],</span>
+<span class="sd">           [False, False, False, False, False, False, False, False],</span>
+<span class="sd">           [False, False, False, False, False, False, False, False],</span>
+<span class="sd">           [False, False,  True, False, False,  True, False, False],</span>
+<span class="sd">           [False, False, False, False, False, False, False, False],</span>
+<span class="sd">           [False, False, False, False, False, False, False, False]])</span>
+<span class="sd">    &gt;&gt;&gt; np.round(dip.edge_detect(im, &#39;sobel_h&#39;), 2)</span>
+<span class="sd">    array([[ 0.  ,  0.  ,  0.  ,  0.  ,  0.  ,  0.  ,  0.  ,  0.  ],</span>
+<span class="sd">           [ 0.  ,  0.25,  0.75,  1.  ,  1.  ,  0.75,  0.25,  0.  ],</span>
+<span class="sd">           [ 0.  ,  0.5 ,  0.75,  0.62,  0.62,  0.62,  0.25,  0.  ],</span>
+<span class="sd">           [ 0.  ,  0.25,  0.12,  0.  ,  0.  ,  0.  ,  0.  ,  0.  ],</span>
+<span class="sd">           [ 0.  , -0.25, -0.12,  0.  ,  0.  ,  0.  ,  0.  ,  0.  ],</span>
+<span class="sd">           [ 0.  , -0.5 , -0.88, -1.  , -1.  , -0.75, -0.25,  0.  ],</span>
+<span class="sd">           [ 0.  , -0.25, -0.75, -1.  , -1.  , -0.75, -0.25,  0.  ],</span>
+<span class="sd">           [ 0.  ,  0.  ,  0.  ,  0.  ,  0.  ,  0.  ,  0.  ,  0.  ]])</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="s1">&#39;sobel&#39;</span> <span class="o">==</span> <span class="n">mode</span><span class="p">:</span>
+        <span class="n">edges</span> <span class="o">=</span> <span class="n">sobel</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="s1">&#39;sobel_h&#39;</span> <span class="o">==</span> <span class="n">mode</span><span class="p">:</span>
+        <span class="n">edges</span> <span class="o">=</span> <span class="n">sobel_h</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="s1">&#39;sobel_v&#39;</span> <span class="o">==</span> <span class="n">mode</span><span class="p">:</span>
+        <span class="n">edges</span> <span class="o">=</span> <span class="n">sobel_v</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="s1">&#39;canny&#39;</span> <span class="o">==</span> <span class="n">mode</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s1">&#39;sigma&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;sigma&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">edges</span> <span class="o">=</span> <span class="n">canny</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="s1">&#39;scharr&#39;</span> <span class="o">==</span> <span class="n">mode</span><span class="p">:</span>
+        <span class="n">edges</span> <span class="o">=</span> <span class="n">scharr</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="s1">&#39;prewitt&#39;</span> <span class="o">==</span> <span class="n">mode</span><span class="p">:</span>
+        <span class="n">edges</span> <span class="o">=</span> <span class="n">prewitt</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="s1">&#39;roberts&#39;</span> <span class="o">==</span> <span class="n">mode</span><span class="p">:</span>
+        <span class="n">edges</span> <span class="o">=</span> <span class="n">roberts</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="s1">&#39;laplace&#39;</span> <span class="o">==</span> <span class="n">mode</span><span class="p">:</span>
+        <span class="n">edges</span> <span class="o">=</span> <span class="n">laplace</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unrecognized mode &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mode</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">as_bool</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">edges</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">edges</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sorted_edges_ravel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">edges</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
+            <span class="c1"># Set threshold to 95th percentile</span>
+            <span class="n">threshold</span> <span class="o">=</span> <span class="n">sorted_edges_ravel</span><span class="p">[(</span><span class="n">edges</span><span class="o">.</span><span class="n">size</span> <span class="o">*</span> <span class="mi">19</span><span class="p">)</span> <span class="o">//</span> <span class="mi">20</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">edges</span> <span class="o">&lt;</span> <span class="n">threshold</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">edges</span></div>
+
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Brighton Ancelin.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

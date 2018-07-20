@@ -50,6 +50,7 @@ Some functions available through this library are merely aliases for
 functions provided by external packages. This is done for simplicity and
 ease of student experience. These aliases, along with links to their
 referenced functions' documentation pages, are listed below:
+
     * numpy.fft
         * `fft`_
         * `fft2`_

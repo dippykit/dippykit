@@ -158,6 +158,7 @@ def quiver(
 
     Plots a field of arrow on the current axes. If the following keyword
     arguments are not set, then they will take on the following default values:
+
         * 'units': 'xy'
         * 'angles': 'xy'
         * 'scale_units': 'xy'
