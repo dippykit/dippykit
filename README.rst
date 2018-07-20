@@ -1,7 +1,8 @@
-dippykit
-A Digital Image Processing Library
+dippykit - A Digital Image Processing Library
 
 Authors: Brighton Ancelin
+
+Versioning Scheme: Semantic Versioning 2.0.0
 
 This package is intended for use by Digital Image Processing students. It serves as an educational resource.
 The general methodology for the package is that each module contains functions pertinent to a specific concept or field.

@@ -20,11 +20,11 @@ setup(
     long_description_content_type='txt/x-rst',
     url="https://github.com/dippykit/dippykit",
     classifiers=[
-        'Development Status :: Alpha',
-        'Intended Audience :: Students',
+        'Development Status :: 3 - Alpha',
+        'Intended Audience :: Education',
         'Programming Language :: Python :: 3',
-        'License :: OSI Approved :: GNU GPLv3',
-        'Versioning Scheme :: Semantic Versioning 2.0.0',
+        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
+        'Natural Language :: English'
     ],
     packages=find_packages(exclude=['docs', 'doc']),
     install_requires=[

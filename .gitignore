@@ -1,4 +1,4 @@
-
-*.py[ocd]
-
 .idea
+*.py[ocd]
+dist
+*.egg-info
