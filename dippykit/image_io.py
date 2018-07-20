@@ -11,26 +11,7 @@ from PIL import Image
 
 __author__ = 'Brighton Ancelin'
 
-__all__ = ['im_read', 'im_write', 'im_to_float', 'float_to_im',
-
-           'IM_AIRPLANE_DOWNSAMPLED_SQUARE', 'IM_BRUSSELS',
-           'IM_BRUSSELS_DOWNSAMPLED_SQUARE', 'IM_CAMERAMAN', 'IM_COINS',
-           'IM_HORSE', 'IM_LENNA_RGB', 'IM_LENNA', 'IM_SALZBURG_SQUARE'
-           ]
-
-
-IM_AIRPLANE_DOWNSAMPLED_SQUARE = \
-        resource_filename('dippykit', '/images/lenna.tif')
-IM_BRUSSELS = resource_filename('dippykit', 'images/Brussels.jpg')
-IM_BRUSSELS_DOWNSAMPLED_SQUARE = \
-        resource_filename('dippykit', 'images/Brussels.jpg')
-IM_CAMERAMAN = resource_filename('dippykit', 'images/cameraman.tif')
-IM_COINS = resource_filename('dippykit', 'images/coins.png')
-IM_HORSE = resource_filename('dippykit', 'images/horse.png')
-IM_LENNA_RGB = resource_filename('dippykit', 'images/Lena.png')
-IM_LENNA = resource_filename('dippykit', '/images/lenna.tif')
-IM_SALZBURG_SQUARE = \
-        resource_filename('dippykit', '/images/salzburg_square.png')
+__all__ = ['im_read', 'im_write', 'im_to_float', 'float_to_im']
 
 
 def im_read(
