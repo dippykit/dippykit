@@ -8,6 +8,7 @@ A Python library for digital image processing.
    :maxdepth: 2
    :caption: Contents:
    
+   install_guide
    dippykit
    dippykit.adjustments
    dippykit.coding
