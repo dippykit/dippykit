@@ -5,11 +5,15 @@ output of images much simpler. The syntax is similar to that of Matlab.
 
 """
 
+# This library was developed for the Georgia Tech graduate course ECE 6258:
+# Digital Image Processing with Professor Ghassan AlRegib.
+# For comments and feedback, please email dippykit[at]gmail.com
+
 # Functional imports
 import numpy as np
 from PIL import Image
 
-__author__ = 'Brighton Ancelin'
+__author__ = 'Brighton Ancelin, Motaz Alfarraj, Ghassan AlRegib'
 
 __all__ = ['im_read', 'im_write', 'im_to_float', 'float_to_im']
 

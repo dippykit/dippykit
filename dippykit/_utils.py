@@ -6,6 +6,10 @@ operations intended to simplify argument and return value handling.
 
 """
 
+# This library was developed for the Georgia Tech graduate course ECE 6258:
+# Digital Image Processing with Professor Ghassan AlRegib.
+# For comments and feedback, please email dippykit[at]gmail.com
+
 # Functional imports
 import numpy as np
 
@@ -13,7 +17,7 @@ import numpy as np
 from typing import List, Dict, Any, Union, Tuple
 import warnings
 
-__author__ = 'Brighton Ancelin'
+__author__ = 'Brighton Ancelin, Motaz Alfarraj, Ghassan AlRegib'
 
 
 NumericType = Union[int, float]

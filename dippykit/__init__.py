@@ -148,6 +148,12 @@ referenced functions' documentation pages, are listed below:
 
 """
 
+# This library was developed for the Georgia Tech graduate course ECE 6258:
+# Digital Image Processing with Professor Ghassan AlRegib.
+# For comments and feedback, please email dippykit[at]gmail.com
+
+__author__ = 'Brighton Ancelin, Motaz Alfarraj, Ghassan AlRegib'
+
 from .windows import *
 from .image_io import *
 from .visualization import *

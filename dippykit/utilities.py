@@ -5,6 +5,10 @@ ill-categorized functions that are useful in image processing.
 
 """
 
+# This library was developed for the Georgia Tech graduate course ECE 6258:
+# Digital Image Processing with Professor Ghassan AlRegib.
+# For comments and feedback, please email dippykit[at]gmail.com
+
 # Internal imports
 from . import _utils
 
@@ -16,7 +20,7 @@ from scipy import signal
 import warnings
 from typing import Union, Tuple, Callable, Any
 
-__author__ = 'Brighton Ancelin'
+__author__ = 'Brighton Ancelin, Motaz Alfarraj, Ghassan AlRegib'
 
 __all__ = ['block_process', 'zigzag_indices', 'conv2d_grid', 'rgb2ycbcr',
            'rgb2gray', 'convolve2d']

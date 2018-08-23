@@ -5,6 +5,10 @@ operations on images in various useful manners.
 
 """
 
+# This library was developed for the Georgia Tech graduate course ECE 6258:
+# Digital Image Processing with Professor Ghassan AlRegib.
+# For comments and feedback, please email dippykit[at]gmail.com
+
 # Functional imports
 import numpy as np
 from scipy import fftpack
@@ -12,7 +16,7 @@ from skimage.feature import canny
 from skimage.filters import sobel, sobel_h, sobel_v, scharr, prewitt, \
     roberts, laplace
 
-__author__ = 'Brighton Ancelin'
+__author__ = 'Brighton Ancelin, Motaz Alfarraj, Ghassan AlRegib'
 
 __all__ = ['dct_2d', 'idct_2d', 'edge_detect']
 

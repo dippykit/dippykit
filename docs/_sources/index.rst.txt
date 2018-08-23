@@ -2,7 +2,12 @@
 
 dippykit Documentation
 ============================================================
-A Python library for digital image processing.
+*A Python Library for Digital Image Processing.*
+
+This library was developed for the Georgia Tech graduate course **ECE 6258: Digital Image Processing** with Professor
+Ghassan AlRegib.
+
+*For comments and feedback, please email dippykit[at]gmail.com*
 
 .. toctree::
    :maxdepth: 2

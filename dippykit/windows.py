@@ -4,6 +4,10 @@ This module contains an assortment of functions that generate various windows.
 
 """
 
+# This library was developed for the Georgia Tech graduate course ECE 6258:
+# Digital Image Processing with Professor Ghassan AlRegib.
+# For comments and feedback, please email dippykit[at]gmail.com
+
 # Internal imports
 from . import _utils
 
@@ -14,7 +18,7 @@ import numpy as np
 import warnings
 from typing import Union, Tuple
 
-__author__ = 'Brighton Ancelin'
+__author__ = 'Brighton Ancelin, Motaz Alfarraj, Ghassan AlRegib'
 
 __all__ = ['window_2d']
 

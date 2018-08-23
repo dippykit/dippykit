@@ -53,8 +53,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'dippykit'
-copyright = '2018, Brighton Ancelin'
-author = 'Brighton Ancelin'
+copyright = '2018, Brighton Ancelin, Motaz Alfarraj, Ghassan AlRegib'
+author = 'Brighton Ancelin, Motaz Alfarraj, Ghassan AlRegib'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -147,7 +147,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'dippykit.tex', 'dippykit Documentation',
-     'Brighton Ancelin', 'manual'),
+     'Brighton Ancelin, Motaz Alfarraj, Ghassan AlRegib', 'manual'),
 ]
 
 

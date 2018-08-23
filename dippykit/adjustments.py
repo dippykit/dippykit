@@ -6,6 +6,10 @@ shifts, etc.
 
 """
 
+# This library was developed for the Georgia Tech graduate course ECE 6258:
+# Digital Image Processing with Professor Ghassan AlRegib.
+# For comments and feedback, please email dippykit[at]gmail.com
+
 # Internal imports
 from . import _utils
 from . import image_io
@@ -17,7 +21,7 @@ from skimage.util import random_noise
 # General imports
 import warnings
 
-__author__ = 'Brighton Ancelin'
+__author__ = 'Brighton Ancelin, Motaz Alfarraj, Ghassan AlRegib'
 
 __all__ = ['image_noise', 'image_adjust', 'image_translate', 'image_shift']
 

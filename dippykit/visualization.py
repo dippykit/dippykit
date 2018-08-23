@@ -5,6 +5,10 @@ visualization of various image-relevant data
 
 """
 
+# This library was developed for the Georgia Tech graduate course ECE 6258:
+# Digital Image Processing with Professor Ghassan AlRegib.
+# For comments and feedback, please email dippykit[at]gmail.com
+
 # Functional imports
 import numpy as np
 import matplotlib
@@ -20,7 +24,7 @@ from tkinter import Tk, TOP, BOTH
 # General imports
 from typing import Callable, Any, Tuple
 
-__author__ = 'Brighton Ancelin'
+__author__ = 'Brighton Ancelin, Motaz Alfarraj, Ghassan AlRegib'
 
 __all__ = ['imshow', 'quiver', 'surf', 'setup_continuous_rendering', 'zlabel']
 

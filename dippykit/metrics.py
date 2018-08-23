@@ -5,6 +5,10 @@ image and signal data. They provide a means for high-level analysis.
 
 """
 
+# This library was developed for the Georgia Tech graduate course ECE 6258:
+# Digital Image Processing with Professor Ghassan AlRegib.
+# For comments and feedback, please email dippykit[at]gmail.com
+
 # Internal imports
 from . import _utils
 from . import utilities
@@ -17,7 +21,7 @@ from skimage.measure import compare_ssim
 # General imports
 from typing import Dict, Tuple, Any
 
-__author__ = 'Brighton Ancelin'
+__author__ = 'Brighton Ancelin, Motaz Alfarraj, Ghassan AlRegib'
 
 
 __all__ = ['PSNR', 'contrast', 'MSE', 'energy', 'MAD', 'MADev', 'entropy',

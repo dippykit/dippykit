@@ -5,6 +5,10 @@ useful manners.
 
 """
 
+# This library was developed for the Georgia Tech graduate course ECE 6258:
+# Digital Image Processing with Professor Ghassan AlRegib.
+# For comments and feedback, please email dippykit[at]gmail.com
+
 # Internal imports
 from . import _utils
 
@@ -12,7 +16,7 @@ from . import _utils
 import numpy as np
 import cv2
 
-__author__ = 'Brighton Ancelin'
+__author__ = 'Brighton Ancelin, Motaz Alfarraj, Ghassan AlRegib'
 
 __all__ = ['_downsample', '_upsample', 'resample']
 

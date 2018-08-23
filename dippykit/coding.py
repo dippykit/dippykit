@@ -5,6 +5,10 @@ in popular or useful manners.
 
 """
 
+# This library was developed for the Georgia Tech graduate course ECE 6258:
+# Digital Image Processing with Professor Ghassan AlRegib.
+# For comments and feedback, please email dippykit[at]gmail.com
+
 # Functional imports
 import numpy as np
 from heapq import heappush, heappop, heapify
@@ -12,7 +16,7 @@ from heapq import heappush, heappop, heapify
 # General imports
 from typing import Dict, List, Tuple
 
-__author__ = 'Brighton Ancelin'
+__author__ = 'Brighton Ancelin, Motaz Alfarraj, Ghassan AlRegib'
 
 __all__ = ['JPEG_Q_table_luminance', 'huffman_encode', 'huffman_decode',
            'huffman_dict', 'huffman_tree']
