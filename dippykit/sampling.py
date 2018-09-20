@@ -189,7 +189,7 @@ def resample(
     """Resamples an image based on a given resampling matrix.
 
     Resamples an image by the given resampling matrix argument, rs_matrix.
-    For an input domain vector **mn** = [**m**, **n**] and an input
+    For an input domain vector **mn** = [**n**, **m**] and an input
     image **f** (**mn**), the output image **g** (**.**) is defined by **g**
     (**mn**) = **f** (**M** @ **mn**) where **M** is the resampling matrix
     (rs_matrix) and the @ symbol denotes matrix multiplication.
@@ -240,19 +240,28 @@ def resample(
 
     >>> import numpy as np
     >>> image = np.array([[ 0,  1,  2,  3],
-    ...                   [10, 11, 12., 13],
-    ...                   [20, 21, 22., 23],
-    ...                   [30, 31, 32., 33]])
+    ...                   [10, 11, 12, 13],
+    ...                   [20, 21, 22, 23],
+    ...                   [30, 31, 32, 33]])
     >>> M = np.array([[1/2, 0], [0, 1/2]])
     >>> resample(image, M)
-    array([[ 0.,  0.,  1.,  0.,  2.,  0.,  3.],
-           [ 0.,  0.,  0.,  0.,  0.,  0.,  0.],
-           [10.,  0., 11.,  0., 12.,  0., 13.],
-           [ 0.,  0.,  0.,  0.,  0.,  0.,  0.],
-           [20.,  0., 21.,  0., 22.,  0., 23.],
-           [ 0.,  0.,  0.,  0.,  0.,  0.,  0.],
-           [30.,  0., 31.,  0., 32.,  0., 33.]])
+    array([[ 0,  0,  1,  0,  2,  0,  3],
+           [ 0,  0,  0,  0,  0,  0,  0],
+           [10,  0, 11,  0, 12,  0, 13],
+           [ 0,  0,  0,  0,  0,  0,  0],
+           [20,  0, 21,  0, 22,  0, 23],
+           [ 0,  0,  0,  0,  0,  0,  0],
+           [30,  0, 31,  0, 32,  0, 33]])
     >>> resample(image, M, interp='lin')
+    array([[ 0,  0,  1,  1,  2,  2,  3],
+           [ 5,  5,  6,  6,  7,  7,  8],
+           [10, 10, 11, 11, 12, 12, 13],
+           [15, 15, 16, 16, 17, 17, 18],
+           [20, 20, 21, 21, 22, 22, 23],
+           [25, 25, 26, 26, 27, 27, 28],
+           [30, 30, 31, 31, 32, 32, 33]])
+    >>> image_float = image.astype(float)
+    >>> resample(image_float, M, interp='lin')
     array([[ 0. ,  0.5,  1. ,  1.5,  2. ,  2.5,  3. ],
            [ 5. ,  5.5,  6. ,  6.5,  7. ,  7.5,  8. ],
            [10. , 10.5, 11. , 11.5, 12. , 12.5, 13. ],
@@ -260,15 +269,38 @@ def resample(
            [20. , 20.5, 21. , 21.5, 22. , 22.5, 23. ],
            [25. , 25.5, 26. , 26.5, 27. , 27.5, 28. ],
            [30. , 30.5, 31. , 31.5, 32. , 32.5, 33. ]])
-    >>> resample(image, M, interp='lin', crop=True, crop_size=(4,3))
+    >>> resample(image_float, M, interp='lin', crop=True, crop_size=(4,3))
     array([[ 6. ,  6.5,  7. ],
            [11. , 11.5, 12. ],
            [16. , 16.5, 17. ],
            [21. , 21.5, 22. ]])
     >>> M2 = np.array([[2, 0], [0, 2]])
     >>> resample(image, M2)
-    array([[ 0.,  2.],
-           [20., 22.]])
+    array([[ 0,  2],
+           [20, 22]])
+    >>> M3 = np.array([[-1, 0], [0, 1]])
+    >>> resample(image, M3)
+    array([[ 3,  2,  1,  0],
+           [13, 12, 11, 10],
+           [23, 22, 21, 20],
+           [33, 32, 31, 30]])
+    >>> theta = np.pi / 2
+    >>> M4 = np.array([[ np.cos(theta), -np.sin(theta)],
+    ...                [ np.sin(theta),  np.cos(theta)]])
+    >>> resample(image, M4)
+    array([[ 3, 13, 23, 33],
+           [ 2, 12, 22, 32],
+           [ 1, 11, 21, 31],
+           [ 0, 10, 20, 30]])
+    >>> theta = np.pi / 4
+    >>> M5 = np.array([[ np.cos(theta), -np.sin(theta)],
+    ...                [ np.sin(theta),  np.cos(theta)]])
+    >>> resample(image, M5, interp='nearest')
+    array([[ 0,  0,  3,  0,  0],
+           [ 0,  1, 12, 13,  0],
+           [ 0, 11, 11, 22, 33],
+           [ 0, 10, 21, 31,  0],
+           [ 0,  0, 30,  0,  0]])
 
     """
     def resample_no_interp():
@@ -278,8 +310,8 @@ def resample(
         rs_matrix_inv = np.linalg.inv(rs_matrix)
         # Create a matrix where each column is a coordinate of one of the
         # corners in the domain of the input image (kl-space)
-        kl_extrema = np.array(np.meshgrid([0, height - 1], [0, width - 1])) \
-            .reshape(2, -1)
+        kl_extrema = np.array(np.meshgrid([0, width - 1], [0, height - 1])) \
+                .reshape(2, -1)
         # Convert the extrema in input image domain (kl-space) to output image
         # domain (mn-space)
         mn_extrema = rs_matrix_inv @ kl_extrema
@@ -308,20 +340,27 @@ def resample(
         kl = (kl_scaled[:, lattice_mask] / resolution_factor).astype(int)
         # Only non-negative kl values within the kl max values (height and
         # width) will correspond to pixels in the input image.
-        domain_mask = np.all((0 <= kl) & (np.array([[height], [width]]) > kl),
+        domain_mask = np.all((0 <= kl) & (np.array([[width], [height]]) > kl),
                              axis=0)
         # Mask the domains to only valid values
         kl = kl[:, domain_mask]
         mn = (mn[:, lattice_mask])[:, domain_mask]
         # Create an image of 0s of the correct size
-        rs_image_height = m_max - m_min + 1
-        rs_image_width = n_max - n_min + 1
-        rs_image = np.zeros((rs_image_height, rs_image_width)) \
-                .astype(image.dtype)
+        rs_image_height = n_max - n_min + 1
+        rs_image_width = m_max - m_min + 1
+        if image.ndim > 2:
+            rs_image = np.zeros((rs_image_height, rs_image_width,
+                    image.shape[2])).astype(image.dtype)
+        else:
+            rs_image = np.zeros((rs_image_height, rs_image_width)) \
+                    .astype(image.dtype)
         # Create a column vector of the offsets in m and n
         mn_offset = np.array([[m_min], [n_min]])
         # Assign values from the input image to the output image accordingly
-        rs_image[tuple(mn - mn_offset)] = image[tuple(kl)]
+        ix_rs = mn - mn_offset
+        ix_rs = ix_rs[[1, 0], :]
+        ix_im = kl[[1, 0], :]
+        rs_image[tuple(ix_rs)] = image[tuple(ix_im)]
         return rs_image
 
     def resample_interp():
@@ -330,8 +369,8 @@ def resample(
         rs_matrix_inv = np.linalg.inv(rs_matrix)
         # Create a matrix where each column is a coordinate of one of the
         # corners in the domain of the input image (kl-space)
-        kl_extrema = np.array(np.meshgrid([0, height - 1], [0, width - 1])) \
-            .reshape(2, -1)
+        kl_extrema = np.array(np.meshgrid([0, width - 1], [0, height - 1])) \
+                .reshape(2, -1)
         # Convert the extrema in input image domain (kl-space) to output image
         # domain (mn-space)
         mn_extrema = rs_matrix_inv @ kl_extrema
@@ -344,15 +383,21 @@ def resample(
         n_max = np.fix(np.max(mn_extrema[1])).astype(int)
         # Restructure the rs_matrix to fit the format desired by
         # cv2.warpAffine()
-        aff_resample = np.linalg.inv(rs_matrix)
-        aff_resample[[0, 0, 1, 1], [0, 1, 0, 1]] = \
-                aff_resample[[1, 1, 0, 0], [1, 0, 1, 0]]
-        aff_translation = np.array([[-n_min], [-m_min]])
-        rs_image_dims = (n_max - n_min + 1, m_max - m_min + 1)
-        affine_mat = np.concatenate((aff_resample, aff_translation), axis=1)
+        aff_translation = np.array([[-m_min], [-n_min]])
+        rs_image_dims = (m_max - m_min + 1, n_max - n_min + 1)
+        affine_mat = np.concatenate((rs_matrix_inv, aff_translation), axis=1)
         # Return the cv2.warpAffine() transformation of the image
-        return cv2.warpAffine(image, affine_mat.astype(float), rs_image_dims,
-                              flags=arg_dict['interpolation'])
+        if 'f' == image.dtype.kind:
+            return cv2.warpAffine(image, affine_mat.astype(float),
+                    rs_image_dims, flags=arg_dict['interpolation'])
+        elif image.dtype.kind in 'iub':
+            return cv2.warpAffine(image.astype(float),
+                    affine_mat.astype(float), rs_image_dims,
+                    flags=arg_dict['interpolation']).astype(image.dtype)
+        else:
+            raise ValueError("Unsupported type for interpolation: "
+                             "'{}'".format(image.dtype.name))
+
 
     possible_arg_list = ['crop', 'crop_size', 'interpolation']
     possible_interp_list = ['none', 'nearest', 'linear', 'bilinear', 'area',
@@ -390,7 +435,7 @@ def resample(
         rs_image = resample_no_interp()
     else:
         rs_image = resample_interp()
-    (rs_image_height, rs_image_width) = np.array(rs_image.shape)
+    rs_image_height, rs_image_width = rs_image.shape[:2]
 
     if arg_dict.get('crop', False):
         if 'crop_size' in arg_dict:

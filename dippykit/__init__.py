@@ -79,6 +79,7 @@ referenced functions' documentation pages, are listed below:
         * `title`_
         * `xlabel`_
         * `ylabel`_
+        * *Since version 2.0.0, all of pyplot is aliased*
     * cv2
         * `medianBlur`_
         * `resize`_
@@ -169,9 +170,7 @@ from numpy.fft import fft, fft2, fftshift, ifft, ifft2
 from scipy.signal import convolve
 from scipy.linalg import dft
 
-from matplotlib.pyplot import axis, bar, colorbar, contour, figure, hist, \
-    legend, loglog, plot, semilogx, semilogy, show, subplot, suptitle, \
-    title, xlabel, ylabel
+from matplotlib.pyplot import *
 
 from cv2 import medianBlur, resize
 

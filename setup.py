@@ -12,7 +12,7 @@ with open(os.path.join(cur_path, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name='dippykit',
-    version='1.0.2',
+    version='2.0.0',
     author='Brighton Ancelin',
     author_email='bancelin3@gatech.edu',
     description='A Python Package for Digital Image Processing Education',
@@ -35,6 +35,6 @@ setup(
         'scipy',
         'scikit-image',
     ],
-    python_requires='>=3',
+    python_requires='>=3.5.2',
 )
 
