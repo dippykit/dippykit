@@ -24,28 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="dippykit  documentation" href="index.html"/>
-        <link rel="up" title="dippykit package" href="dippykit.html"/>
-        <link rel="next" title="dippykit.visualization module" href="dippykit.visualization.html"/>
-        <link rel="prev" title="dippykit.transforms module" href="dippykit.transforms.html"/> 
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="dippykit.visualization module" href="dippykit.visualization.html" />
+    <link rel="prev" title="dippykit.transforms module" href="dippykit.transforms.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -90,22 +81,7 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="install_guide.html">Installation Guide</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="dippykit.html">dippykit package</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="dippykit.html#submodules">Submodules</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="dippykit.adjustments.html">dippykit.adjustments module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="dippykit.coding.html">dippykit.coding module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="dippykit.image_io.html">dippykit.image_io module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="dippykit.metrics.html">dippykit.metrics module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="dippykit.sampling.html">dippykit.sampling module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="dippykit.transforms.html">dippykit.transforms module</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">dippykit.utilities module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="dippykit.visualization.html">dippykit.visualization module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="dippykit.windows.html">dippykit.windows module</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="dippykit.html#module-dippykit">Module contents</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="dippykit.html">dippykit package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dippykit.adjustments.html">dippykit.adjustments module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dippykit.coding.html">dippykit.coding module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dippykit.image_io.html">dippykit.image_io module</a></li>
@@ -126,7 +102,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">dippykit</a>
@@ -134,9 +110,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -187,7 +164,7 @@
 ill-categorized functions that are useful in image processing.</p>
 <dl class="function">
 <dt id="dippykit.utilities.block_process">
-<code class="descclassname">dippykit.utilities.</code><code class="descname">block_process</code><span class="sig-paren">(</span><em>im: numpy.ndarray, func: Callable[numpy.ndarray, Any], block_size: Union[typing.Tuple[typing.Union[int, float], typing.Union[int, float]], int, float] = (8, 8), stride: Union[typing.Tuple[typing.Union[int, float], typing.Union[int, float]], int, float] = None</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="reference internal" href="_modules/dippykit/utilities.html#block_process"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.utilities.block_process" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">dippykit.utilities.</code><code class="descname">block_process</code><span class="sig-paren">(</span><em>im: numpy.ndarray, func: typing.Callable[numpy.ndarray, typing.Any], block_size: typing.Union[typing.Tuple[typing.Union[int, float], typing.Union[int, float]], int, float] = (8, 8), stride: typing.Union[typing.Tuple[typing.Union[int, float], typing.Union[int, float]], int, float] = None</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="reference internal" href="_modules/dippykit/utilities.html#block_process"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.utilities.block_process" title="Permalink to this definition">¶</a></dt>
 <dd><p>Performs an operation on an array/image in smaller blocks and
 concatenates the results</p>
 <p>Given an array/image, a function, and a block size, this function will
@@ -202,7 +179,7 @@ using a block size of (8, 8) on an image that is of size (9, 9) will
 result in a block of size (8, 8), a block of size (8,1), a block of size
 (1, 8), and a block of size (1, 1)).</p>
 <p>The function argument, func, can return anything that numpy is able to
-convert to an <code class="docutils literal notranslate"><span class="pre">ndarray</span></code>. This value may be a scalar, vector, matrix,
+convert to an <code class="docutils literal"><span class="pre">ndarray</span></code>. This value may be a scalar, vector, matrix,
 or anything that will consistently concatenate as blocks progress along
 each axis.</p>
 <p>If a stride is specified, then blocks edges will be separated by the
@@ -213,16 +190,16 @@ process overlapping blocks or to skip over regions of an array/image.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>im</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – The array or image to be processed.</li>
-<li><strong>func</strong> (<code class="docutils literal notranslate"><span class="pre">Callable[[np.ndarray],</span> <span class="pre">Any]</span></code>) – The function to apply to each block. The return value must
+<li><strong>im</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code>) – The array or image to be processed.</li>
+<li><strong>func</strong> (<code class="docutils literal"><span class="pre">Callable[[np.ndarray],</span> <span class="pre">Any]</span></code>) – The function to apply to each block. The return value must
 be something that numpy can convert to an ndarray.</li>
-<li><strong>block_size</strong> (<code class="docutils literal notranslate"><span class="pre">ShapeType</span></code>) – (default=(8, 8)) The size of each block.</li>
-<li><strong>stride</strong> (<code class="docutils literal notranslate"><span class="pre">ShapeType</span></code>) – (default=block_size) The stride to take when moving to
+<li><strong>block_size</strong> (<code class="docutils literal"><span class="pre">ShapeType</span></code>) – (default=(8, 8)) The size of each block.</li>
+<li><strong>stride</strong> (<code class="docutils literal"><span class="pre">ShapeType</span></code>) – (default=block_size) The stride to take when moving to
 the next block.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><code class="docutils literal"><span class="pre">numpy.ndarray</span></code></p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The concatenated output of the function func for each block.</p>
@@ -231,7 +208,7 @@ the next block.</li>
 </tbody>
 </table>
 <p>Examples:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">im</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span>  <span class="mi">3</span><span class="p">,</span>  <span class="mi">4</span><span class="p">,</span>  <span class="mi">5</span><span class="p">,</span>  <span class="mi">6</span><span class="p">,</span>  <span class="mi">7</span><span class="p">,</span>  <span class="mi">8</span><span class="p">,</span>  <span class="mi">9</span><span class="p">],</span>
 <span class="gp">... </span>               <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">19</span><span class="p">],</span>
 <span class="gp">... </span>               <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">29</span><span class="p">],</span>
@@ -277,7 +254,7 @@ the next block.</li>
 
 <dl class="function">
 <dt id="dippykit.utilities.zigzag_indices">
-<code class="descclassname">dippykit.utilities.</code><code class="descname">zigzag_indices</code><span class="sig-paren">(</span><em>shape: Union[typing.Tuple[int, int], int], length: int = -1</em><span class="sig-paren">)</span> &#x2192; Tuple[numpy.ndarray, numpy.ndarray]<a class="reference internal" href="_modules/dippykit/utilities.html#zigzag_indices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.utilities.zigzag_indices" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">dippykit.utilities.</code><code class="descname">zigzag_indices</code><span class="sig-paren">(</span><em>shape: typing.Union[typing.Tuple[int, int], int], length: int = -1</em><span class="sig-paren">)</span> &#x2192; typing.Tuple[numpy.ndarray, numpy.ndarray]<a class="reference internal" href="_modules/dippykit/utilities.html#zigzag_indices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.utilities.zigzag_indices" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates indices for a zigzag pattern in a matrix</p>
 <p>Given a matrix shape, this function will determine the indices in such a
 matrix of consecutive elements in a zigzag pattern. If an integer <em>length</em>
@@ -290,14 +267,14 @@ every element’s indices. This saves computation time.</em></p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>shape</strong> (<code class="docutils literal notranslate"><span class="pre">Tuple[int,</span> <span class="pre">int]</span></code> or <code class="docutils literal notranslate"><span class="pre">int</span></code>) – The shape of the matrix for which the zigzag indices are
+<li><strong>shape</strong> (<code class="docutils literal"><span class="pre">Tuple[int,</span> <span class="pre">int]</span></code> or <code class="docutils literal"><span class="pre">int</span></code>) – The shape of the matrix for which the zigzag indices are
 applicable.</li>
-<li><strong>length</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – (default=shape[0]*shape[1]) The number of indices to be
+<li><strong>length</strong> (<code class="docutils literal"><span class="pre">int</span></code>) – (default=shape[0]*shape[1]) The number of indices to be
 returned; equivalently, the length of each ndarray returned.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><code class="docutils literal notranslate"><span class="pre">Tuple[numpy.ndarray,</span> <span class="pre">numpy.ndarray]</span></code></p>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><code class="docutils literal"><span class="pre">Tuple[numpy.ndarray,</span> <span class="pre">numpy.ndarray]</span></code></p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A length 2 tuple of indices of zigzag values.</p>
@@ -306,7 +283,7 @@ returned; equivalently, the length of each ndarray returned.</li>
 </tbody>
 </table>
 <p>Examples:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">im</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span>  <span class="mi">3</span><span class="p">,</span>  <span class="mi">4</span><span class="p">,</span>  <span class="mi">5</span><span class="p">,</span>  <span class="mi">6</span><span class="p">,</span>  <span class="mi">7</span><span class="p">,</span>  <span class="mi">8</span><span class="p">,</span>  <span class="mi">9</span><span class="p">],</span>
 <span class="gp">... </span>               <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">19</span><span class="p">],</span>
 <span class="gp">... </span>               <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">29</span><span class="p">],</span>
@@ -333,7 +310,7 @@ returned; equivalently, the length of each ndarray returned.</li>
 
 <dl class="function">
 <dt id="dippykit.utilities.conv2d_grid">
-<code class="descclassname">dippykit.utilities.</code><code class="descname">conv2d_grid</code><span class="sig-paren">(</span><em>f_lower: Tuple[Union[int, float], Union[int, float]], g_lower: Tuple[Union[int, float], Union[int, float]], f: numpy.ndarray, g: numpy.ndarray</em><span class="sig-paren">)</span> &#x2192; Tuple[numpy.ndarray, numpy.ndarray]<a class="reference internal" href="_modules/dippykit/utilities.html#conv2d_grid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.utilities.conv2d_grid" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">dippykit.utilities.</code><code class="descname">conv2d_grid</code><span class="sig-paren">(</span><em>f_lower: typing.Tuple[typing.Union[int, float], typing.Union[int, float]], g_lower: typing.Tuple[typing.Union[int, float], typing.Union[int, float]], f: numpy.ndarray, g: numpy.ndarray</em><span class="sig-paren">)</span> &#x2192; typing.Tuple[numpy.ndarray, numpy.ndarray]<a class="reference internal" href="_modules/dippykit/utilities.html#conv2d_grid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.utilities.conv2d_grid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates a meshgrid for the domain of a convolution result</p>
 <p>Given the domain values of the [0, 0] index in the
 two-dimensional signals f and g and the signals f and g themselves,
@@ -355,14 +332,14 @@ convolution operations.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>f_lower</strong> (<code class="docutils literal notranslate"><span class="pre">Tuple[int</span> <span class="pre">or</span> <span class="pre">float,</span> <span class="pre">int</span> <span class="pre">or</span> <span class="pre">float]</span></code>) – The domain value of the point f[0, 0].</li>
-<li><strong>g_lower</strong> (<code class="docutils literal notranslate"><span class="pre">Tuple[int</span> <span class="pre">or</span> <span class="pre">float,</span> <span class="pre">int</span> <span class="pre">or</span> <span class="pre">float]</span></code>) – The domain value of the point g[0, 0].</li>
-<li><strong>f</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – An ndarray interpreted as a two-dimensional signal.</li>
-<li><strong>g</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – An ndarray interpreted as a two-dimensional signal.</li>
+<li><strong>f_lower</strong> (<code class="docutils literal"><span class="pre">Tuple[int</span> <span class="pre">or</span> <span class="pre">float,</span> <span class="pre">int</span> <span class="pre">or</span> <span class="pre">float]</span></code>) – The domain value of the point f[0, 0].</li>
+<li><strong>g_lower</strong> (<code class="docutils literal"><span class="pre">Tuple[int</span> <span class="pre">or</span> <span class="pre">float,</span> <span class="pre">int</span> <span class="pre">or</span> <span class="pre">float]</span></code>) – The domain value of the point g[0, 0].</li>
+<li><strong>f</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code>) – An ndarray interpreted as a two-dimensional signal.</li>
+<li><strong>g</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code>) – An ndarray interpreted as a two-dimensional signal.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><code class="docutils literal notranslate"><span class="pre">Tuple[numpy.ndarray,</span> <span class="pre">numpy.ndarray]</span></code></p>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><code class="docutils literal"><span class="pre">Tuple[numpy.ndarray,</span> <span class="pre">numpy.ndarray]</span></code></p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The domain of the convolution of f and g in meshgrid format.</p>
@@ -371,7 +348,7 @@ convolution operations.</p>
 </tbody>
 </table>
 <p>Examples:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">dippykit</span> <span class="k">as</span> <span class="nn">dip</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">f_domain_x</span><span class="p">,</span> <span class="n">f_domain_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">f_domain_x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
@@ -424,22 +401,22 @@ convolution operations.</p>
 <code class="descclassname">dippykit.utilities.</code><code class="descname">rgb2ycbcr</code><span class="sig-paren">(</span><em>rgb_im: numpy.ndarray</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="reference internal" href="_modules/dippykit/utilities.html#rgb2ycbcr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.utilities.rgb2ycbcr" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts an RGB image to YCbCr, in exactly the same manner as Matlab</p>
 <p>This function will return the same output as Matlab’s rgb2ycbcr function
-for images with a dtype of <code class="docutils literal notranslate"><span class="pre">uint8</span></code>.</p>
+for images with a dtype of <code class="docutils literal"><span class="pre">uint8</span></code>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>rgb_im</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – The RGB image to be converted.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>rgb_im</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code>) – The RGB image to be converted.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="docutils literal"><span class="pre">numpy.ndarray</span></code></td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A YCbCr image, matching the Matlab conversion metric for dtypes
-of <code class="docutils literal notranslate"><span class="pre">numpy.uint8</span></code>.</td>
+of <code class="docutils literal"><span class="pre">numpy.uint8</span></code>.</td>
 </tr>
 </tbody>
 </table>
 <p>Examples:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">im</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[[</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">],</span> <span class="p">[</span><span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">]],</span>
 <span class="gp">... </span>               <span class="p">[[</span>  <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">],</span> <span class="p">[</span> <span class="mi">64</span><span class="p">,</span>  <span class="mi">32</span><span class="p">,</span> <span class="mi">224</span><span class="p">]]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rgb2ycbcr</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
@@ -462,16 +439,16 @@ weights are the same as those used in the Matlab rgb2gray function.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>rgb_im</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – The input 3-channel RGB image.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>rgb_im</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code>) – The input 3-channel RGB image.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="docutils literal"><span class="pre">numpy.ndarray</span></code></td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The output 1-channel gray image.</td>
 </tr>
 </tbody>
 </table>
 <p>Examples:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">im</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[[</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">],</span> <span class="p">[</span><span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">]],</span>
 <span class="gp">... </span>               <span class="p">[[</span>  <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">],</span> <span class="p">[</span> <span class="mi">64</span><span class="p">,</span>  <span class="mi">32</span><span class="p">,</span> <span class="mi">224</span><span class="p">]]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rgb2gray</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
@@ -483,7 +460,7 @@ weights are the same as those used in the Matlab rgb2gray function.</p>
 
 <dl class="function">
 <dt id="dippykit.utilities.convolve2d">
-<code class="descclassname">dippykit.utilities.</code><code class="descname">convolve2d</code><span class="sig-paren">(</span><em>sig_1: numpy.ndarray</em>, <em>sig_2: numpy.ndarray</em>, <em>mode: str = 'full'</em>, <em>boundary: str = 'fill'</em>, <em>fillvalue: Union[int</em>, <em>float] = 0</em>, <em>like_matlab: bool = False</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="reference internal" href="_modules/dippykit/utilities.html#convolve2d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.utilities.convolve2d" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">dippykit.utilities.</code><code class="descname">convolve2d</code><span class="sig-paren">(</span><em>sig_1: numpy.ndarray</em>, <em>sig_2: numpy.ndarray</em>, <em>mode: str = 'full'</em>, <em>boundary: str = 'fill'</em>, <em>fillvalue: typing.Union[int</em>, <em>float] = 0</em>, <em>like_matlab: bool = False</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="reference internal" href="_modules/dippykit/utilities.html#convolve2d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.utilities.convolve2d" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convolves two arrays in two dimensions</p>
 <p>Given two input arrays, this function computes their 2D convolution. The
 input arrays must be either 2-dimensional or 3-dimensional, and the
@@ -508,28 +485,28 @@ so more detailed documentation may be found there.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>sig_1</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – The first input array.</li>
-<li><strong>sig_2</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – The second input array.</li>
-<li><strong>mode</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – (default=’full’) The mode to be used for the convolution.
+<li><strong>sig_1</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code>) – The first input array.</li>
+<li><strong>sig_2</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code>) – The second input array.</li>
+<li><strong>mode</strong> (<code class="docutils literal"><span class="pre">str</span></code>) – (default=’full’) The mode to be used for the convolution.
 If set to ‘full’, a full convolution will be performed. If set to
 ‘same’, the output will be the same size (in the first two
 dimensions) as the first input array. If set to valid, only values
 generated without padding will be retained. For more information,
 see <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.convolve2d.html">scipy.signal.convolve2d</a>.</li>
-<li><strong>boundary</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – (default=’fill’) A string representing how boundaries
+<li><strong>boundary</strong> (<code class="docutils literal"><span class="pre">str</span></code>) – (default=’fill’) A string representing how boundaries
 will be handled. If set to ‘fill’, the first input array is padded
 with fillvalue values. If set to ‘wrap’, the first input array is
 padded with copies of itself in a tile configuration. If set to
 ‘symm’, the first input array is padded with reflected copies of
 itself. For more information, see <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.convolve2d.html">scipy.signal.convolve2d</a>.</li>
-<li><strong>fillvalue</strong> (<code class="docutils literal notranslate"><span class="pre">NumericType</span></code>) – (default=0) The numeric value to pad the first input
+<li><strong>fillvalue</strong> (<code class="docutils literal"><span class="pre">NumericType</span></code>) – (default=0) The numeric value to pad the first input
 array with (assuming boundary=’fill’).</li>
-<li><strong>like_matlab</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>) – (default=False) If set to True, this function will
+<li><strong>like_matlab</strong> (<code class="docutils literal"><span class="pre">bool</span></code>) – (default=False) If set to True, this function will
 return arrays in the same manner that Matlab would.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><code class="docutils literal"><span class="pre">numpy.ndarray</span></code></p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The convolution of the two arrays.</p>
@@ -551,7 +528,7 @@ section for more information.</p>
 </dl>
 </div>
 <p>Examples:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
 <span class="gp">... </span>              <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
 <span class="gp">... </span>              <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mi">1</span><span class="p">,</span>  <span class="mi">1</span><span class="p">],</span>
@@ -596,9 +573,7 @@ section for more information.</p>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -616,11 +591,11 @@ section for more information.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Brighton Ancelin, Motaz Alfarraj, Ghassan AlRegib.
+        &copy; Copyright 2018, Brighton Ancelin, Motaz Alfarraj, Ghassan AlRegib
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -635,35 +610,33 @@ section for more information.</p>
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
+    
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'./',
+              VERSION:'',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+    
 
   
 
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

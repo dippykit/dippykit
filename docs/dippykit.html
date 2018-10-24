@@ -24,27 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="dippykit  documentation" href="index.html"/>
-        <link rel="next" title="dippykit.adjustments module" href="dippykit.adjustments.html"/>
-        <link rel="prev" title="Installation Guide" href="install_guide.html"/> 
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="dippykit.adjustments module" href="dippykit.adjustments.html" />
+    <link rel="prev" title="Installation Guide" href="install_guide.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -130,7 +122,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">dippykit</a>
@@ -138,9 +130,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -210,7 +203,7 @@
 <div><ul>
 <li><dl class="first docutils">
 <dt>For a default import, use:</dt>
-<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">dippykit</span> <span class="k">as</span> <span class="nn">dip</span>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">dippykit</span> <span class="k">as</span> <span class="nn">dip</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Refer to all functions using the dip.function() syntax, e.g.:</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dip</span><span class="o">.</span><span class="n">window_2d</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="go">array([[0.  , 0.  , 0.  , 0.  ],</span>
@@ -224,7 +217,7 @@
 </li>
 <li><dl class="first docutils">
 <dt>For a static import, use:</dt>
-<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dippykit</span> <span class="k">import</span> <span class="o">*</span>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dippykit</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Refer to all functions using the function() syntax, e.g.:</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">window_2d</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="go">array([[0.  , 0.  , 0.  , 0.  ],</span>
@@ -242,12 +235,12 @@
 <div class="section" id="new-types">
 <h3>New Types<a class="headerlink" href="#new-types" title="Permalink to this headline">¶</a></h3>
 <p>In the documentation for this library there are two new types used. These
-are <code class="docutils literal notranslate"><span class="pre">NumericType</span></code> and <code class="docutils literal notranslate"><span class="pre">ShapeType</span></code>.</p>
-<p><code class="docutils literal notranslate"><span class="pre">NumericType</span></code> is an alias for the union of <code class="docutils literal notranslate"><span class="pre">int</span></code> and <code class="docutils literal notranslate"><span class="pre">float</span></code>, and as
+are <code class="docutils literal"><span class="pre">NumericType</span></code> and <code class="docutils literal"><span class="pre">ShapeType</span></code>.</p>
+<p><code class="docutils literal"><span class="pre">NumericType</span></code> is an alias for the union of <code class="docutils literal"><span class="pre">int</span></code> and <code class="docutils literal"><span class="pre">float</span></code>, and as
 such represents values that can be either integers or floating point
 numbers.</p>
-<p><code class="docutils literal notranslate"><span class="pre">ShapeType</span></code> is an alias for the union of <code class="docutils literal notranslate"><span class="pre">NumericType</span></code> and
-<code class="docutils literal notranslate"><span class="pre">Tuple[NumericType,</span> <span class="pre">NumericType]</span></code>. In effect, <code class="docutils literal notranslate"><span class="pre">ShapeType</span></code> is something
+<p><code class="docutils literal"><span class="pre">ShapeType</span></code> is an alias for the union of <code class="docutils literal"><span class="pre">NumericType</span></code> and
+<code class="docutils literal"><span class="pre">Tuple[NumericType,</span> <span class="pre">NumericType]</span></code>. In effect, <code class="docutils literal"><span class="pre">ShapeType</span></code> is something
 that could be logically construed as the dimensions of some rectangle. For
 single-element or scalar arguments, the shape is square. Integer arguments
 describe the absolute size of the rectangle, whereas floating point
@@ -312,6 +305,7 @@ referenced functions’ documentation pages, are listed below:</p>
 <li><a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.title.html">title</a></li>
 <li><a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.xlabel.html">xlabel</a></li>
 <li><a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.ylabel.html">ylabel</a></li>
+<li><em>Since version 2.0.0, all of pyplot is aliased</em></li>
 </ul>
 </dd>
 </dl>
@@ -342,9 +336,7 @@ referenced functions’ documentation pages, are listed below:</p>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -362,11 +354,11 @@ referenced functions’ documentation pages, are listed below:</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Brighton Ancelin, Motaz Alfarraj, Ghassan AlRegib.
+        &copy; Copyright 2018, Brighton Ancelin, Motaz Alfarraj, Ghassan AlRegib
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -381,35 +373,33 @@ referenced functions’ documentation pages, are listed below:</p>
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
+    
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'./',
+              VERSION:'',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+    
 
   
 
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

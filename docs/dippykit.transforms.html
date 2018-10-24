@@ -24,28 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="dippykit  documentation" href="index.html"/>
-        <link rel="up" title="dippykit package" href="dippykit.html"/>
-        <link rel="next" title="dippykit.utilities module" href="dippykit.utilities.html"/>
-        <link rel="prev" title="dippykit.sampling module" href="dippykit.sampling.html"/> 
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="dippykit.utilities module" href="dippykit.utilities.html" />
+    <link rel="prev" title="dippykit.sampling module" href="dippykit.sampling.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -90,22 +81,7 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="install_guide.html">Installation Guide</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="dippykit.html">dippykit package</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="dippykit.html#submodules">Submodules</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="dippykit.adjustments.html">dippykit.adjustments module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="dippykit.coding.html">dippykit.coding module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="dippykit.image_io.html">dippykit.image_io module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="dippykit.metrics.html">dippykit.metrics module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="dippykit.sampling.html">dippykit.sampling module</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">dippykit.transforms module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="dippykit.utilities.html">dippykit.utilities module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="dippykit.visualization.html">dippykit.visualization module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="dippykit.windows.html">dippykit.windows module</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="dippykit.html#module-dippykit">Module contents</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="dippykit.html">dippykit package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dippykit.adjustments.html">dippykit.adjustments module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dippykit.coding.html">dippykit.coding module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dippykit.image_io.html">dippykit.image_io module</a></li>
@@ -126,7 +102,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">dippykit</a>
@@ -134,9 +110,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -192,16 +169,16 @@ operations on images in various useful manners.</p>
 <p>Given an input image, this function computes its discrete cosine
 transform. This result is identical to the result of the dct2() Matlab
 function. Internally, this function is computed using
-<code class="docutils literal notranslate"><span class="pre">scipy.fftpack.dctn(im,</span> <span class="pre">norm='ortho')</span></code>.</p>
+<code class="docutils literal"><span class="pre">scipy.fftpack.dctn(im,</span> <span class="pre">norm='ortho')</span></code>.</p>
 <p>This function is essentially a wrapper for <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.fftpack.dctn.html">scipy.fftpack.dctn</a>,
 so more detailed documentation may be found there.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>im</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – An image to be processed.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>im</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code>) – An image to be processed.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="docutils literal"><span class="pre">numpy.ndarray</span></code></td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The discrete cosine transform of the input image.</td>
 </tr>
@@ -221,7 +198,7 @@ section for more information.</p>
 </dl>
 </div>
 <p>Examples:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">freq_1</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">4</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">freq_2</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">8</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">domain_1</span><span class="p">,</span> <span class="n">domain_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span>
@@ -276,16 +253,16 @@ section for more information.</p>
 <p>Given an input image, this function computes its inverse discrete cosine
 transform. This result is identical to the result of the idct2() Matlab
 function. Internally, this function is computed using
-<code class="docutils literal notranslate"><span class="pre">scipy.fftpack.idctn(im,</span> <span class="pre">norm='ortho')</span></code>.</p>
+<code class="docutils literal"><span class="pre">scipy.fftpack.idctn(im,</span> <span class="pre">norm='ortho')</span></code>.</p>
 <p>This function is essentially a wrapper for <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.fftpack.idctn.html">scipy.fftpack.idctn</a>,
 so more detailed documentation may be found there.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>im</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – An image to be processed.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>im</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code>) – An image to be processed.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="docutils literal"><span class="pre">numpy.ndarray</span></code></td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The inverse discrete cosine transform of the input image.</td>
 </tr>
@@ -305,7 +282,7 @@ section for more information.</p>
 </dl>
 </div>
 <p>Examples:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">im_DCT</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">im_DCT</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -336,11 +313,11 @@ so more detailed documentation may be found there.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>im</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – The input image.</li>
-<li><strong>mode</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – The edge detection mode/algorithm to be used. Acceptable
+<li><strong>im</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code>) – The input image.</li>
+<li><strong>mode</strong> (<code class="docutils literal"><span class="pre">str</span></code>) – The edge detection mode/algorithm to be used. Acceptable
 values are: ‘sobel’, ‘sobel_h’, ‘sobel_v’, ‘canny’, ‘scharr’,
 ‘prewitt’, ‘roberts’, and ‘laplace’.</li>
-<li><strong>as_bool</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>) – (default=False) If set to True, this function will
+<li><strong>as_bool</strong> (<code class="docutils literal"><span class="pre">bool</span></code>) – (default=False) If set to True, this function will
 return the result as a binary/boolean image. This binary image is
 built by taking the original edge image and substituting any
 values below <em>threshold</em> as False, and all other values as True. The
@@ -353,7 +330,7 @@ the square root of 2 by default.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><code class="docutils literal"><span class="pre">numpy.ndarray</span></code></p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The edge image.</p>
@@ -389,7 +366,7 @@ section for more information.</p>
 </dl>
 </div>
 <p>Examples:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">im</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">],</span>
 <span class="gp">... </span>                     <span class="p">[</span><span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">],</span>
 <span class="gp">... </span>                     <span class="p">[</span><span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">1.</span> <span class="p">,</span> <span class="mf">1.</span> <span class="p">,</span> <span class="mf">1.</span> <span class="p">,</span> <span class="mf">1.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">,</span> <span class="mf">0.</span> <span class="p">],</span>
@@ -433,9 +410,7 @@ section for more information.</p>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -453,11 +428,11 @@ section for more information.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Brighton Ancelin, Motaz Alfarraj, Ghassan AlRegib.
+        &copy; Copyright 2018, Brighton Ancelin, Motaz Alfarraj, Ghassan AlRegib
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -472,35 +447,33 @@ section for more information.</p>
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
+    
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'./',
+              VERSION:'',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+    
 
   
 
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>
