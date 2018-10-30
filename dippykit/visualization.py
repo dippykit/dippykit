@@ -341,7 +341,7 @@ def _setup_window(
     fig = matplotlib.figure.Figure()
     ax = fig.add_subplot(1, 1, 1)
     canvas = FigureCanvasTkAgg(fig, master=window)
-    canvas.show()
+    canvas.draw()
     canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=1)
     canvas._tkcanvas.pack(side=TOP, fill=BOTH, expand=1)
     return ax, canvas
