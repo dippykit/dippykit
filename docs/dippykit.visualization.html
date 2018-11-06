@@ -275,7 +275,7 @@ section for more information.</p>
 
 <dl class="function">
 <dt id="dippykit.visualization.setup_continuous_rendering">
-<code class="descclassname">dippykit.visualization.</code><code class="descname">setup_continuous_rendering</code><span class="sig-paren">(</span><em>render: typing.Callable[[matplotlib.axes._axes.Axes, typing.Any], NoneType], update: typing.Callable[&lt;bound method BaseContext.Queue of &lt;multiprocessing.context.DefaultContext object at 0x000001296F3C9748&gt;&gt;, NoneType], delay: int = 100, auto_play: bool = True</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/dippykit/visualization.html#setup_continuous_rendering"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.visualization.setup_continuous_rendering" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">dippykit.visualization.</code><code class="descname">setup_continuous_rendering</code><span class="sig-paren">(</span><em>render: typing.Callable[[matplotlib.axes._axes.Axes, typing.Any], NoneType], update: typing.Callable[&lt;bound method BaseContext.Queue of &lt;multiprocessing.context.DefaultContext object at 0x000002E17CE49710&gt;&gt;, NoneType], delay: int = 100, auto_play: bool = True, precompute: bool = False</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/dippykit/visualization.html#setup_continuous_rendering"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.visualization.setup_continuous_rendering" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets up a continuous renderer</p>
 <p>This function sets up a window to display data that can continuously
 change. To best understand this function, try copying the example code
@@ -300,6 +300,12 @@ the <em>render</em> function to update the rendering. Also known as the
 refresh rate.</li>
 <li><strong>auto_play</strong> (<code class="docutils literal"><span class="pre">bool</span></code>) – (default=True) If set to false, the rendering will
 prompt the user before each update.</li>
+<li><strong>precompute</strong> – (default=False) If set to true, the update function will
+be called once before any rendering takes place. In this single call, 
+the queue is to be populated with all data needed for the entire 
+rendering process. Setting this parameter to true also removes the 
+multiprocessing aspect of the visualization, which can be useful for 
+those with restrictions to multiprocessing in their code.</li>
 </ul>
 </td>
 </tr>

@@ -207,6 +207,7 @@ def setup_continuous_rendering(
         update: Callable[[Queue], None],
         delay: int=100,
         auto_play: bool=True,
+        precompute: bool=False,
         ) -> None:
     """Sets up a continuous renderer
 
@@ -233,6 +234,12 @@ def setup_continuous_rendering(
     :type auto_play: ``bool``
     :param auto_play: (default=True) If set to false, the rendering will
         prompt the user before each update.
+    :param precompute: (default=False) If set to true, the update function will
+        be called once before any rendering takes place. In this single call, 
+        the queue is to be populated with all data needed for the entire 
+        rendering process. Setting this parameter to true also removes the 
+        multiprocessing aspect of the visualization, which can be useful for 
+        those with restrictions to multiprocessing in their code.
     :return: None
 
     Examples:
@@ -327,12 +334,16 @@ def setup_continuous_rendering(
     """
     window = Tk()
     queue = Queue()
-    update_process = Process(target=update, args=(queue,))
-    update_process.start()
+    if not precompute:
+        update_process = Process(target=update, args=(queue,))
+        update_process.start()
+    else:
+        update(queue)
     ax, canvas = _setup_window(window)
     _update_window(render, queue, window, ax, canvas, delay, auto_play)
     window.mainloop()
-    update_process.terminate()
+    if not precompute:
+        update_process.terminate()
 
 
 def _setup_window(

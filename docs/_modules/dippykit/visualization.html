@@ -361,6 +361,7 @@
         <span class="n">update</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Queue</span><span class="p">],</span> <span class="kc">None</span><span class="p">],</span>
         <span class="n">delay</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
         <span class="n">auto_play</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">precompute</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
         <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Sets up a continuous renderer</span>
 
@@ -387,6 +388,12 @@
 <span class="sd">    :type auto_play: ``bool``</span>
 <span class="sd">    :param auto_play: (default=True) If set to false, the rendering will</span>
 <span class="sd">        prompt the user before each update.</span>
+<span class="sd">    :param precompute: (default=False) If set to true, the update function will</span>
+<span class="sd">        be called once before any rendering takes place. In this single call, </span>
+<span class="sd">        the queue is to be populated with all data needed for the entire </span>
+<span class="sd">        rendering process. Setting this parameter to true also removes the </span>
+<span class="sd">        multiprocessing aspect of the visualization, which can be useful for </span>
+<span class="sd">        those with restrictions to multiprocessing in their code.</span>
 <span class="sd">    :return: None</span>
 
 <span class="sd">    Examples:</span>
@@ -481,12 +488,16 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">window</span> <span class="o">=</span> <span class="n">Tk</span><span class="p">()</span>
     <span class="n">queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
-    <span class="n">update_process</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">update</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">queue</span><span class="p">,))</span>
-    <span class="n">update_process</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">precompute</span><span class="p">:</span>
+        <span class="n">update_process</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">update</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">queue</span><span class="p">,))</span>
+        <span class="n">update_process</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">update</span><span class="p">(</span><span class="n">queue</span><span class="p">)</span>
     <span class="n">ax</span><span class="p">,</span> <span class="n">canvas</span> <span class="o">=</span> <span class="n">_setup_window</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
     <span class="n">_update_window</span><span class="p">(</span><span class="n">render</span><span class="p">,</span> <span class="n">queue</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">canvas</span><span class="p">,</span> <span class="n">delay</span><span class="p">,</span> <span class="n">auto_play</span><span class="p">)</span>
     <span class="n">window</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span>
-    <span class="n">update_process</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span></div>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">precompute</span><span class="p">:</span>
+        <span class="n">update_process</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span></div>
 
 
 <span class="k">def</span> <span class="nf">_setup_window</span><span class="p">(</span>
