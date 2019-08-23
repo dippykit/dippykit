@@ -2,8 +2,7 @@ dippykit - A Digital Image Processing Library
 
 Authors: Brighton Ancelin, Motaz Alfarraj, Ghassan AlRegib
 
-This library was developed for the Georgia Tech graduate course **ECE 6258: Digital Image Processing** with Professor
-Ghassan AlRegib.
+This library was developed for the Georgia Tech's graduate course [ECE 6258: Digital Image Processing](https://ghassanalregib.info/ece6258) with Professor [Ghassan AlRegib](https://ghassanalregib.info)
 
 Versioning Scheme: Semantic Versioning 2.0.0
 
