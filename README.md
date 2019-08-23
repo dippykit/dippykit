@@ -13,7 +13,7 @@ not tasked with specifying modules to access specific members. The organization 
 aspect in this regard.
 
 This code is maintained under the Semantic Versioning 2.0.0 versioning scheme, further defined
-`here. <https://semver.org/>`_ In essence, the version is represented as MAJOR.MINOR.PATCH and each increments by the
+[here](https://semver.org/)_ In essence, the version is represented as MAJOR.MINOR.PATCH and each increments by the
 following rules:
 
 * Increment MAJOR when incompatible API changes are made
