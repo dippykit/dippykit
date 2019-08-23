@@ -1,4 +1,4 @@
-## dippykit - A Digital Image Processing Library
+# dippykit - A Digital Image Processing Library
 
 Authors: Brighton Ancelin, Motaz Alfarraj, Ghassan AlRegib
 
