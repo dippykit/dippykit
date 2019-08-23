@@ -19,4 +19,3 @@ following rules:
 * Increment MAJOR when incompatible API changes are made
 * Increment MINOR when backwards-compatible functionality is added
 * Increment PATCH when backwards-compatible bug fixes are made
-
