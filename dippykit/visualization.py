@@ -12,17 +12,13 @@ visualization of various image-relevant data
 # Functional imports
 import numpy as np
 import matplotlib
-matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.axes import Axes
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from multiprocessing import Queue, Process
-from threading import Thread
-from tkinter import Tk, TOP, BOTH
+from multiprocessing import Process, Queue
 
 # General imports
-from typing import Callable, Any, Tuple
+from typing import Callable, Any, Tuple, List
 
 __author__ = 'Brighton Ancelin, Motaz Alfarraj, Ghassan AlRegib'
 
@@ -208,6 +204,7 @@ def setup_continuous_rendering(
         delay: int=100,
         auto_play: bool=True,
         precompute: bool=False,
+        clear_axes: bool=True
         ) -> None:
     """Sets up a continuous renderer
 
@@ -234,12 +231,17 @@ def setup_continuous_rendering(
     :type auto_play: ``bool``
     :param auto_play: (default=True) If set to false, the rendering will
         prompt the user before each update.
+    :type precompute: ``bool``
     :param precompute: (default=False) If set to true, the update function will
         be called once before any rendering takes place. In this single call, 
         the queue is to be populated with all data needed for the entire 
         rendering process. Setting this parameter to true also removes the 
         multiprocessing aspect of the visualization, which can be useful for 
         those with restrictions to multiprocessing in their code.
+    :type clear_axes: ``bool``
+    :param clear_axes: (default=True) If set to true, the axes will be cleared
+        before each rendering. This is generally an individuals desired
+        performance, but can be disabled if one wants to hand axes manually.
     :return: None
 
     Examples:
@@ -315,8 +317,8 @@ def setup_continuous_rendering(
             sad_face = (sad_mouth, left_eye, right_eye, False)
             is_happy = True
             while True:
-                # If there are less than 10 items in the queue
-                if queue.qsize() < 10:
+                # If the queue is empty
+                if queue.empty():
                     # Alternate with happy and sad faces
                     if is_happy:
                         queue.put(happy_face)
@@ -332,61 +334,56 @@ def setup_continuous_rendering(
                                            auto_play=False)
 
     """
-    window = Tk()
     queue = Queue()
     if not precompute:
         update_process = Process(target=update, args=(queue,))
         update_process.start()
     else:
         update(queue)
-    ax, canvas = _setup_window(window)
-    _update_window(render, queue, window, ax, canvas, delay, auto_play)
-    window.mainloop()
+    try:
+        ax = _setup_window()
+        _update_window(render, queue, ax, delay, auto_play, clear_axes)
+    except (KeyboardInterrupt, SystemExit):
+        # Allow the other process to be terminated
+        pass
     if not precompute:
         update_process.terminate()
 
 
 def _setup_window(
-        window: Tk
-        ) -> Tuple[Axes, FigureCanvasTkAgg]:
-    fig = matplotlib.figure.Figure()
+        ) -> Axes:
+    fig = plt.figure()
     ax = fig.add_subplot(1, 1, 1)
-    canvas = FigureCanvasTkAgg(fig, master=window)
-    canvas.draw()
-    canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=1)
-    canvas._tkcanvas.pack(side=TOP, fill=BOTH, expand=1)
-    return ax, canvas
+    ax.figure.canvas.draw()
+    plt.ion()
+    plt.show()
+    return ax
 
 
 def _update_window(
         render: Callable[[Axes, Any], None],
         queue: Queue,
-        window: Tk,
         ax: Axes,
-        canvas: FigureCanvasTkAgg,
         delay: int,
         auto_play: bool,
-        wait_thread: Thread=None,
+        clear_axes: bool,
         ) -> None:
-    do_update = False
-    if wait_thread is None:
-        do_update = True
-    elif not wait_thread.is_alive():
-        wait_thread = None
-        do_update = True
-    if do_update and (not queue.empty()):
+    while queue.empty():
+        plt.pause(0.005)
+    val = queue.get_nowait()
+    while val is not None:
+        if clear_axes:
+            ax.clear()
+        render(ax, val)
+        # Inefficient, but convenient for users
+        ax.figure.canvas.draw()
+        if not auto_play:
+            input('Press ENTER to continue...')
+        if delay > 0:
+            plt.pause(delay/1000)
+        else:
+            plt.pause(0.001)
+        while queue.empty():
+            plt.pause(0.005)
         val = queue.get_nowait()
-        if val is not None:
-            render(ax, val)
-            canvas.draw()
-            if not auto_play:
-                wait_thread = Thread(
-                    target=lambda: input('Press ENTER to continue...'))
-                wait_thread.setDaemon(True)
-                wait_thread.start()
-            window.after(delay, _update_window, render, queue, window, ax,
-                         canvas, delay, auto_play, wait_thread)
-    else:
-        window.after(delay, _update_window, render, queue, window, ax,
-                     canvas, delay, auto_play, wait_thread)
 

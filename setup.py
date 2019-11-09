@@ -7,12 +7,12 @@ import os
 
 cur_path = os.path.abspath(os.path.dirname(__file__))
 
-with open(os.path.join(cur_path, 'README.rst'), encoding='utf-8') as f:
+with open(os.path.join(cur_path, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
     name='dippykit',
-    version='2.0.2',
+    version='2.0.3',
     author='Brighton Ancelin',
     author_email='bancelin3@gatech.edu',
     description='A Python Package for Digital Image Processing Education',
@@ -37,4 +37,3 @@ setup(
     ],
     python_requires='>=3.5.2',
 )
-
