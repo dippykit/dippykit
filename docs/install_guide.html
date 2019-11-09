@@ -17,34 +17,36 @@
   
 
   
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="dippykit package" href="dippykit.html" />
     <link rel="prev" title="dippykit Documentation" href="index.html" /> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -82,7 +84,7 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installation Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#setting-up-the-environment">Setting Up the Environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#installing-dippykit">Installing <code class="docutils literal"><span class="pre">dippykit</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-dippykit">Installing <code class="docutils literal notranslate"><span class="pre">dippykit</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#verifying-your-installation">Verifying Your Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#creating-a-new-pycharm-project">Creating a New PyCharm Project</a></li>
 </ul>
@@ -166,53 +168,53 @@
 <p>This guide assumes that you do not have a subversion of
 Python 3 installed nor do you have PyCharm installed.</p>
 <p>This guide does not make use of virtual environments. If you
-are familiar with Python and prefer to install <code class="docutils literal"><span class="pre">dippykit</span></code> via
+are familiar with Python and prefer to install <code class="docutils literal notranslate"><span class="pre">dippykit</span></code> via
 a virtual environment, you are free to do so.</p>
 <div class="section" id="setting-up-the-environment">
 <h2>Setting Up the Environment<a class="headerlink" href="#setting-up-the-environment" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li>Install any subversion of Python 3. The download for
+<li><p>Install any subversion of Python 3. The download for
 the latest version of Python can be found on <a class="reference external" href="https://www.python.org/downloads/">the Python
 website</a>. On Windows
 and Mac, installation should be as simple as executing
 the downloaded file and completing the installation
-wizard.</li>
-<li>We recommend the use of the PyCharm IDE from JetBrains.
+wizard.</p></li>
+<li><p>We recommend the use of the PyCharm IDE from JetBrains.
 Follow the instructions on <a class="reference external" href="https://www.jetbrains.com/pycharm/download/">the PyCharm website</a>
 to download PyCharm (Community version is acceptable).
 On Windows and Mac, installation should be as simple as
 executing the downloaded file and completing the
-installation wizard.</li>
+installation wizard.</p></li>
 </ol>
 </div>
 <div class="section" id="installing-dippykit">
-<h2>Installing <code class="docutils literal"><span class="pre">dippykit</span></code><a class="headerlink" href="#installing-dippykit" title="Permalink to this headline">¶</a></h2>
+<h2>Installing <code class="docutils literal notranslate"><span class="pre">dippykit</span></code><a class="headerlink" href="#installing-dippykit" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li>We recommend installing <code class="docutils literal"><span class="pre">dippykit</span></code> from PyPI. From the
+<li><p>We recommend installing <code class="docutils literal notranslate"><span class="pre">dippykit</span></code> from PyPI. From the
 command line, enter the command
-“<code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">dippykit</span></code>”. This may take a while, so be
-prepared to  wait.</li>
+“<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">dippykit</span></code>”. This may take a while, so be
+prepared to  wait.</p></li>
 </ol>
 </div>
 <div class="section" id="verifying-your-installation">
 <h2>Verifying Your Installation<a class="headerlink" href="#verifying-your-installation" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
-<li><p class="first">From the command line, enter the command “<code class="docutils literal"><span class="pre">python</span></code>”. This
+<li><p>From the command line, enter the command “<code class="docutils literal notranslate"><span class="pre">python</span></code>”. This
 will convert your terminal into an interactive Python
 interpreter where you can run Python code line by line.</p>
 <ul class="simple">
-<li>In some cases (e.g. if a version of Python 2 is
+<li><p>In some cases (e.g. if a version of Python 2 is
 already installed on your machine), you will need to
-use the “<code class="docutils literal"><span class="pre">python3</span></code>” or other command to open an
+use the “<code class="docutils literal notranslate"><span class="pre">python3</span></code>” or other command to open an
 interactive Python <em>3</em> interpreter. To exit the
-interpreter, simply enter the “<code class="docutils literal"><span class="pre">exit()</span></code>” command.
+interpreter, simply enter the “<code class="docutils literal notranslate"><span class="pre">exit()</span></code>” command.
 Right before the interpreter opens, it should display
 the version of Python it is using. Ensure that this
-version is your subversion of Python 3.</li>
+version is your subversion of Python 3.</p></li>
 </ul>
 </li>
-<li><p class="first">Enter the following lines of code into the interpreter:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">dippykit</span> <span class="k">as</span> <span class="nn">dip</span>
+<li><p>Enter the following lines of code into the interpreter:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">dippykit</span> <span class="k">as</span> <span class="nn">dip</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dip</span><span class="o">.</span><span class="n">window_2d</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;rect&#39;</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 <span class="go">array([[0.   , 0.   , 0.   , 0.   , 0.   , 0.   , 0.   , 0.   ],</span>
 <span class="go">       [0.   , 0.   , 0.   , 0.   , 0.   , 0.   , 0.   , 0.   ],</span>
@@ -225,27 +227,26 @@ version is your subversion of Python 3.</li>
 </pre></div>
 </div>
 </li>
-<li><p class="first">If the above array was displayed, congratulations - your
-installation was successful!</p>
-</li>
+<li><p>If the above array was displayed, congratulations - your
+installation was successful!</p></li>
 </ol>
 </div>
 <div class="section" id="creating-a-new-pycharm-project">
 <h2>Creating a New PyCharm Project<a class="headerlink" href="#creating-a-new-pycharm-project" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li>Open PyCharm.</li>
-<li>Click on <strong>Create New Project</strong>.</li>
-<li>After selecting an appropriate location to store the
-project’s files, click on <strong>Project Interpreter</strong>.</li>
-<li>Select <strong>Existing Interpreter</strong></li>
-<li>If the recently installed Python 3 executable is not
+<li><p>Open PyCharm.</p></li>
+<li><p>Click on <strong>Create New Project</strong>.</p></li>
+<li><p>After selecting an appropriate location to store the
+project’s files, click on <strong>Project Interpreter</strong>.</p></li>
+<li><p>Select <strong>Existing Interpreter</strong></p></li>
+<li><p>If the recently installed Python 3 executable is not
 listed automatically, click the settings/gear button to
 the right. Select <strong>Add Local</strong> and navigate to wherever
-your executable was installed.</li>
-<li>Click <strong>Create</strong>.</li>
-<li>Congratulations - you now have a new PyCharm project.
+your executable was installed.</p></li>
+<li><p>Click <strong>Create</strong>.</p></li>
+<li><p>Congratulations - you now have a new PyCharm project.
 From here, you can take advantage of all the benefits of
-the IDE.</li>
+the IDE.</p></li>
 </ol>
 </div>
 </div>
@@ -261,7 +262,7 @@ the IDE.</li>
         <a href="dippykit.html" class="btn btn-neutral float-right" title="dippykit package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="dippykit Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral float-left" title="dippykit Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -287,35 +288,16 @@ the IDE.</li>
   
 
 
-  
-
-    
-    
-      <script type="text/javascript">
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'./',
-              VERSION:'',
-              LANGUAGE:'None',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-    
-
-  
-
-  <script type="text/javascript" src="_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

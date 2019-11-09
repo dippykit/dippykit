@@ -17,32 +17,34 @@
   
 
   
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
-
-  
-  <script src="../../_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -166,17 +168,13 @@
 <span class="c1"># Functional imports</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib</span>
-<span class="n">matplotlib</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;TkAgg&#39;</span><span class="p">)</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="k">import</span> <span class="n">Axes3D</span>
 <span class="kn">from</span> <span class="nn">matplotlib.axes</span> <span class="k">import</span> <span class="n">Axes</span>
-<span class="kn">from</span> <span class="nn">matplotlib.backends.backend_tkagg</span> <span class="k">import</span> <span class="n">FigureCanvasTkAgg</span>
-<span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="k">import</span> <span class="n">Queue</span><span class="p">,</span> <span class="n">Process</span>
-<span class="kn">from</span> <span class="nn">threading</span> <span class="k">import</span> <span class="n">Thread</span>
-<span class="kn">from</span> <span class="nn">tkinter</span> <span class="k">import</span> <span class="n">Tk</span><span class="p">,</span> <span class="n">TOP</span><span class="p">,</span> <span class="n">BOTH</span>
+<span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="k">import</span> <span class="n">Process</span><span class="p">,</span> <span class="n">Queue</span>
 
 <span class="c1"># General imports</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">List</span>
 
 <span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Brighton Ancelin, Motaz Alfarraj, Ghassan AlRegib&#39;</span>
 
@@ -362,6 +360,7 @@
         <span class="n">delay</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
         <span class="n">auto_play</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">precompute</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">clear_axes</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span>
         <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Sets up a continuous renderer</span>
 
@@ -388,12 +387,17 @@
 <span class="sd">    :type auto_play: ``bool``</span>
 <span class="sd">    :param auto_play: (default=True) If set to false, the rendering will</span>
 <span class="sd">        prompt the user before each update.</span>
+<span class="sd">    :type precompute: ``bool``</span>
 <span class="sd">    :param precompute: (default=False) If set to true, the update function will</span>
 <span class="sd">        be called once before any rendering takes place. In this single call, </span>
 <span class="sd">        the queue is to be populated with all data needed for the entire </span>
 <span class="sd">        rendering process. Setting this parameter to true also removes the </span>
 <span class="sd">        multiprocessing aspect of the visualization, which can be useful for </span>
 <span class="sd">        those with restrictions to multiprocessing in their code.</span>
+<span class="sd">    :type clear_axes: ``bool``</span>
+<span class="sd">    :param clear_axes: (default=True) If set to true, the axes will be cleared</span>
+<span class="sd">        before each rendering. This is generally an individuals desired</span>
+<span class="sd">        performance, but can be disabled if one wants to hand axes manually.</span>
 <span class="sd">    :return: None</span>
 
 <span class="sd">    Examples:</span>
@@ -469,8 +473,8 @@
 <span class="sd">            sad_face = (sad_mouth, left_eye, right_eye, False)</span>
 <span class="sd">            is_happy = True</span>
 <span class="sd">            while True:</span>
-<span class="sd">                # If there are less than 10 items in the queue</span>
-<span class="sd">                if queue.qsize() &lt; 10:</span>
+<span class="sd">                # If the queue is empty</span>
+<span class="sd">                if queue.empty():</span>
 <span class="sd">                    # Alternate with happy and sad faces</span>
 <span class="sd">                    if is_happy:</span>
 <span class="sd">                        queue.put(happy_face)</span>
@@ -486,63 +490,58 @@
 <span class="sd">                                           auto_play=False)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">window</span> <span class="o">=</span> <span class="n">Tk</span><span class="p">()</span>
     <span class="n">queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">precompute</span><span class="p">:</span>
         <span class="n">update_process</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">update</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">queue</span><span class="p">,))</span>
         <span class="n">update_process</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">update</span><span class="p">(</span><span class="n">queue</span><span class="p">)</span>
-    <span class="n">ax</span><span class="p">,</span> <span class="n">canvas</span> <span class="o">=</span> <span class="n">_setup_window</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
-    <span class="n">_update_window</span><span class="p">(</span><span class="n">render</span><span class="p">,</span> <span class="n">queue</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">canvas</span><span class="p">,</span> <span class="n">delay</span><span class="p">,</span> <span class="n">auto_play</span><span class="p">)</span>
-    <span class="n">window</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">_setup_window</span><span class="p">()</span>
+        <span class="n">_update_window</span><span class="p">(</span><span class="n">render</span><span class="p">,</span> <span class="n">queue</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">delay</span><span class="p">,</span> <span class="n">auto_play</span><span class="p">,</span> <span class="n">clear_axes</span><span class="p">)</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">KeyboardInterrupt</span><span class="p">,</span> <span class="ne">SystemExit</span><span class="p">):</span>
+        <span class="c1"># Allow the other process to be terminated</span>
+        <span class="k">pass</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">precompute</span><span class="p">:</span>
         <span class="n">update_process</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span></div>
 
 
 <span class="k">def</span> <span class="nf">_setup_window</span><span class="p">(</span>
-        <span class="n">window</span><span class="p">:</span> <span class="n">Tk</span>
-        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Axes</span><span class="p">,</span> <span class="n">FigureCanvasTkAgg</span><span class="p">]:</span>
-    <span class="n">fig</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Axes</span><span class="p">:</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
     <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">canvas</span> <span class="o">=</span> <span class="n">FigureCanvasTkAgg</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">master</span><span class="o">=</span><span class="n">window</span><span class="p">)</span>
-    <span class="n">canvas</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
-    <span class="n">canvas</span><span class="o">.</span><span class="n">get_tk_widget</span><span class="p">()</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">side</span><span class="o">=</span><span class="n">TOP</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="n">BOTH</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">canvas</span><span class="o">.</span><span class="n">_tkcanvas</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">side</span><span class="o">=</span><span class="n">TOP</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="n">BOTH</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">ax</span><span class="p">,</span> <span class="n">canvas</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ion</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">ax</span>
 
 
 <span class="k">def</span> <span class="nf">_update_window</span><span class="p">(</span>
         <span class="n">render</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Axes</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="kc">None</span><span class="p">],</span>
         <span class="n">queue</span><span class="p">:</span> <span class="n">Queue</span><span class="p">,</span>
-        <span class="n">window</span><span class="p">:</span> <span class="n">Tk</span><span class="p">,</span>
         <span class="n">ax</span><span class="p">:</span> <span class="n">Axes</span><span class="p">,</span>
-        <span class="n">canvas</span><span class="p">:</span> <span class="n">FigureCanvasTkAgg</span><span class="p">,</span>
         <span class="n">delay</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">auto_play</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-        <span class="n">wait_thread</span><span class="p">:</span> <span class="n">Thread</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">clear_axes</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
         <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">do_update</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="k">if</span> <span class="n">wait_thread</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">do_update</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="k">elif</span> <span class="ow">not</span> <span class="n">wait_thread</span><span class="o">.</span><span class="n">is_alive</span><span class="p">():</span>
-        <span class="n">wait_thread</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="n">do_update</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="k">if</span> <span class="n">do_update</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">queue</span><span class="o">.</span><span class="n">empty</span><span class="p">()):</span>
+    <span class="k">while</span> <span class="n">queue</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">pause</span><span class="p">(</span><span class="mf">0.005</span><span class="p">)</span>
+    <span class="n">val</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">get_nowait</span><span class="p">()</span>
+    <span class="k">while</span> <span class="n">val</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">clear_axes</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="n">render</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+        <span class="c1"># Inefficient, but convenient for users</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">auto_play</span><span class="p">:</span>
+            <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Press ENTER to continue...&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">delay</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">pause</span><span class="p">(</span><span class="n">delay</span><span class="o">/</span><span class="mi">1000</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">pause</span><span class="p">(</span><span class="mf">0.001</span><span class="p">)</span>
+        <span class="k">while</span> <span class="n">queue</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">pause</span><span class="p">(</span><span class="mf">0.005</span><span class="p">)</span>
         <span class="n">val</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">get_nowait</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">val</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">render</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
-            <span class="n">canvas</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">auto_play</span><span class="p">:</span>
-                <span class="n">wait_thread</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span>
-                    <span class="n">target</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Press ENTER to continue...&#39;</span><span class="p">))</span>
-                <span class="n">wait_thread</span><span class="o">.</span><span class="n">setDaemon</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-                <span class="n">wait_thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-            <span class="n">window</span><span class="o">.</span><span class="n">after</span><span class="p">(</span><span class="n">delay</span><span class="p">,</span> <span class="n">_update_window</span><span class="p">,</span> <span class="n">render</span><span class="p">,</span> <span class="n">queue</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span>
-                         <span class="n">canvas</span><span class="p">,</span> <span class="n">delay</span><span class="p">,</span> <span class="n">auto_play</span><span class="p">,</span> <span class="n">wait_thread</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">window</span><span class="o">.</span><span class="n">after</span><span class="p">(</span><span class="n">delay</span><span class="p">,</span> <span class="n">_update_window</span><span class="p">,</span> <span class="n">render</span><span class="p">,</span> <span class="n">queue</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span>
-                     <span class="n">canvas</span><span class="p">,</span> <span class="n">delay</span><span class="p">,</span> <span class="n">auto_play</span><span class="p">,</span> <span class="n">wait_thread</span><span class="p">)</span>
 
 </pre></div>
 
@@ -573,35 +572,16 @@
   
 
 
-  
-
-    
-    
-      <script type="text/javascript">
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'../../',
-              VERSION:'',
-              LANGUAGE:'None',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-    
-
-  
-
-  <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

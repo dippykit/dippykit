@@ -2,6 +2,6 @@ dippykit.adjustments module
 ===========================
 
 .. automodule:: dippykit.adjustments
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:

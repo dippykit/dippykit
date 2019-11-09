@@ -17,34 +17,36 @@
   
 
   
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="dippykit.coding module" href="dippykit.coding.html" />
     <link rel="prev" title="dippykit package" href="dippykit.html" /> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -157,254 +159,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-dippykit.adjustments">
-<span id="dippykit-adjustments-module"></span><h1>dippykit.adjustments module<a class="headerlink" href="#module-dippykit.adjustments" title="Permalink to this headline">¶</a></h1>
-<p>Module of image adjustment functions</p>
-<p>This module contains an assortment of functions for use in adjusting the
-specifics of images. This includes noise, domain expansion/contraction,
-shifts, etc.</p>
-<dl class="function">
-<dt id="dippykit.adjustments.image_noise">
-<code class="descclassname">dippykit.adjustments.</code><code class="descname">image_noise</code><span class="sig-paren">(</span><em>im: numpy.ndarray</em>, <em>mode: str = 'gaussian'</em>, <em>**kwargs</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="reference internal" href="_modules/dippykit/adjustments.html#image_noise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.adjustments.image_noise" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds random noise to an image</p>
-<p>Adds random noise to an input image. For images with an integer dtype,
-the returned image will retain the original image’s dtype. In all other
-cases, the returned image will have a float dtype and be within the
-normalized range from 0 to 1.</p>
-<p>This function is essentially a wrapper for <a class="reference external" href="http://scikit-image.org/docs/dev/api/skimage.util.html#skimage.util.random_noise">skimage.util.random_noise</a>,
-so more detailed documentation may be found there.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>im</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code>) – The original image.</li>
-<li><strong>mode</strong> (<code class="docutils literal"><span class="pre">str</span></code>) – (default=’gaussian’) The type of noise to add to the image.
-May be one of the following: <em>‘gaussian’, ‘localvar’, ‘poisson’,
-‘salt’, ‘pepper’, ‘s&amp;p’, ‘speckle’</em>. Passed as the mode argument to
-<a class="reference external" href="http://scikit-image.org/docs/dev/api/skimage.util.html#skimage.util.random_noise">skimage.util.random_noise</a>.</li>
-<li><strong>kwargs</strong> – See below.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><code class="docutils literal"><span class="pre">numpy.ndarray</span></code></p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The noisy image.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name" colspan="2">Keyword Arguments:</th></tr>
-<tr class="field-even field"><td>&#160;</td><td class="field-body"><ul class="first last simple">
-<li><strong>mean</strong> (<code class="docutils literal"><span class="pre">int</span></code> or <code class="docutils literal"><span class="pre">float</span></code>) –
-The mean of the randomly distributed noise. This value’s meaning
-is dependent on the dtype of the image (e.g. mean=127 for an image
-with dtype=uint8 is analogous to mean=(127 / 255) for an image with
-dtype=float).</li>
-<li><strong>var</strong> (<code class="docutils literal"><span class="pre">int</span></code> or <code class="docutils literal"><span class="pre">float</span></code>) –
-The variance of the randomly distributed noise. This value’s
-meaning is dependent on the dtype of the image (e.g. var=(0.01 * (
-255 ** 2)) for an image with dtype=uint8 is analogous to var=0.01
-for an image with dtype=float).</li>
-<li><strong>local_vars</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code>) –
-The array of local variances for the randomly distributed noise.
-This value’s meaning is dependent on the dtype of the image. Each
-element in the array is treated in the same way the var keyword
-argument would be.</li>
-<li>A full list of keyword arguments along with descriptions can be
-found at <a class="reference external" href="http://scikit-image.org/docs/dev/api/skimage.util.html#skimage.util.random_noise">skimage.util.random_noise</a>.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">This function wraps around functions from other packages. Reading
-these functions’ documentations may be useful. See the <strong>See also</strong>
-section for more information.</p>
-</div>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<dl class="last docutils">
-<dt><a class="reference external" href="http://scikit-image.org/docs/dev/api/skimage.util.html#skimage.util.random_noise">skimage.util.random_noise</a></dt>
-<dd>Documentation of the random_noise function from Scikit Image</dd>
-</dl>
-</div>
-<p>Examples:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">im</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">im</span>
-<span class="go">array([[238, 208, 243, 228, 198, 186,  72, 181],</span>
-<span class="go">       [ 92, 247,  98, 197, 203, 210, 219, 175],</span>
-<span class="go">       [124,  66, 231, 193, 154, 153, 136,  59],</span>
-<span class="go">       [218, 162,  65, 196, 181, 160,  13, 148],</span>
-<span class="go">       [164,  26, 150, 202,  55, 138,  40, 116],</span>
-<span class="go">       [ 46, 151,  97,  78, 169, 249, 181, 167],</span>
-<span class="go">       [ 79,  72,  31,  98, 152,  80, 220, 152],</span>
-<span class="go">       [ 19, 233, 111, 126, 176,  68,  40,  49]], dtype=uint8)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">image_noise</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
-<span class="go">array([[246, 220, 211, 216, 216, 157,  51, 176],</span>
-<span class="go">       [ 79, 230,  68, 217, 211, 175, 244, 180],</span>
-<span class="go">       [ 86,  75, 184, 178, 123, 183, 106,  61],</span>
-<span class="go">       [201, 154,  73, 193, 163, 180,  33, 180],</span>
-<span class="go">       [192,  19, 144, 197,  64,  89,  36,  99],</span>
-<span class="go">       [ 58, 182,  81,  53, 154, 255, 193, 145],</span>
-<span class="go">       [ 60,  62,  55, 122, 132,  97, 244, 167],</span>
-<span class="go">       [ 33, 181, 132, 163, 190,   9,  41,  45]], dtype=uint8)</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="dippykit.adjustments.image_adjust">
-<code class="descclassname">dippykit.adjustments.</code><code class="descname">image_adjust</code><span class="sig-paren">(</span><em>im: numpy.ndarray</em>, <em>lower_in: typing.Union[int</em>, <em>float] = None</em>, <em>upper_in: typing.Union[int</em>, <em>float] = None</em>, <em>lower_out: typing.Union[int</em>, <em>float] = None</em>, <em>upper_out: typing.Union[int</em>, <em>float] = None</em>, <em>keep_dtype: bool = True</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="reference internal" href="_modules/dippykit/adjustments.html#image_adjust"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.adjustments.image_adjust" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adjusts a given image by clipping and scaling its range</p>
-<p>Given an image and parameters, this function clips the values in the
-image to within a specific range and subsequently scales the image to a
-new range.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>im</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code>) – The original image.</li>
-<li><strong>lower_in</strong> (<code class="docutils literal"><span class="pre">NumericType</span></code>) – The lower clipping bound for the input image. All
-values less than this will be set to this in the image before
-scaling. By default, this value will be set to 1st percentile of the
-image.</li>
-<li><strong>upper_in</strong> (<code class="docutils literal"><span class="pre">NumericType</span></code>) – The upper clipping bound for the input image. All
-values greater than this will be set to this in the image before
-scaling. By default, this value will be set to 99th percentile of the
-image.</li>
-<li><strong>lower_out</strong> (<code class="docutils literal"><span class="pre">NumericType</span></code>) – The lower bound for the range of the scaled output
-image. By default, this value is the minimum value of the dtype for
-integer dtypes or 0.0 for float dtypes.</li>
-<li><strong>upper_out</strong> (<code class="docutils literal"><span class="pre">NumericType</span></code>) – The upper bound for the range of the scaled output
-image. By default, this value is the maximum value of the dtype for
-integer dtypes or 1.0 for float dtypes.</li>
-<li><strong>keep_dtype</strong> (<code class="docutils literal"><span class="pre">bool</span></code>) – (default=True) Whether or not to cast the output
-image back to the dtype of the input image</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><code class="docutils literal"><span class="pre">numpy.ndarray</span></code></p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The adjusted image.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<p>Examples:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">im</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">32</span><span class="p">,</span>  <span class="mi">64</span><span class="p">],</span>
-<span class="gp">... </span>               <span class="p">[</span> <span class="mi">96</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">160</span><span class="p">],</span>
-<span class="gp">... </span>               <span class="p">[</span><span class="mi">192</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">255</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">image_adjust</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">192</span><span class="p">)</span>
-<span class="go">array([[  0,   0,   0],</span>
-<span class="go">       [ 63, 127, 191],</span>
-<span class="go">       [255, 255, 255]], dtype=uint8)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">image_adjust</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">192</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">192</span><span class="p">)</span>
-<span class="go">array([[ 64,  64,  64],</span>
-<span class="go">       [ 96, 128, 160],</span>
-<span class="go">       [192, 192, 192]], dtype=uint8)</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="dippykit.adjustments.image_translate">
-<code class="descclassname">dippykit.adjustments.</code><code class="descname">image_translate</code><span class="sig-paren">(</span><em>im: numpy.ndarray, dist_vec: typing.Union[typing.Tuple[typing.Union[int, float], typing.Union[int, float]], int, float], pad_value: typing.Union[int, float] = 0</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="reference internal" href="_modules/dippykit/adjustments.html#image_translate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.adjustments.image_translate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Translates an image</p>
-<p>Given an image and a two-dimensional vector of distances to translate,
-this function translates the original image. Values left in the wake of
-the translation are padded with pad_value, which is by default set to 0.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>im</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code>) – The original image.</li>
-<li><strong>dist_vec</strong> (<code class="docutils literal"><span class="pre">ShapeType</span></code>) – A vector of distances to translate.</li>
-<li><strong>pad_value</strong> (<code class="docutils literal"><span class="pre">NumericType</span></code>) – The value to pad for elements left in the wake of the
-translation.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><code class="docutils literal"><span class="pre">numpy.ndarray</span></code></p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The translated image.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<p>Examples:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">im</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">array</span><span class="p">([[</span> <span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span>  <span class="mi">3</span><span class="p">,</span>  <span class="mi">4</span><span class="p">,</span>  <span class="mi">5</span><span class="p">],</span>
-<span class="gp">... </span>                     <span class="p">[</span> <span class="mi">6</span><span class="p">,</span>  <span class="mi">7</span><span class="p">,</span>  <span class="mi">8</span><span class="p">,</span>  <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
-<span class="gp">... </span>                     <span class="p">[</span><span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span>
-<span class="gp">... </span>                     <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span>
-<span class="gp">... </span>                     <span class="p">[</span><span class="mi">21</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">25</span><span class="p">]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">image_translate</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-<span class="go">array([[ 0,  0,  1,  2,  3],</span>
-<span class="go">       [ 0,  0,  6,  7,  8],</span>
-<span class="go">       [ 0,  0, 11, 12, 13],</span>
-<span class="go">       [ 0,  0, 16, 17, 18],</span>
-<span class="go">       [ 0,  0, 21, 22, 23]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">image_translate</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">pad_value</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
-<span class="go">array([[-1, -1, 16, 17, 18],</span>
-<span class="go">       [-1, -1, 21, 22, 23],</span>
-<span class="go">       [-1, -1, -1, -1, -1],</span>
-<span class="go">       [-1, -1, -1, -1, -1],</span>
-<span class="go">       [-1, -1, -1, -1, -1]])</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="dippykit.adjustments.image_shift">
-<code class="descclassname">dippykit.adjustments.</code><code class="descname">image_shift</code><span class="sig-paren">(</span><em>im: numpy.ndarray, dist_vec: typing.Union[typing.Tuple[typing.Union[int, float], typing.Union[int, float]], int, float]</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="reference internal" href="_modules/dippykit/adjustments.html#image_shift"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.adjustments.image_shift" title="Permalink to this definition">¶</a></dt>
-<dd><p>Shifts an image by consecutively applying and summing translations</p>
-<p>Given an image and a two-dimensional vector of distances to shift,
-this function shifts the image by weighting and summing many
-intermediate translations. This simulates an image taken with a shaky
-camera.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>im</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code>) – The original image.</li>
-<li><strong>dist_vec</strong> (<code class="docutils literal"><span class="pre">ShapeType</span></code>) – A vector of distances to shift.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><code class="docutils literal"><span class="pre">numpy.ndarray</span></code></p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The translated image.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<p>Examples:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">im</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">array</span><span class="p">([[</span>  <span class="mi">1</span><span class="p">,</span>   <span class="mi">2</span><span class="p">,</span>   <span class="mi">4</span><span class="p">],</span>
-<span class="gp">... </span>                     <span class="p">[</span>  <span class="mi">8</span><span class="p">,</span>  <span class="mi">16</span><span class="p">,</span>  <span class="mi">32</span><span class="p">],</span>
-<span class="gp">... </span>                     <span class="p">[</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">256</span><span class="p">]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">image_translate</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-<span class="go">array([[  1,   1,   3],</span>
-<span class="go">       [  8,  12,  24],</span>
-<span class="go">       [ 64,  96, 192]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">image_translate</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-<span class="go">array([[  1,   5,  10],</span>
-<span class="go">       [  8,  40,  80],</span>
-<span class="go">       [ 64, 128, 256]])</span>
-</pre></div>
-</div>
-</dd></dl>
-
+  <div class="section" id="dippykit-adjustments-module">
+<h1>dippykit.adjustments module<a class="headerlink" href="#dippykit-adjustments-module" title="Permalink to this headline">¶</a></h1>
 </div>
 
 
@@ -418,7 +174,7 @@ camera.</p>
         <a href="dippykit.coding.html" class="btn btn-neutral float-right" title="dippykit.coding module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="dippykit.html" class="btn btn-neutral" title="dippykit package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="dippykit.html" class="btn btn-neutral float-left" title="dippykit package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -444,35 +200,16 @@ camera.</p>
   
 
 
-  
-
-    
-    
-      <script type="text/javascript">
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'./',
-              VERSION:'',
-              LANGUAGE:'None',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-    
-
-  
-
-  <script type="text/javascript" src="_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

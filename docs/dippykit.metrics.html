@@ -17,34 +17,36 @@
   
 
   
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="dippykit.sampling module" href="dippykit.sampling.html" />
     <link rel="prev" title="dippykit.image_io module" href="dippykit.image_io.html" /> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -157,585 +159,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-dippykit.metrics">
-<span id="dippykit-metrics-module"></span><h1>dippykit.metrics module<a class="headerlink" href="#module-dippykit.metrics" title="Permalink to this headline">¶</a></h1>
-<p>Module of various metrics-based functions</p>
-<p>This module contains an assortment of functions that provide insight into
-image and signal data. They provide a means for high-level analysis.</p>
-<dl class="function">
-<dt id="dippykit.metrics.PSNR">
-<code class="descclassname">dippykit.metrics.</code><code class="descname">PSNR</code><span class="sig-paren">(</span><em>im_1: numpy.ndarray</em>, <em>im_2: numpy.ndarray</em>, <em>max_signal_value: typing.Union[int</em>, <em>float] = None</em><span class="sig-paren">)</span> &#x2192; float<a class="reference internal" href="_modules/dippykit/metrics.html#PSNR"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.metrics.PSNR" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the <strong>peak signal-to-noise ratio</strong> between two images in dB</p>
-<p>Calculates the peak signal-to-noise ratio in decibels between two input
-images. The ratio is defined as -20 * log<sub>10</sub>
-(max_signal_value / X) where max_signal_value is the maximum possible 
-value in either image and X is the mean of all elements in the ndarray 
-(im_1 - im_2)<sup>2</sup>. The two images must have the same 
-dtype.</p>
-<p>If max_signal_value is not specified and the two images have unsigned 
-integer dtype, then max_signal_value is assumed to be the largest value 
-possible in the dtype. If max_signal_value is not specified and the two 
-images have float dtype and all their values are between 0.0 and 1.0 
-inclusive, then max_signal_value is assumed to be 1.0.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>im_1</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code>) – An image to be compared.</li>
-<li><strong>im_2</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code>) – An image to be compared.</li>
-<li><strong>max_signal_value</strong> (<code class="docutils literal"><span class="pre">int</span></code> or <code class="docutils literal"><span class="pre">float</span></code>) – (Optional) The maximum <em>possible</em> signal value in 
-either image. (This is not necessarily the maximum value of either 
-image).</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><code class="docutils literal"><span class="pre">float</span></code></p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The decibel peak signal-to-noise ratio.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<p>Examples:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">im</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.5</span>  <span class="p">,</span> <span class="mf">0.125</span><span class="p">],</span>
-<span class="gp">... </span>               <span class="p">[</span><span class="mf">0.25</span> <span class="p">,</span> <span class="mf">0.</span>   <span class="p">]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">im_2</span> <span class="o">=</span> <span class="n">im</span> <span class="o">/</span> <span class="mi">2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">PSNR</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">im_2</span><span class="p">)</span>
-<span class="go">16.880806619058927</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">im</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">100</span><span class="p">,</span>  <span class="mi">20</span><span class="p">],</span>
-<span class="gp">... </span>               <span class="p">[</span> <span class="mi">40</span><span class="p">,</span>   <span class="mi">0</span><span class="p">]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">im_2</span> <span class="o">=</span> <span class="n">im</span> <span class="o">/</span> <span class="mi">2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">PSNR</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">im_2</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
-<span class="go">19.380190974762105</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="dippykit.metrics.contrast">
-<code class="descclassname">dippykit.metrics.</code><code class="descname">contrast</code><span class="sig-paren">(</span><em>im: numpy.ndarray</em><span class="sig-paren">)</span> &#x2192; float<a class="reference internal" href="_modules/dippykit/metrics.html#contrast"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.metrics.contrast" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the <strong>contrast value</strong> of an image</p>
-<p>Calculates the contrast value of an image. The contrast value of the
-image is defined as the difference between the maximum pixel value and
-the minimum pixel value divided by the sum of the same values.
-Therefore, the return value of this function is a float between 0.0 and
-1.0.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>im</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code>) – An image to be examined.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="docutils literal"><span class="pre">float</span></code></td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The contrast value of the image (float between 0.0 and 1.0).</td>
-</tr>
-</tbody>
-</table>
-<p>Examples:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">im_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.5</span>  <span class="p">,</span> <span class="mf">0.125</span><span class="p">],</span>
-<span class="gp">... </span>                 <span class="p">[</span><span class="mf">0.25</span> <span class="p">,</span> <span class="mf">0.</span>   <span class="p">]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">contrast</span><span class="p">(</span><span class="n">im_1</span><span class="p">)</span>
-<span class="go">1.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">im_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">125</span><span class="p">,</span> <span class="mi">125</span><span class="p">],</span>
-<span class="gp">... </span>                 <span class="p">[</span><span class="mi">125</span><span class="p">,</span> <span class="mi">125</span><span class="p">]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">contrast</span><span class="p">(</span><span class="n">im_2</span><span class="p">)</span>
-<span class="go">0.0</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="dippykit.metrics.MSE">
-<code class="descclassname">dippykit.metrics.</code><code class="descname">MSE</code><span class="sig-paren">(</span><em>im: numpy.ndarray</em>, <em>im_ref: numpy.ndarray = None</em><span class="sig-paren">)</span> &#x2192; float<a class="reference internal" href="_modules/dippykit/metrics.html#MSE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.metrics.MSE" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the <strong>mean squared error</strong> of an image or images</p>
-<ul class="simple">
-<li><dl class="first docutils">
-<dt><strong>For one image argument:</strong></dt>
-<dd>Calculates the mean squared error of an error image. The mean squared
-error is defined as the mean of all squared elements in the error
-image.</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt><strong>For two image arguments:</strong></dt>
-<dd>Calculates the mean squared error between two images. The mean squared
-error is defined as the mean of all squared elements in the ndarray
-(im - im_ref).</dd>
-</dl>
-</li>
-</ul>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>im</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code>) – An image to be examined.</li>
-<li><strong>im_ref</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code>) – (Optional) A reference image for im to be compared against.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><code class="docutils literal"><span class="pre">float</span></code></p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The mean squared error of the image(s).</p>
-</td>
-</tr>
-</tbody>
-</table>
-<p>Examples:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">im_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.5</span>  <span class="p">,</span> <span class="mf">0.125</span><span class="p">],</span>
-<span class="gp">... </span>                 <span class="p">[</span><span class="mf">0.25</span> <span class="p">,</span> <span class="mf">0.</span>   <span class="p">]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">MSE</span><span class="p">(</span><span class="n">im_1</span><span class="p">)</span>
-<span class="go">0.08203125</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">im_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.</span>   <span class="p">,</span> <span class="mf">0.125</span><span class="p">],</span>
-<span class="gp">... </span>                 <span class="p">[</span><span class="mf">0.25</span> <span class="p">,</span> <span class="mf">0.</span>   <span class="p">]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">MSE</span><span class="p">(</span><span class="n">im_1</span><span class="p">,</span> <span class="n">im_2</span><span class="p">)</span>
-<span class="go">0.0625</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="dippykit.metrics.energy">
-<code class="descclassname">dippykit.metrics.</code><code class="descname">energy</code><span class="sig-paren">(</span><em>im: numpy.ndarray</em><span class="sig-paren">)</span> &#x2192; float<a class="reference internal" href="_modules/dippykit/metrics.html#energy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.metrics.energy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the <strong>energy</strong> of an image</p>
-<p>Calculates the energy of an image. The energy is defined as the sum of
-all squared elements in the image.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>im</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code>) – An image to be examined.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="docutils literal"><span class="pre">float</span></code></td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The energy of the image.</td>
-</tr>
-</tbody>
-</table>
-<p>Examples:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">im_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.5</span>  <span class="p">,</span> <span class="mf">0.125</span><span class="p">],</span>
-<span class="gp">... </span>                 <span class="p">[</span><span class="mf">0.25</span> <span class="p">,</span> <span class="mf">0.</span>   <span class="p">]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">energy</span><span class="p">(</span><span class="n">im_1</span><span class="p">)</span>
-<span class="go">0.328125</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">im_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">125</span><span class="p">,</span> <span class="mi">125</span><span class="p">],</span>
-<span class="gp">... </span>                 <span class="p">[</span><span class="mi">125</span><span class="p">,</span> <span class="mi">125</span><span class="p">]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">energy</span><span class="p">(</span><span class="n">im_2</span><span class="p">)</span>
-<span class="go">62500</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="dippykit.metrics.MAD">
-<code class="descclassname">dippykit.metrics.</code><code class="descname">MAD</code><span class="sig-paren">(</span><em>im: numpy.ndarray</em>, <em>im_ref: numpy.ndarray = None</em><span class="sig-paren">)</span> &#x2192; float<a class="reference internal" href="_modules/dippykit/metrics.html#MAD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.metrics.MAD" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the <strong>mean absolute difference</strong> of an image or images</p>
-<ul class="simple">
-<li><dl class="first docutils">
-<dt><strong>For one image argument:</strong></dt>
-<dd>Calculates the mean absolute difference of an error image. The mean
-absolute difference is defined as the mean of the absolute value of
-all elements in the error image.</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt><strong>For two image arguments:</strong></dt>
-<dd>Calculates the mean absolute difference between two images. The mean
-absolute difference is defined as the mean of the absolute value of
-all elements in the ndarray (im - im_ref).</dd>
-</dl>
-</li>
-</ul>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>im</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code>) – An image to be examined.</li>
-<li><strong>im_ref</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code>) – (Optional) A reference image for im to be compared against.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><code class="docutils literal"><span class="pre">float</span></code></p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The mean absolute difference of the image(s).</p>
-</td>
-</tr>
-</tbody>
-</table>
-<p>Examples:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">im_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.5</span>  <span class="p">,</span> <span class="mf">0.125</span><span class="p">],</span>
-<span class="gp">... </span>                 <span class="p">[</span><span class="mf">0.25</span> <span class="p">,</span> <span class="mf">0.</span>   <span class="p">]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">MAD</span><span class="p">(</span><span class="n">im_1</span><span class="p">)</span>
-<span class="go">0.21875</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">im_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.</span>   <span class="p">,</span> <span class="mf">0.125</span><span class="p">],</span>
-<span class="gp">... </span>                 <span class="p">[</span><span class="mf">0.25</span> <span class="p">,</span> <span class="mf">0.</span>   <span class="p">]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">MAD</span><span class="p">(</span><span class="n">im_1</span><span class="p">,</span> <span class="n">im_2</span><span class="p">)</span>
-<span class="go">0.125</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="dippykit.metrics.MADev">
-<code class="descclassname">dippykit.metrics.</code><code class="descname">MADev</code><span class="sig-paren">(</span><em>im: numpy.ndarray</em><span class="sig-paren">)</span> &#x2192; float<a class="reference internal" href="_modules/dippykit/metrics.html#MADev"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.metrics.MADev" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the <strong>mean absolute deviation</strong> of an image</p>
-<p>Calculates the mean absolute deviation of an image. The mean absolute
-deviation is defined as the mean of the absolute value of all
-differences between elements in the image and the mean value of all
-elements in the image.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>im</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code>) – An image to be examined.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="docutils literal"><span class="pre">float</span></code></td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The mean absolute deviation of the image.</td>
-</tr>
-</tbody>
-</table>
-<p>Examples:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">im_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span>
-<span class="gp">... </span>                 <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">MADev</span><span class="p">(</span><span class="n">im_1</span><span class="p">)</span>
-<span class="go">0.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">im_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span>
-<span class="gp">... </span>                 <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">MADev</span><span class="p">(</span><span class="n">im_2</span><span class="p">)</span>
-<span class="go">2.5</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="dippykit.metrics.entropy">
-<code class="descclassname">dippykit.metrics.</code><code class="descname">entropy</code><span class="sig-paren">(</span><em>im: numpy.ndarray</em><span class="sig-paren">)</span> &#x2192; float<a class="reference internal" href="_modules/dippykit/metrics.html#entropy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.metrics.entropy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the <strong>entropy</strong> of an image</p>
-<p>Calculates the entropy of an image. The entropy is equivalent to the
-expected value of the number of bits used to encode a single pixel in
-the optimal encoding case. It is a lower bound on the amount of
-information required to represent the image (per pixel). The entropy is
-defined by the sum of all pixel value probabilities times the
-logarithm-base-2 of the inverse pixel probability.</p>
-<p>This function requires that the input image have either an integer or
-unsigned integer dtype.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>im</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code>) – An image to be examined.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="docutils literal"><span class="pre">float</span></code></td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The entropy of the image.</td>
-</tr>
-</tbody>
-</table>
-<p>Examples:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">im_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span>
-<span class="gp">... </span>                 <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">entropy</span><span class="p">(</span><span class="n">im_1</span><span class="p">)</span>
-<span class="go">-0.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">im_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span>
-<span class="gp">... </span>                 <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">entropy</span><span class="p">(</span><span class="n">im_2</span><span class="p">)</span>
-<span class="go">1.5</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="dippykit.metrics.SSIM">
-<code class="descclassname">dippykit.metrics.</code><code class="descname">SSIM</code><span class="sig-paren">(</span><em>im_1: numpy.ndarray</em>, <em>im_2: numpy.ndarray</em>, <em>K1: float = 0.01</em>, <em>K2: float = 0.03</em>, <em>use_gaussian_window: bool = None</em>, <em>window_size: int = None</em>, <em>data_range: float = None</em>, <em>sigma: float = None</em>, <em>auto_downsample: bool = None</em>, <em>use_sample_covariance: bool = None</em>, <em>like_matlab: bool = False</em>, <em>**kwargs</em><span class="sig-paren">)</span> &#x2192; typing.Tuple[float, numpy.ndarray]<a class="reference internal" href="_modules/dippykit/metrics.html#SSIM"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.metrics.SSIM" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the mean SSIM index and SSIM image for a comparison of two 
-images</p>
-<p>Given two images, this function will return the mean SSIM index and the 
-full SSIM image.</p>
-<p>This function is essentially a wrapper for
-<a class="reference external" href="http://scikit-image.org/docs/dev/api/skimage.measure.html#skimage.measure.compare_ssim">skimage.measure.compare_ssim</a>, so more detailed documentation may be
-found there.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>im_1</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code>) – The first image in the comparison</li>
-<li><strong>im_2</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code>) – The second image in the comparison</li>
-<li><strong>K1</strong> (<code class="docutils literal"><span class="pre">float</span></code>) – (default=0.01) The K1 parameter used in the SSIM calculation</li>
-<li><strong>K2</strong> (<code class="docutils literal"><span class="pre">float</span></code>) – (default=0.03) The K2 parameter used in the SSIM calculation</li>
-<li><strong>use_gaussian_window</strong> (<code class="docutils literal"><span class="pre">bool</span></code>) – (default=False) If set to True, 
-this function will use a gaussian window for the SSIM calculation</li>
-<li><strong>window_size</strong> (<code class="docutils literal"><span class="pre">int</span></code>) – (Optional) The size of the window to be used in the 
-SSIM calculation. If <strong>use_gaussian_window</strong> is set to True, 
-then this argument is ignored.</li>
-<li><strong>data_range</strong> (<code class="docutils literal"><span class="pre">float</span></code>) – (Optional) The range of values that the image can span. 
-If this parameter is not set, then the range will be determined 
-from the minimum and maximum values of the images. For uint8 
-images, this value should be 255.</li>
-<li><strong>sigma</strong> (<code class="docutils literal"><span class="pre">float</span></code>) – (Optional) If <strong>use_gaussian_window</strong> is set to True, 
-this parameter determines the sigma used for the gaussian window.</li>
-<li><strong>auto_downsample</strong> (<code class="docutils literal"><span class="pre">bool</span></code>) – (default=True) If set to True, this function will
-automatically downsample the inputs. The downsampling consists of
-finding the smallest of the images’ first two dimensions (number of
-rows and number of columns), dividing this value by 256, rounding
-the output, and setting this final value as the scaling factor (sf). A
-square (sf x sf) lowpass averaging filter is then applied to both
-images with mode ‘same’. Finally, the two images are downsampled by
-sf in each dimension.</li>
-<li><strong>use_sample_covariance</strong> (<code class="docutils literal"><span class="pre">bool</span></code>) – (default=False) If set to True,
-this function will use sample covariances in its calculations.
-Otherwise, covariances of 1 will be used.</li>
-<li><strong>like_matlab</strong> (<code class="docutils literal"><span class="pre">bool</span></code>) – If set to True, this function will act like the
-Matlab function ssim_index. This is merely a specific configuration
-of the above parameters.</li>
-<li><strong>kwargs</strong> – For a full list of keyword arguments, see
-<a class="reference external" href="http://scikit-image.org/docs/dev/api/skimage.measure.html#skimage.measure.compare_ssim">skimage.measure.compare_ssim</a>.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><code class="docutils literal"><span class="pre">(float,</span> <span class="pre">numpy.ndarray)</span></code></p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A tuple of two elements. The first element is the mean SSIM 
-index. The second element is the full SSIM image.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">This function wraps around functions from other packages. Reading
-these functions’ documentations may be useful. See the <strong>See also</strong>
-section for more information.</p>
-</div>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<dl class="last docutils">
-<dt><a class="reference external" href="http://scikit-image.org/docs/dev/api/skimage.measure.html#skimage.measure.compare_ssim">skimage.measure.compare_ssim</a></dt>
-<dd>Documentation of the compare_ssim function from Scikit Image</dd>
-<dt><a class="reference external" href="https://en.wikipedia.org/wiki/Structural_similarity#Formula_components">SSIM Wikipedia Page</a></dt>
-<dd>Wikipedia page describing the formulae for SSIM calculations</dd>
-</dl>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="dippykit.metrics.SSIM_luminance">
-<code class="descclassname">dippykit.metrics.</code><code class="descname">SSIM_luminance</code><span class="sig-paren">(</span><em>im_1: numpy.ndarray</em>, <em>im_2: numpy.ndarray</em>, <em>K1: float = 0.01</em>, <em>K2: float = 0.03</em>, <em>use_gaussian_window: bool = None</em>, <em>window_size: int = None</em>, <em>data_range: float = None</em>, <em>sigma: float = None</em>, <em>auto_downsample: bool = None</em>, <em>use_sample_covariance: bool = None</em>, <em>like_matlab: bool = False</em>, <em>**kwargs</em><span class="sig-paren">)</span> &#x2192; typing.Tuple[float, numpy.ndarray]<a class="reference internal" href="_modules/dippykit/metrics.html#SSIM_luminance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.metrics.SSIM_luminance" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the mean luminance component of the SSIM index and luminance
-component of the SSIM image for a comparison of two images</p>
-<p>Given two images, this function will return the mean luminance component
-of the SSIM index and luminance component of the full SSIM image.</p>
-<p>This function is heavily based on <a class="reference external" href="http://scikit-image.org/docs/dev/api/skimage.measure.html#skimage.measure.compare_ssim">skimage.measure.compare_ssim</a>,
-so more detailed documentation may be found there.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>im_1</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code>) – The first image in the comparison</li>
-<li><strong>im_2</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code>) – The second image in the comparison</li>
-<li><strong>K1</strong> (<code class="docutils literal"><span class="pre">float</span></code>) – (default=0.01) The K1 parameter used in the SSIM calculation</li>
-<li><strong>K2</strong> (<code class="docutils literal"><span class="pre">float</span></code>) – (default=0.03) The K2 parameter used in the SSIM calculation</li>
-<li><strong>use_gaussian_window</strong> (<code class="docutils literal"><span class="pre">bool</span></code>) – (default=False) If set to True,
-this function will use a gaussian window for the SSIM calculation</li>
-<li><strong>window_size</strong> (<code class="docutils literal"><span class="pre">int</span></code>) – (Optional) The size of the window to be used in the
-SSIM calculation. If <strong>use_gaussian_window</strong> is set to True,
-then this argument is ignored.</li>
-<li><strong>data_range</strong> (<code class="docutils literal"><span class="pre">float</span></code>) – (Optional) The range of values that the image can span.
-If this parameter is not set, then the range will be determined
-from the minimum and maximum values of the images. For uint8
-images, this value should be 255.</li>
-<li><strong>sigma</strong> (<code class="docutils literal"><span class="pre">float</span></code>) – (Optional) If <strong>use_gaussian_window</strong> is set to True,
-this parameter determines the sigma used for the gaussian window.</li>
-<li><strong>auto_downsample</strong> (<code class="docutils literal"><span class="pre">bool</span></code>) – (default=True) If set to True, this function will
-automatically downsample the inputs. The downsampling consists of
-finding the smallest of the images’ first two dimensions (number of
-rows and number of columns), dividing this value by 256, rounding
-the output, and setting this final value as the scaling factor (sf). A
-square (sf x sf) lowpass averaging filter is then applied to both
-images with mode ‘same’. Finally, the two images are downsampled by
-sf in each dimension.</li>
-<li><strong>use_sample_covariance</strong> (<code class="docutils literal"><span class="pre">bool</span></code>) – (default=False) If set to True,
-this function will use sample covariances in its calculations.
-Otherwise, covariances of 1 will be used.</li>
-<li><strong>like_matlab</strong> (<code class="docutils literal"><span class="pre">bool</span></code>) – If set to True, this function will act like the
-Matlab function ssim_index. This is merely a specific configuration
-of the above parameters.</li>
-<li><strong>kwargs</strong> – For a full list of keyword arguments, see
-<a class="reference external" href="http://scikit-image.org/docs/dev/api/skimage.measure.html#skimage.measure.compare_ssim">skimage.measure.compare_ssim</a>.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><code class="docutils literal"><span class="pre">(float,</span> <span class="pre">numpy.ndarray)</span></code></p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A tuple of two elements. The first element is the mean SSIM
-index. The second element is the full SSIM image.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<dl class="last docutils">
-<dt><a class="reference external" href="http://scikit-image.org/docs/dev/api/skimage.measure.html#skimage.measure.compare_ssim">skimage.measure.compare_ssim</a></dt>
-<dd>Documentation of the compare_ssim function from Scikit Image</dd>
-<dt><a class="reference external" href="https://en.wikipedia.org/wiki/Structural_similarity#Formula_components">SSIM Wikipedia Page</a></dt>
-<dd>Wikipedia page describing the formulae for SSIM calculations</dd>
-</dl>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="dippykit.metrics.SSIM_contrast">
-<code class="descclassname">dippykit.metrics.</code><code class="descname">SSIM_contrast</code><span class="sig-paren">(</span><em>im_1: numpy.ndarray</em>, <em>im_2: numpy.ndarray</em>, <em>K1: float = 0.01</em>, <em>K2: float = 0.03</em>, <em>use_gaussian_window: bool = None</em>, <em>window_size: int = None</em>, <em>data_range: float = None</em>, <em>sigma: float = None</em>, <em>auto_downsample: bool = None</em>, <em>use_sample_covariance: bool = None</em>, <em>like_matlab: bool = False</em>, <em>**kwargs</em><span class="sig-paren">)</span> &#x2192; typing.Tuple[float, numpy.ndarray]<a class="reference internal" href="_modules/dippykit/metrics.html#SSIM_contrast"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.metrics.SSIM_contrast" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the mean contrast component of the SSIM index and contrast
-component of the SSIM image for a comparison of two images</p>
-<p>Given two images, this function will return the mean contrast component
-of the SSIM index and contrast component of the full SSIM image.</p>
-<p>This function is heavily based on <a class="reference external" href="http://scikit-image.org/docs/dev/api/skimage.measure.html#skimage.measure.compare_ssim">skimage.measure.compare_ssim</a>,
-so more detailed documentation may be found there.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>im_1</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code>) – The first image in the comparison</li>
-<li><strong>im_2</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code>) – The second image in the comparison</li>
-<li><strong>K1</strong> (<code class="docutils literal"><span class="pre">float</span></code>) – (default=0.01) The K1 parameter used in the SSIM calculation</li>
-<li><strong>K2</strong> (<code class="docutils literal"><span class="pre">float</span></code>) – (default=0.03) The K2 parameter used in the SSIM calculation</li>
-<li><strong>use_gaussian_window</strong> (<code class="docutils literal"><span class="pre">bool</span></code>) – (default=False) If set to True,
-this function will use a gaussian window for the SSIM calculation</li>
-<li><strong>window_size</strong> (<code class="docutils literal"><span class="pre">int</span></code>) – (Optional) The size of the window to be used in the
-SSIM calculation. If <strong>use_gaussian_window</strong> is set to True,
-then this argument is ignored.</li>
-<li><strong>data_range</strong> (<code class="docutils literal"><span class="pre">float</span></code>) – (Optional) The range of values that the image can span.
-If this parameter is not set, then the range will be determined
-from the minimum and maximum values of the images. For uint8
-images, this value should be 255.</li>
-<li><strong>sigma</strong> (<code class="docutils literal"><span class="pre">float</span></code>) – (Optional) If <strong>use_gaussian_window</strong> is set to True,
-this parameter determines the sigma used for the gaussian window.</li>
-<li><strong>auto_downsample</strong> (<code class="docutils literal"><span class="pre">bool</span></code>) – (default=True) If set to True, this function will
-automatically downsample the inputs. The downsampling consists of
-finding the smallest of the images’ first two dimensions (number of
-rows and number of columns), dividing this value by 256, rounding
-the output, and setting this final value as the scaling factor (sf). A
-square (sf x sf) lowpass averaging filter is then applied to both
-images with mode ‘same’. Finally, the two images are downsampled by
-sf in each dimension.</li>
-<li><strong>use_sample_covariance</strong> (<code class="docutils literal"><span class="pre">bool</span></code>) – (default=False) If set to True,
-this function will use sample covariances in its calculations.
-Otherwise, covariances of 1 will be used.</li>
-<li><strong>like_matlab</strong> (<code class="docutils literal"><span class="pre">bool</span></code>) – If set to True, this function will act like the
-Matlab function ssim_index. This is merely a specific configuration
-of the above parameters.</li>
-<li><strong>kwargs</strong> – For a full list of keyword arguments, see
-<a class="reference external" href="http://scikit-image.org/docs/dev/api/skimage.measure.html#skimage.measure.compare_ssim">skimage.measure.compare_ssim</a>.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><code class="docutils literal"><span class="pre">(float,</span> <span class="pre">numpy.ndarray)</span></code></p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A tuple of two elements. The first element is the mean SSIM
-index. The second element is the full SSIM image.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<dl class="last docutils">
-<dt><a class="reference external" href="http://scikit-image.org/docs/dev/api/skimage.measure.html#skimage.measure.compare_ssim">skimage.measure.compare_ssim</a></dt>
-<dd>Documentation of the compare_ssim function from Scikit Image</dd>
-<dt><a class="reference external" href="https://en.wikipedia.org/wiki/Structural_similarity#Formula_components">SSIM Wikipedia Page</a></dt>
-<dd>Wikipedia page describing the formulae for SSIM calculations</dd>
-</dl>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="dippykit.metrics.SSIM_structure">
-<code class="descclassname">dippykit.metrics.</code><code class="descname">SSIM_structure</code><span class="sig-paren">(</span><em>im_1: numpy.ndarray</em>, <em>im_2: numpy.ndarray</em>, <em>K1: float = 0.01</em>, <em>K2: float = 0.03</em>, <em>use_gaussian_window: bool = None</em>, <em>window_size: int = None</em>, <em>data_range: float = None</em>, <em>sigma: float = None</em>, <em>auto_downsample: bool = None</em>, <em>use_sample_covariance: bool = None</em>, <em>like_matlab: bool = False</em>, <em>**kwargs</em><span class="sig-paren">)</span> &#x2192; typing.Tuple[float, numpy.ndarray]<a class="reference internal" href="_modules/dippykit/metrics.html#SSIM_structure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.metrics.SSIM_structure" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the mean structure component of the SSIM index and structure
-component of the SSIM image for a comparison of two images</p>
-<p>Given two images, this function will return the mean structure component
-of the SSIM index and structure component of the full SSIM image.</p>
-<p>This function is heavily based on <a class="reference external" href="http://scikit-image.org/docs/dev/api/skimage.measure.html#skimage.measure.compare_ssim">skimage.measure.compare_ssim</a>,
-so more detailed documentation may be found there.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>im_1</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code>) – The first image in the comparison</li>
-<li><strong>im_2</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code>) – The second image in the comparison</li>
-<li><strong>K1</strong> (<code class="docutils literal"><span class="pre">float</span></code>) – (default=0.01) The K1 parameter used in the SSIM calculation</li>
-<li><strong>K2</strong> (<code class="docutils literal"><span class="pre">float</span></code>) – (default=0.03) The K2 parameter used in the SSIM calculation</li>
-<li><strong>use_gaussian_window</strong> (<code class="docutils literal"><span class="pre">bool</span></code>) – (default=False) If set to True,
-this function will use a gaussian window for the SSIM calculation</li>
-<li><strong>window_size</strong> (<code class="docutils literal"><span class="pre">int</span></code>) – (Optional) The size of the window to be used in the
-SSIM calculation. If <strong>use_gaussian_window</strong> is set to True,
-then this argument is ignored.</li>
-<li><strong>data_range</strong> (<code class="docutils literal"><span class="pre">float</span></code>) – (Optional) The range of values that the image can span.
-If this parameter is not set, then the range will be determined
-from the minimum and maximum values of the images. For uint8
-images, this value should be 255.</li>
-<li><strong>sigma</strong> (<code class="docutils literal"><span class="pre">float</span></code>) – (Optional) If <strong>use_gaussian_window</strong> is set to True,
-this parameter determines the sigma used for the gaussian window.</li>
-<li><strong>auto_downsample</strong> (<code class="docutils literal"><span class="pre">bool</span></code>) – (default=True) If set to True, this function will
-automatically downsample the inputs. The downsampling consists of
-finding the smallest of the images’ first two dimensions (number of
-rows and number of columns), dividing this value by 256, rounding
-the output, and setting this final value as the scaling factor (sf). A
-square (sf x sf) lowpass averaging filter is then applied to both
-images with mode ‘same’. Finally, the two images are downsampled by
-sf in each dimension.</li>
-<li><strong>use_sample_covariance</strong> (<code class="docutils literal"><span class="pre">bool</span></code>) – (default=False) If set to True,
-this function will use sample covariances in its calculations.
-Otherwise, covariances of 1 will be used.</li>
-<li><strong>like_matlab</strong> (<code class="docutils literal"><span class="pre">bool</span></code>) – If set to True, this function will act like the
-Matlab function ssim_index. This is merely a specific configuration
-of the above parameters.</li>
-<li><strong>kwargs</strong> – For a full list of keyword arguments, see
-<a class="reference external" href="http://scikit-image.org/docs/dev/api/skimage.measure.html#skimage.measure.compare_ssim">skimage.measure.compare_ssim</a>.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><code class="docutils literal"><span class="pre">(float,</span> <span class="pre">numpy.ndarray)</span></code></p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A tuple of two elements. The first element is the mean SSIM
-index. The second element is the full SSIM image.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<dl class="last docutils">
-<dt><a class="reference external" href="http://scikit-image.org/docs/dev/api/skimage.measure.html#skimage.measure.compare_ssim">skimage.measure.compare_ssim</a></dt>
-<dd>Documentation of the compare_ssim function from Scikit Image</dd>
-<dt><a class="reference external" href="https://en.wikipedia.org/wiki/Structural_similarity#Formula_components">SSIM Wikipedia Page</a></dt>
-<dd>Wikipedia page describing the formulae for SSIM calculations</dd>
-</dl>
-</div>
-</dd></dl>
-
+  <div class="section" id="dippykit-metrics-module">
+<h1>dippykit.metrics module<a class="headerlink" href="#dippykit-metrics-module" title="Permalink to this headline">¶</a></h1>
 </div>
 
 
@@ -749,7 +174,7 @@ index. The second element is the full SSIM image.</p>
         <a href="dippykit.sampling.html" class="btn btn-neutral float-right" title="dippykit.sampling module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="dippykit.image_io.html" class="btn btn-neutral" title="dippykit.image_io module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="dippykit.image_io.html" class="btn btn-neutral float-left" title="dippykit.image_io module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -775,35 +200,16 @@ index. The second element is the full SSIM image.</p>
   
 
 
-  
-
-    
-    
-      <script type="text/javascript">
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'./',
-              VERSION:'',
-              LANGUAGE:'None',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-    
-
-  
-
-  <script type="text/javascript" src="_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

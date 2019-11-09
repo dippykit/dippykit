@@ -1,5 +1,5 @@
-dip-library
-===========
+dippykit
+========
 
 .. toctree::
    :maxdepth: 4

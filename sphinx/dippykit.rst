@@ -20,4 +20,6 @@ Module contents
 ---------------
 
 .. automodule:: dippykit
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:
