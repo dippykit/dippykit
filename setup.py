@@ -17,7 +17,7 @@ setup(
     author_email='bancelin3@gatech.edu',
     description='A Python Package for Digital Image Processing Education',
     long_description=long_description,
-    long_description_content_type='txt/x-rst',
+    long_description_content_type='text/markdown',
     url="https://github.com/dippykit/dippykit",
     classifiers=[
         'Development Status :: 3 - Alpha',
