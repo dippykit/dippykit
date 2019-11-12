@@ -17,35 +17,33 @@
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
 
+  
+  
     
 
   
+
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="dippykit.visualization module" href="dippykit.visualization.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -164,72 +162,81 @@
 <p>This module contains an assortment of functions that generate various windows.</p>
 <dl class="function">
 <dt id="dippykit.windows.window_2d">
-<code class="sig-prename descclassname">dippykit.windows.</code><code class="sig-name descname">window_2d</code><span class="sig-paren">(</span><em class="sig-param">support_size: Union[int, Tuple[int, int]], window_type: str = 'gaussian', **kwargs</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="reference internal" href="_modules/dippykit/windows.html#window_2d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.windows.window_2d" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">dippykit.windows.</code><code class="descname">window_2d</code><span class="sig-paren">(</span><em>support_size: typing.Union[int, typing.Tuple[int, int]], window_type: str = 'gaussian', **kwargs</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="reference internal" href="_modules/dippykit/windows.html#window_2d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.windows.window_2d" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates a specified 2-dimensional window array.</p>
 <p>Returns a window with the specified parameters. The returned window
 is normalized such that the sum of all its elements is 1. When the window
 cannot be centered, the window will prefer top-left placement of pixels.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>support_size</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">Tuple[int,</span> <span class="pre">int]</span></code>) – Height and width of the window array in pixels.</p></li>
-<li><p><strong>window_type</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – (default=’gaussian’) Type of window desired. Must be
-one of the following: <em>gaussian, rectangle, ellipse, circle</em>.</p></li>
-<li><p><strong>kwargs</strong> – See below.</p></li>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>support_size</strong> (<code class="docutils literal"><span class="pre">int</span></code> or <code class="docutils literal"><span class="pre">Tuple[int,</span> <span class="pre">int]</span></code>) – Height and width of the window array in pixels.</li>
+<li><strong>window_type</strong> (<code class="docutils literal"><span class="pre">str</span></code>) – (default=’gaussian’) Type of window desired. Must be
+one of the following: <em>gaussian, rectangle, ellipse, circle</em>.</li>
+<li><strong>kwargs</strong> – See below.</li>
 </ul>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
-</dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>The desired, normalized 2-dimensional window.</p>
-</dd>
-<dt class="field-even">Keyword Arguments</dt>
-<dd class="field-even"><ul class="simple">
-<li><dl class="simple">
-<dt><em>Gaussian windows</em></dt><dd><ul>
-<li><p><strong>variance</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) –
-(default=1.0) The sigma squared variance of the gaussian window.</p></li>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><code class="docutils literal"><span class="pre">numpy.ndarray</span></code></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The desired, normalized 2-dimensional window.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Keyword Arguments:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body"><ul class="first last simple">
+<li><dl class="first docutils">
+<dt><em>Gaussian windows</em></dt>
+<dd><ul class="first last">
+<li><strong>variance</strong> (<code class="docutils literal"><span class="pre">float</span></code>) –
+(default=1.0) The sigma squared variance of the gaussian window.</li>
 </ul>
 </dd>
 </dl>
 </li>
-<li><dl class="simple">
-<dt><em>Rectangle windows</em></dt><dd><ul>
-<li><p><strong>dimensions</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">Tuple[int,</span> <span class="pre">int]</span></code>) –
+<li><dl class="first docutils">
+<dt><em>Rectangle windows</em></dt>
+<dd><ul class="first last">
+<li><strong>dimensions</strong> (<code class="docutils literal"><span class="pre">int</span></code> or <code class="docutils literal"><span class="pre">Tuple[int,</span> <span class="pre">int]</span></code>) –
 (default= <strong>support_size</strong> ) The dimensions of the rectangle
 window. If a list of two integers is provided, the first
 element is the window height and the second element is the window
-width. If a single integer is provided, a square is generated.</p></li>
+width. If a single integer is provided, a square is generated.</li>
 </ul>
 </dd>
 </dl>
 </li>
-<li><dl class="simple">
-<dt><em>Ellipse windows</em></dt><dd><ul>
-<li><p><strong>radii</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">Tuple[int,</span> <span class="pre">int]</span></code>) –
+<li><dl class="first docutils">
+<dt><em>Ellipse windows</em></dt>
+<dd><ul class="first last">
+<li><strong>radii</strong> (<code class="docutils literal"><span class="pre">int</span></code> or <code class="docutils literal"><span class="pre">Tuple[int,</span> <span class="pre">int]</span></code>) –
 (default= <strong>support_size</strong> /2) The radii of the ellipse window.
 If a list of two integers is provided, the first element is
 the window height-radius and the second element is the window
 width-radius. If a single integer is provided, a circle is
-generated.</p></li>
+generated.</li>
 </ul>
 </dd>
 </dl>
 </li>
-<li><dl class="simple">
-<dt><em>Circle windows</em></dt><dd><ul>
-<li><p><strong>radius</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">Tuple[int,</span> <span class="pre">int]</span></code>) –
-(default= <strong>support_size</strong> /2) The radius of the circle window.</p></li>
+<li><dl class="first docutils">
+<dt><em>Circle windows</em></dt>
+<dd><ul class="first last">
+<li><strong>radius</strong> (<code class="docutils literal"><span class="pre">int</span></code> or <code class="docutils literal"><span class="pre">Tuple[int,</span> <span class="pre">int]</span></code>) –
+(default= <strong>support_size</strong> /2) The radius of the circle window.</li>
 </ul>
 </dd>
 </dl>
 </li>
 </ul>
-</dd>
-</dl>
+</td>
+</tr>
+</tbody>
+</table>
 <p>Examples:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">window_2d</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;rect&#39;</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">window_2d</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;rect&#39;</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
 <span class="go">array([[0.        , 0.        , 0.        , 0.        , 0.        ],</span>
 <span class="go">       [0.        , 0.16666667, 0.16666667, 0.16666667, 0.        ],</span>
 <span class="go">       [0.        , 0.16666667, 0.16666667, 0.16666667, 0.        ],</span>
@@ -265,7 +272,7 @@ generated.</p></li>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="dippykit.visualization.html" class="btn btn-neutral float-left" title="dippykit.visualization module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="dippykit.visualization.html" class="btn btn-neutral" title="dippykit.visualization module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -291,16 +298,35 @@ generated.</p></li>
   
 
 
+  
+
+    
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'./',
+              VERSION:'',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

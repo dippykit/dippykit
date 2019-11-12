@@ -17,36 +17,34 @@
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
 
+  
+  
     
 
   
+
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="dippykit.windows module" href="dippykit.windows.html" />
     <link rel="prev" title="dippykit.utilities module" href="dippykit.utilities.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -166,7 +164,7 @@
 visualization of various image-relevant data</p>
 <dl class="function">
 <dt id="dippykit.visualization.imshow">
-<code class="sig-prename descclassname">dippykit.visualization.</code><code class="sig-name descname">imshow</code><span class="sig-paren">(</span><em class="sig-param">im: numpy.ndarray</em>, <em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/dippykit/visualization.html#imshow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.visualization.imshow" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">dippykit.visualization.</code><code class="descname">imshow</code><span class="sig-paren">(</span><em>im: numpy.ndarray</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/dippykit/visualization.html#imshow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.visualization.imshow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Displays an image</p>
 <p>Displays the argument image with optional parameters. If the image has a
 dtype of uint8, then by default the vmin and vmax parameters will be set
@@ -174,140 +172,153 @@ to 0 and 255 respectively. This is to provided accurate depictions of
 otherwise dark images.</p>
 <p>This function is essentially a wrapper for <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.imshow.html">matplotlib.pyplot.imshow</a>,
 so more detailed documentation may be found there.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>im</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – The image to be displayed.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>im</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code>) – The image to be displayed.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This function wraps around functions from other packages. Reading
+<p class="first admonition-title">Note</p>
+<p class="last">This function wraps around functions from other packages. Reading
 these functions’ documentations may be useful. See the <strong>See also</strong>
 section for more information.</p>
 </div>
 <div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<dl class="simple">
-<dt><a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.imshow.html">matplotlib.pyplot.imshow</a></dt><dd><p>Documentation of the random_noise function from Scikit Image</p>
-</dd>
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.imshow.html">matplotlib.pyplot.imshow</a></dt>
+<dd>Documentation of the random_noise function from Scikit Image</dd>
 </dl>
 </div>
 </dd></dl>
 
 <dl class="function">
 <dt id="dippykit.visualization.quiver">
-<code class="sig-prename descclassname">dippykit.visualization.</code><code class="sig-name descname">quiver</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/dippykit/visualization.html#quiver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.visualization.quiver" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">dippykit.visualization.</code><code class="descname">quiver</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/dippykit/visualization.html#quiver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.visualization.quiver" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plots a field of arrows</p>
 <p>Plots a field of arrow on the current axes. If the following keyword
 arguments are not set, then they will take on the following default values:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>‘units’: ‘xy’</p></li>
-<li><p>‘angles’: ‘xy’</p></li>
-<li><p>‘scale_units’: ‘xy’</p></li>
-<li><p>‘scale’: The mean of the magnitudes of the U and V vectors.</p></li>
+<li>‘units’: ‘xy’</li>
+<li>‘angles’: ‘xy’</li>
+<li>‘scale_units’: ‘xy’</li>
+<li>‘scale’: The mean of the magnitudes of the U and V vectors.</li>
 </ul>
 </div></blockquote>
 <p>This function is essentially a wrapper for
 <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.quiver.html">matplotlib.axes.Axes.quiver</a>, so more detailed documentation may be
 found there.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>None</p>
-</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This function wraps around functions from other packages. Reading
+<p class="first admonition-title">Note</p>
+<p class="last">This function wraps around functions from other packages. Reading
 these functions’ documentations may be useful. See the <strong>See also</strong>
 section for more information.</p>
 </div>
 <div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<dl class="simple">
-<dt><a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.quiver.html">matplotlib.axes.Axes.quiver</a></dt><dd><p>Documentation of the quiver function from Matplotlib</p>
-</dd>
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.quiver.html">matplotlib.axes.Axes.quiver</a></dt>
+<dd>Documentation of the quiver function from Matplotlib</dd>
 </dl>
 </div>
 </dd></dl>
 
 <dl class="function">
 <dt id="dippykit.visualization.surf">
-<code class="sig-prename descclassname">dippykit.visualization.</code><code class="sig-name descname">surf</code><span class="sig-paren">(</span><em class="sig-param">x: numpy.ndarray</em>, <em class="sig-param">y: numpy.ndarray</em>, <em class="sig-param">z: numpy.ndarray</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/dippykit/visualization.html#surf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.visualization.surf" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">dippykit.visualization.</code><code class="descname">surf</code><span class="sig-paren">(</span><em>x: numpy.ndarray</em>, <em>y: numpy.ndarray</em>, <em>z: numpy.ndarray</em>, <em>**kwargs</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/dippykit/visualization.html#surf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.visualization.surf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plots a surface</p>
 <p>Plots the x, y, and z values as a surface in 3D.</p>
 <p>This function is essentially a wrapper for
 <a class="reference external" href="https://matplotlib.org/mpl_toolkits/mplot3d/tutorial.html#surface-plots">mpl_toolkits.mplot3d.axes3d.Axes3D.plot_surface</a>, so more detailed
 documentation may be found there.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – The array of x coordinates for the surface plot.</p></li>
-<li><p><strong>y</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – The array of y coordinates for the surface plot.</p></li>
-<li><p><strong>z</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – The array of z coordinates for the surface plot.</p></li>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code>) – The array of x coordinates for the surface plot.</li>
+<li><strong>y</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code>) – The array of y coordinates for the surface plot.</li>
+<li><strong>z</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code>) – The array of z coordinates for the surface plot.</li>
 </ul>
-</dd>
-</dl>
+</td>
+</tr>
+</tbody>
+</table>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This function wraps around functions from other packages. Reading
+<p class="first admonition-title">Note</p>
+<p class="last">This function wraps around functions from other packages. Reading
 these functions’ documentations may be useful. See the <strong>See also</strong>
 section for more information.</p>
 </div>
 <div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<dl class="simple">
-<dt><a class="reference external" href="https://matplotlib.org/mpl_toolkits/mplot3d/tutorial.html#surface-plots">mpl_toolkits.mplot3d.axes3d.Axes3D.plot_surface</a></dt><dd><p>Documentation of the plot_surface function from Matplotlib</p>
-</dd>
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference external" href="https://matplotlib.org/mpl_toolkits/mplot3d/tutorial.html#surface-plots">mpl_toolkits.mplot3d.axes3d.Axes3D.plot_surface</a></dt>
+<dd>Documentation of the plot_surface function from Matplotlib</dd>
 </dl>
 </div>
 </dd></dl>
 
 <dl class="function">
 <dt id="dippykit.visualization.setup_continuous_rendering">
-<code class="sig-prename descclassname">dippykit.visualization.</code><code class="sig-name descname">setup_continuous_rendering</code><span class="sig-paren">(</span><em class="sig-param">render: Callable[[matplotlib.axes._axes.Axes, Any], None], update: Callable[[multiprocessing.context.BaseContext.Queue], None], delay: int = 100, auto_play: bool = True, precompute: bool = False, clear_axes: bool = True</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/dippykit/visualization.html#setup_continuous_rendering"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.visualization.setup_continuous_rendering" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">dippykit.visualization.</code><code class="descname">setup_continuous_rendering</code><span class="sig-paren">(</span><em>render: typing.Callable[[matplotlib.axes._axes.Axes, typing.Any], NoneType], update: typing.Callable[&lt;bound method BaseContext.Queue of &lt;multiprocessing.context.DefaultContext object at 0x0000022939EB9748&gt;&gt;, NoneType], delay: int = 100, auto_play: bool = True, precompute: bool = False, clear_axes: bool = True</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/dippykit/visualization.html#setup_continuous_rendering"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.visualization.setup_continuous_rendering" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets up a continuous renderer</p>
 <p>This function sets up a window to display data that can continuously
 change. To best understand this function, try copying the example code
 below into a python file, running it, and then observing the results.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>render</strong> (<code class="docutils literal notranslate"><span class="pre">Callable[[Axes,</span> <span class="pre">Any],</span> <span class="pre">None]</span></code>) – A function that takes a matplotlib Axes object and any
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>render</strong> (<code class="docutils literal"><span class="pre">Callable[[Axes,</span> <span class="pre">Any],</span> <span class="pre">None]</span></code>) – A function that takes a matplotlib Axes object and any
 data as arguments. This function returns nothing. This function should
 use the Axes object to update the rendering each time a new datum is
-received. These data are supplied through the <em>update</em> function.</p></li>
-<li><p><strong>update</strong> (<code class="docutils literal notranslate"><span class="pre">Callable[[Queue],</span> <span class="pre">None]</span></code>) – A function that takes a Queue as an argument and returns
+received. These data are supplied through the <em>update</em> function.</li>
+<li><strong>update</strong> (<code class="docutils literal"><span class="pre">Callable[[Queue],</span> <span class="pre">None]</span></code>) – A function that takes a Queue as an argument and returns
 nothing. This function should update the rendering by putting each new
-datum into its queue via the <code class="docutils literal notranslate"><span class="pre">Queue.put()</span></code> function. These data are
+datum into its queue via the <code class="docutils literal"><span class="pre">Queue.put()</span></code> function. These data are
 then subsequently rendered by the <em>render</em> function. Once this
-function places <code class="docutils literal notranslate"><span class="pre">None</span></code> into the queue, the rendering will cease to
-update.</p></li>
-<li><p><strong>delay</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – (default=100) The time (in milliseconds) between calling
+function places <code class="docutils literal"><span class="pre">None</span></code> into the queue, the rendering will cease to
+update.</li>
+<li><strong>delay</strong> (<code class="docutils literal"><span class="pre">int</span></code>) – (default=100) The time (in milliseconds) between calling
 the <em>render</em> function to update the rendering. Also known as the
-refresh rate.</p></li>
-<li><p><strong>auto_play</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>) – (default=True) If set to false, the rendering will
-prompt the user before each update.</p></li>
-<li><p><strong>precompute</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>) – (default=False) If set to true, the update function will
+refresh rate.</li>
+<li><strong>auto_play</strong> (<code class="docutils literal"><span class="pre">bool</span></code>) – (default=True) If set to false, the rendering will
+prompt the user before each update.</li>
+<li><strong>precompute</strong> (<code class="docutils literal"><span class="pre">bool</span></code>) – (default=False) If set to true, the update function will
 be called once before any rendering takes place. In this single call, 
 the queue is to be populated with all data needed for the entire 
 rendering process. Setting this parameter to true also removes the 
 multiprocessing aspect of the visualization, which can be useful for 
-those with restrictions to multiprocessing in their code.</p></li>
-<li><p><strong>clear_axes</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>) – (default=True) If set to true, the axes will be cleared
+those with restrictions to multiprocessing in their code.</li>
+<li><strong>clear_axes</strong> (<code class="docutils literal"><span class="pre">bool</span></code>) – (default=True) If set to true, the axes will be cleared
 before each rendering. This is generally an individuals desired
-performance, but can be disabled if one wants to hand axes manually.</p></li>
+performance, but can be disabled if one wants to hand axes manually.</li>
 </ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
 <p>Examples:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># This file will generate a rendering of a square moving in an image</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># This file will generate a rendering of a square moving in an image</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">dippykit</span> <span class="kn">as</span> <span class="nn">dip</span>
@@ -334,7 +345,7 @@ performance, but can be disabled if one wants to hand axes manually.</p></li>
     <span class="n">dip</span><span class="o">.</span><span class="n">setup_continuous_rendering</span><span class="p">(</span><span class="n">render_square</span><span class="p">,</span> <span class="n">update_square</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># This file will generate renderings of happy and sad faces</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># This file will generate renderings of happy and sad faces</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">dippykit</span> <span class="kn">as</span> <span class="nn">dip</span>
@@ -396,33 +407,35 @@ performance, but can be disabled if one wants to hand axes manually.</p></li>
 
 <dl class="function">
 <dt id="dippykit.visualization.zlabel">
-<code class="sig-prename descclassname">dippykit.visualization.</code><code class="sig-name descname">zlabel</code><span class="sig-paren">(</span><em class="sig-param">s: str</em>, <em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/dippykit/visualization.html#zlabel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.visualization.zlabel" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">dippykit.visualization.</code><code class="descname">zlabel</code><span class="sig-paren">(</span><em>s: str</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/dippykit/visualization.html#zlabel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.visualization.zlabel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes a string to the z axis label</p>
 <p>Provided that the current axes has a z axis, this function will write
 the given string to the axis label.</p>
 <p>This function is essentially a wrapper for
 <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.set_ylabel.html">mpl_toolkits.mplot3d.axes3d.Axes3D.set_zlabel</a>, so more detailed
 documentation may be found there.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>s</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – The string to write to the z axis label.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>s</strong> (<code class="docutils literal"><span class="pre">str</span></code>) – The string to write to the z axis label.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This function wraps around functions from other packages. Reading
+<p class="first admonition-title">Note</p>
+<p class="last">This function wraps around functions from other packages. Reading
 these functions’ documentations may be useful. See the <strong>See also</strong>
 section for more information.</p>
 </div>
 <div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<dl class="simple">
-<dt><a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.set_ylabel.html">mpl_toolkits.mplot3d.axes3d.Axes3D.set_zlabel</a></dt><dd><p>Documentation of the set_ylabel function (set_zlabel has no
-formal documentation) from Matplotlib</p>
-</dd>
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.set_ylabel.html">mpl_toolkits.mplot3d.axes3d.Axes3D.set_zlabel</a></dt>
+<dd>Documentation of the set_ylabel function (set_zlabel has no
+formal documentation) from Matplotlib</dd>
 </dl>
 </div>
 </dd></dl>
@@ -440,7 +453,7 @@ formal documentation) from Matplotlib</p>
         <a href="dippykit.windows.html" class="btn btn-neutral float-right" title="dippykit.windows module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="dippykit.utilities.html" class="btn btn-neutral float-left" title="dippykit.utilities module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="dippykit.utilities.html" class="btn btn-neutral" title="dippykit.utilities module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -466,16 +479,35 @@ formal documentation) from Matplotlib</p>
   
 
 
+  
+
+    
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'./',
+              VERSION:'',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

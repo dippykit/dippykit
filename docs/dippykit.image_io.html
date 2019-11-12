@@ -17,36 +17,34 @@
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
 
+  
+  
     
 
   
+
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="dippykit.metrics module" href="dippykit.metrics.html" />
     <link rel="prev" title="dippykit.coding module" href="dippykit.coding.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -166,42 +164,42 @@
 output of images much simpler. The syntax is similar to that of Matlab.</p>
 <dl class="function">
 <dt id="dippykit.image_io.im_read">
-<code class="sig-prename descclassname">dippykit.image_io.</code><code class="sig-name descname">im_read</code><span class="sig-paren">(</span><em class="sig-param">filepath: str</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="reference internal" href="_modules/dippykit/image_io.html#im_read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.image_io.im_read" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">dippykit.image_io.</code><code class="descname">im_read</code><span class="sig-paren">(</span><em>filepath: str</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="reference internal" href="_modules/dippykit/image_io.html#im_read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.image_io.im_read" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads an image from a file</p>
 <p>Using Pillow, attempts to open the image at the given filepath argument
 and subsequently converts the image into a numpy array.</p>
 <p>This function is essentially a wrapper for <a class="reference external" href="https://pillow.readthedocs.io/en/3.1.x/reference/Image.html#functions">PIL.Image.open</a>,
 so more detailed documentation may be found there.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>filepath</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – A filepath to the desired image.</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
-</dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>The image as a numpy array.</p>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><p><strong>IOError</strong> – <em>“If the file cannot be found, or the image cannot be
-opened and identified.” -Pillow</em></p>
-</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filepath</strong> (<code class="docutils literal"><span class="pre">str</span></code>) – A filepath to the desired image.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="docutils literal"><span class="pre">numpy.ndarray</span></code></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The image as a numpy array.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><strong>IOError</strong> – <em>“If the file cannot be found, or the image cannot be
+opened and identified.” -Pillow</em></td>
+</tr>
+</tbody>
+</table>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This function wraps around functions from other packages. Reading
+<p class="first admonition-title">Note</p>
+<p class="last">This function wraps around functions from other packages. Reading
 these functions’ documentations may be useful. See the <strong>See also</strong>
 section for more information.</p>
 </div>
 <div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<dl class="simple">
-<dt><a class="reference external" href="https://pillow.readthedocs.io/en/3.1.x/reference/Image.html#functions">PIL.Image.open</a></dt><dd><p>Documentation of the open function from Pillow</p>
-</dd>
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference external" href="https://pillow.readthedocs.io/en/3.1.x/reference/Image.html#functions">PIL.Image.open</a></dt>
+<dd>Documentation of the open function from Pillow</dd>
 </dl>
 </div>
 <p>Examples:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">im_read</span><span class="p">(</span><span class="s1">&#39;black_image.tif&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">im_read</span><span class="p">(</span><span class="s1">&#39;black_image.tif&#39;</span><span class="p">)</span>
 <span class="go">array([[0, 0, 0, ..., 0, 0, 0],</span>
 <span class="go">       [0, 0, 0, ..., 0, 0, 0],</span>
 <span class="go">       [0, 0, 0, ..., 0, 0, 0],</span>
@@ -215,45 +213,49 @@ section for more information.</p>
 
 <dl class="function">
 <dt id="dippykit.image_io.im_write">
-<code class="sig-prename descclassname">dippykit.image_io.</code><code class="sig-name descname">im_write</code><span class="sig-paren">(</span><em class="sig-param">image: numpy.ndarray</em>, <em class="sig-param">filepath: str</em>, <em class="sig-param">quality: int = 75</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/dippykit/image_io.html#im_write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.image_io.im_write" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">dippykit.image_io.</code><code class="descname">im_write</code><span class="sig-paren">(</span><em>image: numpy.ndarray</em>, <em>filepath: str</em>, <em>quality: int = 75</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/dippykit/image_io.html#im_write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.image_io.im_write" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes an image to a file</p>
 <p>Using Pillow, attempts to write the image to a given filepath argument.</p>
 <p>This function is essentially a wrapper for <a class="reference external" href="https://pillow.readthedocs.io/en/3.1.x/reference/Image.html#PIL.Image.Image.save">PIL.Image.save</a>,
 so more detailed documentation may be found there.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>image</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>) – The image to be written to a file.</p></li>
-<li><p><strong>filepath</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – A filepath for the output image.</p></li>
-<li><p><strong>quality</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – (default=75) The quality level at which you’d like to
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>image</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code>) – The image to be written to a file.</li>
+<li><strong>filepath</strong> (<code class="docutils literal"><span class="pre">str</span></code>) – A filepath for the output image.</li>
+<li><strong>quality</strong> (<code class="docutils literal"><span class="pre">int</span></code>) – (default=75) The quality level at which you’d like to
 save the image. This value should range from 1 (worst) to 95 (best).
-This value is primarily used when saving JPEG files.</p></li>
+This value is primarily used when saving JPEG files.</li>
 </ul>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>KeyError</strong> – <em>“If the output format could not be determined
-from the file name.” -Pillow</em></p></li>
-<li><p><strong>IOError</strong> – <em>“If the file could not be written.  The file
-may have been created, and may contain partial data.” -Pillow</em></p></li>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><strong>KeyError</strong> – <em>“If the output format could not be determined
+from the file name.” -Pillow</em></li>
+<li><strong>IOError</strong> – <em>“If the file could not be written.  The file
+may have been created, and may contain partial data.” -Pillow</em></li>
 </ul>
-</dd>
-</dl>
+</td>
+</tr>
+</tbody>
+</table>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This function wraps around functions from other packages. Reading
+<p class="first admonition-title">Note</p>
+<p class="last">This function wraps around functions from other packages. Reading
 these functions’ documentations may be useful. See the <strong>See also</strong>
 section for more information.</p>
 </div>
 <div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<dl class="simple">
-<dt><a class="reference external" href="https://pillow.readthedocs.io/en/3.1.x/reference/Image.html#PIL.Image.Image.save">PIL.Image.save</a></dt><dd><p>Documentation of the save function from Pillow</p>
-</dd>
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference external" href="https://pillow.readthedocs.io/en/3.1.x/reference/Image.html#PIL.Image.Image.save">PIL.Image.save</a></dt>
+<dd>Documentation of the save function from Pillow</dd>
 </dl>
 </div>
 <p>Examples:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">],</span> <span class="p">[</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;uint8&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">im_write</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="s1">&#39;image.tif&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># There is now a file &#39;image.tif&#39; in the current directory</span>
@@ -263,39 +265,39 @@ section for more information.</p>
 
 <dl class="function">
 <dt id="dippykit.image_io.im_to_float">
-<code class="sig-prename descclassname">dippykit.image_io.</code><code class="sig-name descname">im_to_float</code><span class="sig-paren">(</span><em class="sig-param">image: numpy.ndarray</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="reference internal" href="_modules/dippykit/image_io.html#im_to_float"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.image_io.im_to_float" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">dippykit.image_io.</code><code class="descname">im_to_float</code><span class="sig-paren">(</span><em>image: numpy.ndarray</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="reference internal" href="_modules/dippykit/image_io.html#im_to_float"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.image_io.im_to_float" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts an image from unsigned integer format to normalized floating
 point format</p>
 <p>Given an image in an unsigned integer format (values between 0 and
 2<sup>N</sup> - 1), this function converts the image to a
 floating point format where each value is normalized between
 0.0 and 1.0. Images in this format are more easily processed reliably.</p>
-<p>The dtype of the input image must be one of the following: <code class="docutils literal notranslate"><span class="pre">uint8</span></code>,
-<code class="docutils literal notranslate"><span class="pre">uint16</span></code>, <code class="docutils literal notranslate"><span class="pre">uint32</span></code>, or <code class="docutils literal notranslate"><span class="pre">uint64</span></code>. The values in the image are
+<p>The dtype of the input image must be one of the following: <code class="docutils literal"><span class="pre">uint8</span></code>,
+<code class="docutils literal"><span class="pre">uint16</span></code>, <code class="docutils literal"><span class="pre">uint32</span></code>, or <code class="docutils literal"><span class="pre">uint64</span></code>. The values in the image are
 assumed to have a range of 0~(2<sup>N</sup> - 1) inclusive,
 where N is the number of bits used to represent each unsigned integer.
-This means that if one wants to convert an image with dtype <code class="docutils literal notranslate"><span class="pre">uint8</span></code>,
+This means that if one wants to convert an image with dtype <code class="docutils literal"><span class="pre">uint8</span></code>,
 every instance of the value 0 in the input image will become a 0.0 in the
 output image and every instance of the value 255 in the input image will
 become a 1.0 in the output image.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>image</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> (dtype must be unsigned integer)) – The image in unsigned integer format.</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
-</dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>The image in normalized floating point format (values between
-0.0 and 1.0).</p>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If the dtype of the image argument is not
-unsigned integer.</p>
-</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>image</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code> (dtype must be unsigned integer)) – The image in unsigned integer format.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="docutils literal"><span class="pre">numpy.ndarray</span></code></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The image in normalized floating point format (values between
+0.0 and 1.0).</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><strong>ValueError</strong> – If the dtype of the image argument is not
+unsigned integer.</td>
+</tr>
+</tbody>
+</table>
 <p>Examples:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">64</span><span class="p">],</span> <span class="p">[</span><span class="mi">128</span><span class="p">,</span> <span class="mi">255</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;uint8&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">im_to_float</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
 <span class="go">array([[0.        , 0.25098039],</span>
@@ -306,11 +308,11 @@ unsigned integer.</p>
 
 <dl class="function">
 <dt id="dippykit.image_io.float_to_im">
-<code class="sig-prename descclassname">dippykit.image_io.</code><code class="sig-name descname">float_to_im</code><span class="sig-paren">(</span><em class="sig-param">image: numpy.ndarray</em>, <em class="sig-param">bit_depth: int = 8</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="reference internal" href="_modules/dippykit/image_io.html#float_to_im"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.image_io.float_to_im" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">dippykit.image_io.</code><code class="descname">float_to_im</code><span class="sig-paren">(</span><em>image: numpy.ndarray</em>, <em>bit_depth: int = 8</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="reference internal" href="_modules/dippykit/image_io.html#float_to_im"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dippykit.image_io.float_to_im" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts an image from normalized floating point space to integer space</p>
 <p>Given an image in normalized floating point format (values between 0.0
 and 1.0), this function converts the image to an unsigned integer format
-normalized to the range of values of the format (e.g. for <code class="docutils literal notranslate"><span class="pre">uint8</span></code> this
+normalized to the range of values of the format (e.g. for <code class="docutils literal"><span class="pre">uint8</span></code> this
 range is 0~(2<sup>N</sup> - 1) = 0~255 inclusive). Images in
 this format are more easily stored or written to files.</p>
 <p>If any values in the image argument are less than 0.0 or greater than 1.0,
@@ -321,37 +323,41 @@ the specified bit depth. The number of levels in the image will be
 2<sup>bit_depth</sup>.</p>
 <p>The dtype of the returned image is dependent on the bit depth specified.
 By default, the bit depth is set to 8, meaning that the returned image
-will have a dtype of <code class="docutils literal notranslate"><span class="pre">uint8</span></code>. For a given bit depth, the returned
+will have a dtype of <code class="docutils literal"><span class="pre">uint8</span></code>. For a given bit depth, the returned
 dtype will be the following:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>1 &lt;= bit_depth &lt;= 8: <code class="docutils literal notranslate"><span class="pre">uint8</span></code> (default)</p></li>
-<li><p>9 &lt;= bit_depth &lt;= 16: <code class="docutils literal notranslate"><span class="pre">uint16</span></code></p></li>
-<li><p>17 &lt;= bit_depth &lt;= 32: <code class="docutils literal notranslate"><span class="pre">uint32</span></code></p></li>
-<li><p>33 &lt;= bit_depth &lt;= 64: <code class="docutils literal notranslate"><span class="pre">uint64</span></code></p></li>
+<li>1 &lt;= bit_depth &lt;= 8: <code class="docutils literal"><span class="pre">uint8</span></code> (default)</li>
+<li>9 &lt;= bit_depth &lt;= 16: <code class="docutils literal"><span class="pre">uint16</span></code></li>
+<li>17 &lt;= bit_depth &lt;= 32: <code class="docutils literal"><span class="pre">uint32</span></code></li>
+<li>33 &lt;= bit_depth &lt;= 64: <code class="docutils literal"><span class="pre">uint64</span></code></li>
 </ul>
 </div></blockquote>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>image</strong> (<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> (dtype must be float)) – The image in normalized floating point format (0.0
-represents the minimum value and 1.0 represents the maximum value).</p></li>
-<li><p><strong>bit_depth</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – (default=8) Bit depth for the converted image (between 1
-and 64 inclusive).</p></li>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>image</strong> (<code class="docutils literal"><span class="pre">numpy.ndarray</span></code> (dtype must be float)) – The image in normalized floating point format (0.0
+represents the minimum value and 1.0 represents the maximum value).</li>
+<li><strong>bit_depth</strong> (<code class="docutils literal"><span class="pre">int</span></code>) – (default=8) Bit depth for the converted image (between 1
+and 64 inclusive).</li>
 </ul>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
-</dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>The image in unsigned integer format.</p>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If the bit_depth is not between 1 and 64.</p>
-</dd>
-</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><code class="docutils literal"><span class="pre">numpy.ndarray</span></code></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The image in unsigned integer format.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>ValueError</strong> – If the bit_depth is not between 1 and 64.</p>
+</td>
+</tr>
+</tbody>
+</table>
 <p>Examples:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">64</span><span class="p">],</span> <span class="p">[</span><span class="mi">128</span><span class="p">,</span> <span class="mi">255</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;uint8&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">image_in_float</span> <span class="o">=</span> <span class="n">im_to_float</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">image_in_float</span>
@@ -380,7 +386,7 @@ and 64 inclusive).</p></li>
         <a href="dippykit.metrics.html" class="btn btn-neutral float-right" title="dippykit.metrics module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="dippykit.coding.html" class="btn btn-neutral float-left" title="dippykit.coding module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="dippykit.coding.html" class="btn btn-neutral" title="dippykit.coding module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -406,16 +412,35 @@ and 64 inclusive).</p></li>
   
 
 
+  
+
+    
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'./',
+              VERSION:'',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>
