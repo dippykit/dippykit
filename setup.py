@@ -12,7 +12,7 @@ with open(os.path.join(cur_path, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='dippykit',
-    version='2.0.3',
+    version='3.0.0',
     author='Brighton Ancelin',
     author_email='bancelin3@gatech.edu',
     description='A Python Package for Digital Image Processing Education',

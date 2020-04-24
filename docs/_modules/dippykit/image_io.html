@@ -205,16 +205,16 @@
 <span class="sd">    Examples:</span>
 
 <span class="sd">    &gt;&gt;&gt; im_read(&#39;black_image.tif&#39;)</span>
-<span class="sd">    array([[0, 0, 0, ..., 0, 0, 0],</span>
-<span class="sd">           [0, 0, 0, ..., 0, 0, 0],</span>
-<span class="sd">           [0, 0, 0, ..., 0, 0, 0],</span>
+<span class="sd">    array([[0., 0., 0., ..., 0., 0., 0.],</span>
+<span class="sd">           [0., 0., 0., ..., 0., 0., 0.],</span>
+<span class="sd">           [0., 0., 0., ..., 0., 0., 0.],</span>
 <span class="sd">           ...,</span>
-<span class="sd">           [0, 0, 0, ..., 0, 0, 0],</span>
-<span class="sd">           [0, 0, 0, ..., 0, 0, 0],</span>
-<span class="sd">           [0, 0, 0, ..., 0, 0, 0]], dtype=uint8)</span>
+<span class="sd">           [0., 0., 0., ..., 0., 0., 0.],</span>
+<span class="sd">           [0., 0., 0., ..., 0., 0., 0.],</span>
+<span class="sd">           [0., 0., 0., ..., 0., 0., 0.]])</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">))</span></div>
+    <span class="k">return</span> <span class="n">im_to_float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">)))</span></div>
 
 
 <div class="viewcode-block" id="im_write"><a class="viewcode-back" href="../../dippykit.image_io.html#dippykit.image_io.im_write">[docs]</a><span class="k">def</span> <span class="nf">im_write</span><span class="p">(</span>
@@ -305,6 +305,8 @@
 <span class="sd">           [0.50196078, 1.        ]])</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="s1">&#39;f&#39;</span> <span class="o">==</span> <span class="n">image</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">kind</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">image</span>
     <span class="k">if</span> <span class="s1">&#39;u&#39;</span> <span class="o">!=</span> <span class="n">image</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">kind</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Argument &#39;image&#39; must be an ndarray with an &quot;</span>
                          <span class="s2">&quot;unsigned integer dtype&quot;</span><span class="p">)</span>

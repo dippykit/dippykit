@@ -51,16 +51,16 @@ def im_read(
     Examples:
 
     >>> im_read('black_image.tif')
-    array([[0, 0, 0, ..., 0, 0, 0],
-           [0, 0, 0, ..., 0, 0, 0],
-           [0, 0, 0, ..., 0, 0, 0],
+    array([[0., 0., 0., ..., 0., 0., 0.],
+           [0., 0., 0., ..., 0., 0., 0.],
+           [0., 0., 0., ..., 0., 0., 0.],
            ...,
-           [0, 0, 0, ..., 0, 0, 0],
-           [0, 0, 0, ..., 0, 0, 0],
-           [0, 0, 0, ..., 0, 0, 0]], dtype=uint8)
+           [0., 0., 0., ..., 0., 0., 0.],
+           [0., 0., 0., ..., 0., 0., 0.],
+           [0., 0., 0., ..., 0., 0., 0.]])
 
     """
-    return np.array(Image.open(filepath))
+    return im_to_float(np.array(Image.open(filepath)))
 
 
 def im_write(
@@ -151,6 +151,8 @@ def im_to_float(
            [0.50196078, 1.        ]])
 
     """
+    if 'f' == image.dtype.kind:
+        return image
     if 'u' != image.dtype.kind:
         raise ValueError("Argument 'image' must be an ndarray with an "
                          "unsigned integer dtype")
