@@ -20,6 +20,9 @@ On some Mac devices this library has issues when running on Python 3.6.9 and up.
 attempts to invoke the backend to matplotlib through functions such as ``dippykit.show``. We are working to resolve 
 these issues, but for the moment we recommend any Mac users to use Python 3.6.8 with this library.
 
+When installing on Windows WSL environment, some may notice import errors pertaining to ``skbuild``. To resolve this, 
+one may need to manually specify to install ``skbuild`` with the following command: ``pip install scikit-build``.
+
 ## Versioning Scheme
 This code is maintained under the **Semantic Versioning 2.0.0** versioning scheme, further defined
 [here](https://semver.org/) In essence, the version is represented as MAJOR.MINOR.PATCH and each increments by the
