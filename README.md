@@ -6,6 +6,14 @@ This library was developed for the Georgia Tech's graduate course [ECE 6258: Dig
 
 Documentation can be found [here](https://dippykit.github.io/dippykit/).
 
+## Installation Instructions
+
+The llibrary can be installed via
+
+`pip install git+https://github.com/dippykit/dippykit.git`
+
+To verify your installation, follow the instructions given [here](https://dippykit.github.io/dippykit/).
+
 ## Purpose 
 
 This package is intended for use by Digital Image Processing students. It serves as an educational resource.
