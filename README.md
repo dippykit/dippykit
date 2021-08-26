@@ -10,7 +10,7 @@ Documentation can be found [here](https://dippykit.github.io/dippykit/).
 
 The llibrary can be installed via
 
-`pip install git+https://github.com/dippykit/dippykit.git`
+`pip install git+https://github.com/olivesgatech/dippykit.git`
 
 To verify your installation, follow the instructions given [here](https://dippykit.github.io/dippykit/).
 
