@@ -170,7 +170,7 @@
 <span class="c1"># Functional imports</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy.ndimage</span> <span class="k">import</span> <span class="n">uniform_filter</span><span class="p">,</span> <span class="n">gaussian_filter</span>
-<span class="kn">from</span> <span class="nn">skimage.measure</span> <span class="k">import</span> <span class="n">compare_ssim</span>
+<span class="kn">from</span> <span class="nn">skimage.metrics</span> <span class="k">import</span> <span class="n">structural_similarity</span>
 
 <span class="c1"># General imports</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Any</span>
@@ -568,7 +568,7 @@
 <span class="sd">    full SSIM image.</span>
 
 <span class="sd">    This function is essentially a wrapper for</span>
-<span class="sd">    `skimage.measure.compare_ssim`_, so more detailed documentation may be</span>
+<span class="sd">    `skimage.metrics.structural_similarity`_, so more detailed documentation may be</span>
 <span class="sd">    found there.</span>
 <span class="sd">    </span>
 <span class="sd">    :type im_1: ``numpy.ndarray``</span>
@@ -612,7 +612,7 @@
 <span class="sd">        Matlab function ssim_index. This is merely a specific configuration</span>
 <span class="sd">        of the above parameters.</span>
 <span class="sd">    :param kwargs: For a full list of keyword arguments, see</span>
-<span class="sd">        `skimage.measure.compare_ssim`_.</span>
+<span class="sd">        `skimage.metrics.structural_similarity`_.</span>
 <span class="sd">    :rtype: ``(float, numpy.ndarray)``</span>
 <span class="sd">    :return: A tuple of two elements. The first element is the mean SSIM </span>
 <span class="sd">        index. The second element is the full SSIM image.</span>
@@ -623,13 +623,13 @@
 <span class="sd">        section for more information.</span>
 
 <span class="sd">    .. seealso::</span>
-<span class="sd">        `skimage.measure.compare_ssim`_</span>
-<span class="sd">            Documentation of the compare_ssim function from Scikit Image</span>
+<span class="sd">        `skimage.metrics.structural_similarity`_</span>
+<span class="sd">            Documentation of the structural_similarity function from Scikit Image</span>
 <span class="sd">        `SSIM Wikipedia Page`_</span>
 <span class="sd">            Wikipedia page describing the formulae for SSIM calculations</span>
 
-<span class="sd">    .. _skimage.measure.compare_ssim: http://scikit-image.org/docs/dev/api/</span>
-<span class="sd">        skimage.measure.html#skimage.measure.compare_ssim</span>
+<span class="sd">    .. _skimage.metrics.structural_similarity: http://scikit-image.org/docs/dev/api/</span>
+<span class="sd">        skimage.metrics.html#skimage.metrics.structural_similarity</span>
 
 <span class="sd">    .. _SSIM Wikipedia Page: https://en.wikipedia.org/wiki/</span>
 <span class="sd">        Structural_similarity#Formula_components</span>
@@ -642,9 +642,9 @@
             <span class="n">use_sample_covariance</span><span class="o">=</span><span class="n">use_sample_covariance</span><span class="p">,</span>
             <span class="n">like_matlab</span><span class="o">=</span><span class="n">like_matlab</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">like_matlab</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">compare_ssim</span><span class="p">(</span><span class="n">im_1</span><span class="p">,</span> <span class="n">im_2</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">structural_similarity</span><span class="p">(</span><span class="n">im_1</span><span class="p">,</span> <span class="n">im_2</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">mssim</span><span class="p">,</span> <span class="n">ssim_map</span> <span class="o">=</span> <span class="n">compare_ssim</span><span class="p">(</span><span class="n">im_1</span><span class="p">,</span> <span class="n">im_2</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">mssim</span><span class="p">,</span> <span class="n">ssim_map</span> <span class="o">=</span> <span class="n">structural_similarity</span><span class="p">(</span><span class="n">im_1</span><span class="p">,</span> <span class="n">im_2</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">mssim</span><span class="p">,</span> <span class="n">_SSIM_like_matlab_crop</span><span class="p">(</span><span class="n">ssim_map</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
@@ -662,7 +662,7 @@
         <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The following code was copied and modified from</span>
-<span class="sd">    skimage.measure.compare_ssim. The modifications were adding a callback</span>
+<span class="sd">    skimage.metrics.structural_similarity. The modifications were adding a callback</span>
 <span class="sd">    feature to the algorithm. This allows for targeted SSIM calculations.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">X</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">Y</span><span class="o">.</span><span class="n">dtype</span><span class="p">:</span>
@@ -846,7 +846,7 @@
 <span class="sd">    Given two images, this function will return the mean luminance component</span>
 <span class="sd">    of the SSIM index and luminance component of the full SSIM image.</span>
 
-<span class="sd">    This function is heavily based on `skimage.measure.compare_ssim`_,</span>
+<span class="sd">    This function is heavily based on `skimage.metrics.structural_similarity`_,</span>
 <span class="sd">    so more detailed documentation may be found there.</span>
 
 <span class="sd">    :type im_1: ``numpy.ndarray``</span>
@@ -890,19 +890,19 @@
 <span class="sd">        Matlab function ssim_index. This is merely a specific configuration</span>
 <span class="sd">        of the above parameters.</span>
 <span class="sd">    :param kwargs: For a full list of keyword arguments, see</span>
-<span class="sd">        `skimage.measure.compare_ssim`_.</span>
+<span class="sd">        `skimage.metrics.structural_similarity`_.</span>
 <span class="sd">    :rtype: ``(float, numpy.ndarray)``</span>
 <span class="sd">    :return: A tuple of two elements. The first element is the mean SSIM</span>
 <span class="sd">        index. The second element is the full SSIM image.</span>
 
 <span class="sd">    .. seealso::</span>
-<span class="sd">        `skimage.measure.compare_ssim`_</span>
-<span class="sd">            Documentation of the compare_ssim function from Scikit Image</span>
+<span class="sd">        `skimage.metrics.structural_similarity`_</span>
+<span class="sd">            Documentation of the structural_similarity function from Scikit Image</span>
 <span class="sd">        `SSIM Wikipedia Page`_</span>
 <span class="sd">            Wikipedia page describing the formulae for SSIM calculations</span>
 
-<span class="sd">    .. _skimage.measure.compare_ssim: http://scikit-image.org/docs/dev/api/</span>
-<span class="sd">        skimage.measure.html#skimage.measure.compare_ssim</span>
+<span class="sd">    .. _skimage.metrics.structural_similarity: http://scikit-image.org/docs/dev/api/</span>
+<span class="sd">        skimage.metrics.html#skimage.metrics.structural_similarity</span>
 
 <span class="sd">    .. _SSIM Wikipedia Page: https://en.wikipedia.org/wiki/</span>
 <span class="sd">        Structural_similarity#Formula_components</span>
@@ -945,7 +945,7 @@
 <span class="sd">    Given two images, this function will return the mean contrast component</span>
 <span class="sd">    of the SSIM index and contrast component of the full SSIM image.</span>
 
-<span class="sd">    This function is heavily based on `skimage.measure.compare_ssim`_,</span>
+<span class="sd">    This function is heavily based on `skimage.metrics.structural_similarity`_,</span>
 <span class="sd">    so more detailed documentation may be found there.</span>
 
 <span class="sd">    :type im_1: ``numpy.ndarray``</span>
@@ -989,19 +989,19 @@
 <span class="sd">        Matlab function ssim_index. This is merely a specific configuration</span>
 <span class="sd">        of the above parameters.</span>
 <span class="sd">    :param kwargs: For a full list of keyword arguments, see</span>
-<span class="sd">        `skimage.measure.compare_ssim`_.</span>
+<span class="sd">        `skimage.metrics.structural_similarity`_.</span>
 <span class="sd">    :rtype: ``(float, numpy.ndarray)``</span>
 <span class="sd">    :return: A tuple of two elements. The first element is the mean SSIM</span>
 <span class="sd">        index. The second element is the full SSIM image.</span>
 
 <span class="sd">    .. seealso::</span>
-<span class="sd">        `skimage.measure.compare_ssim`_</span>
-<span class="sd">            Documentation of the compare_ssim function from Scikit Image</span>
+<span class="sd">        `skimage.metrics.structural_similarity`_</span>
+<span class="sd">            Documentation of the structural_similarity function from Scikit Image</span>
 <span class="sd">        `SSIM Wikipedia Page`_</span>
 <span class="sd">            Wikipedia page describing the formulae for SSIM calculations</span>
 
-<span class="sd">    .. _skimage.measure.compare_ssim: http://scikit-image.org/docs/dev/api/</span>
-<span class="sd">        skimage.measure.html#skimage.measure.compare_ssim</span>
+<span class="sd">    .. _skimage.metrics.structural_similarity: http://scikit-image.org/docs/dev/api/</span>
+<span class="sd">        skimage.metrics.html#skimage.metrics.structural_similarity</span>
 
 <span class="sd">    .. _SSIM Wikipedia Page: https://en.wikipedia.org/wiki/</span>
 <span class="sd">        Structural_similarity#Formula_components</span>
@@ -1044,7 +1044,7 @@
 <span class="sd">    Given two images, this function will return the mean structure component</span>
 <span class="sd">    of the SSIM index and structure component of the full SSIM image.</span>
 
-<span class="sd">    This function is heavily based on `skimage.measure.compare_ssim`_,</span>
+<span class="sd">    This function is heavily based on `skimage.metrics.structural_similarity`_,</span>
 <span class="sd">    so more detailed documentation may be found there.</span>
 
 <span class="sd">    :type im_1: ``numpy.ndarray``</span>
@@ -1088,19 +1088,19 @@
 <span class="sd">        Matlab function ssim_index. This is merely a specific configuration</span>
 <span class="sd">        of the above parameters.</span>
 <span class="sd">    :param kwargs: For a full list of keyword arguments, see</span>
-<span class="sd">        `skimage.measure.compare_ssim`_.</span>
+<span class="sd">        `skimage.metrics.structural_similarity`_.</span>
 <span class="sd">    :rtype: ``(float, numpy.ndarray)``</span>
 <span class="sd">    :return: A tuple of two elements. The first element is the mean SSIM</span>
 <span class="sd">        index. The second element is the full SSIM image.</span>
 
 <span class="sd">    .. seealso::</span>
-<span class="sd">        `skimage.measure.compare_ssim`_</span>
-<span class="sd">            Documentation of the compare_ssim function from Scikit Image</span>
+<span class="sd">        `skimage.metrics.structural_similarity`_</span>
+<span class="sd">            Documentation of the structural_similarity function from Scikit Image</span>
 <span class="sd">        `SSIM Wikipedia Page`_</span>
 <span class="sd">            Wikipedia page describing the formulae for SSIM calculations</span>
 
-<span class="sd">    .. _skimage.measure.compare_ssim: http://scikit-image.org/docs/dev/api/</span>
-<span class="sd">        skimage.measure.html#skimage.measure.compare_ssim</span>
+<span class="sd">    .. _skimage.metrics.structural_similarity: http://scikit-image.org/docs/dev/api/</span>
+<span class="sd">        skimage.metrics.html#skimage.metrics.structural_similarity</span>
 
 <span class="sd">    .. _SSIM Wikipedia Page: https://en.wikipedia.org/wiki/</span>
 <span class="sd">        Structural_similarity#Formula_components</span>
