@@ -88,7 +88,7 @@ def PSNR(
             max_signal_value = 1.0
         else:
             max_signal_value = np.iinfo(im_1.dtype).max
-    error_diff = im_1 - im_2
+    error_diff = im_1.astype(float) - im_2.astype(float)
     if np.all(0 == error_diff):
         return float('inf')
     return 10 * np.log10(max_signal_value ** 2 / np.mean(error_diff ** 2))
