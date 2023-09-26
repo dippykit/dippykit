@@ -12,6 +12,7 @@ image and signal data. They provide a means for high-level analysis.
 # Internal imports
 from . import _utils
 from . import utilities
+from . import image_io
 
 # Functional imports
 import numpy as np
@@ -88,7 +89,7 @@ def PSNR(
             max_signal_value = 1.0
         else:
             max_signal_value = np.iinfo(im_1.dtype).max
-    error_diff = im_1.astype(float) - im_2.astype(float)
+    error_diff = image_io.im_to_float(im_1) - image_io.im_to_float(im_2)
     if np.all(0 == error_diff):
         return float('inf')
     return 10 * np.log10(max_signal_value ** 2 / np.mean(error_diff ** 2))
